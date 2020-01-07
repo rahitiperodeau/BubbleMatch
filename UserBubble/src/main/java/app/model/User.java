@@ -18,22 +18,19 @@ public class User {
 	private String name;
 	private String surname;
 	private String password;
+	private String email;
 	private boolean isAdmin;
 	private Date inscriptionDate;
 	private Date lastLoginDate;
 	
 	public User() {
-		this.name= "undefined";
-		this.surname = "undefined";
-		this.password = "undefined";
-		this.isAdmin = false;
-		this.inscriptionDate = new Date();
-		this.lastLoginDate = new Date();
+		
 	}
 	
-	public User(String name, String surname, String password, boolean isAdmin) {
+	public User(String name, String surname, String password, String email, boolean isAdmin) {
 		this.name= name;
 		this.surname = surname;
+		this.email = email;
 		this.password = password;
 		this.isAdmin = isAdmin;
 		this.inscriptionDate = new Date();
@@ -48,6 +45,10 @@ public class User {
 	public String getSurname() {
 		return surname;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
 	public boolean getIsAdmin() {
 		return isAdmin;
 	}
@@ -61,6 +62,9 @@ public class User {
 	
 	public void setName(String name) {
 		this.name =name;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public void setSurname(String surname) {
 		this.surname =surname;
@@ -89,6 +93,11 @@ public class User {
 	public Object getId() {
 		// TODO Auto-generated method stub
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+		
 	}
 	
 }

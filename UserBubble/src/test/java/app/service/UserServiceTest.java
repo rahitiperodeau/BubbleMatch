@@ -19,16 +19,17 @@ import app.model.UserRepository;
 public class UserServiceTest {
 
 	 @Autowired
-	    private UserRepository userRepository;
+	    private UserService myService;
 	    @Before
 	    public void setUp() throws Exception {
-	        User user1= new User("Seraphin", "Andrieuxx", "salut", false);
-	        User user2= new User("Julie", "kikou", "salut", false);
+	    	myService.deleteAllUser();
+	        User user1= new User("Seraphin", "Andrieuxx","seraph@live.fr", "salut", false);
+	        User user2= new User("Julie", "kikou","jul@live.fr", "salut", false);
 	        //save user, verify has ID value after save
 	        assertNull(user1.getId());
 	        assertNull(user2.getId());//null before save
-	        this.userRepository.save(user1);
-	        this.userRepository.save(user2);
+	        myService.addUser(user1);
+	        myService.addUser(user2);
 	        assertNotNull(user1.getId());
 	        assertNotNull(user2.getId());
 	        
@@ -38,21 +39,21 @@ public class UserServiceTest {
 	    public void testFetchData(){
 	        /*Test data retrieval*/
 			
-			UserService myService = new UserService();
-			User userToAdd= new User("Bob", "Andrieuxx", "salut", false);
+			
+			User userToAdd= new User("Bob", "Andrieuxx","bob@test.com", "salut", false);
 			myService.addUser(userToAdd);
-	        User userA = userRepository.findByName("Bob");
+	        User userA = myService.findUserByEmail("bob@test.com");
 	        assertNotNull(userA);
 	        assertEquals("Andrieuxx", userA.getSurname());
 	        
 	        //Test update
-	        User userB = userRepository.findByName("Bob");
+	        User userB = myService.findUserByName("Bob");
 	        userB.setSurname("Bonhomme");
 	        myService.updateUser(userB);
-	        assertEquals("Bonhomme", userRepository.findByName("Bob").getSurname());
+	        assertEquals("Bonhomme", myService.findUserByName("Bob").getSurname());
 	        
 	        /*Get all products, list should only have two*/
-	        Iterable<User> users = userRepository.findAll();
+	        Iterable<User> users = myService.getAllUser();
 	        int count = 0;
 	        for(User p : users){
 	            count++;
@@ -61,14 +62,14 @@ public class UserServiceTest {
 	        
 	        // Test delete
 	        myService.deleteUser((Integer)userA.getId());
-	        users = userRepository.findAll();
+	        users = myService.getAllUser();
 	        count = 0;
 	        for(User p : users){
 	            count++;
 	        }
 	        assertEquals(count, 2);
 	        
-	        
+	        myService.deleteAllUser();
 	        
 	    }
 	

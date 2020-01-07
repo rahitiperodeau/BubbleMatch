@@ -21,8 +21,9 @@ public class UserRepositoryTest {
     private UserRepository userRepository;
     @Before
     public void setUp() throws Exception {
-        User user1= new User("Seraphin", "Andrieuxx", "salut", false);
-        User user2= new User("Julie", "kikou", "salut", false);
+    	userRepository.deleteAll();
+    	User user1= new User("Seraphin", "Andrieuxx","seraph@live.fr", "salut", false);
+        User user2= new User("Julie", "kikou","jul@live.fr", "salut", false);
         //save user, verify has ID value after save
         assertNull(user1.getId());
         assertNull(user2.getId());//null before save
@@ -45,5 +46,6 @@ public class UserRepositoryTest {
             count++;
         }
         assertEquals(count, 2);
+        userRepository.deleteAll();
     }
 }

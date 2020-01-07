@@ -22,6 +22,18 @@ public class UserService {
 	public void addUser(User user) {
 		this.userRepository.save(user);
 	}
+	
+	public User findUserByName(String name) {
+		return this.userRepository.findByName(name);
+	}
+	
+	public User findUserByEmail(String email) {
+		return this.userRepository.findByEmail(email);
+	}
+	
+	public Iterable<User> getAllUser(){
+		return this.userRepository.findAll();
+	}
 
 	public void updateUser(User user) {
 		this.userRepository.save(user);
@@ -36,5 +48,8 @@ public class UserService {
 		return userRepository.findById(id);
 	}
 	
+	public void deleteAllUser() {
+		userRepository.deleteAll();
+	}
 	
 }
