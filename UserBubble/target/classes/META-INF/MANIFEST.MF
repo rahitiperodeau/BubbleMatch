@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: seraph
+Build-Jdk: 11.0.4
+Implementation-Title: UserBubble
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: UserBubble
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/UserBubble
+Created-By: Maven Integration for Eclipse
+
