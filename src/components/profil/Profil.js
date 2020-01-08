@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import User from '../commonModel/user/User';
+import {Card,Button} from 'react-bootstrap';
+import TopBar from '../home/topSide/TopBar';
 
 class Profil extends Component{
     constructor(props){
@@ -12,7 +14,8 @@ class Profil extends Component{
     render(){
         return(
             <div>
-                <div>Profil</div>
+                <TopBar/>
+                <h1>Profil</h1>
                 <User 
                     /* 
                         id={this.props.user.id}
@@ -29,6 +32,8 @@ class Profil extends Component{
                     mail={"johnny.huge@mail.com"}
                     equipes={["equipeA","equipeB","equipeC"]}
                 />
+
+                
 
             </div>
         )

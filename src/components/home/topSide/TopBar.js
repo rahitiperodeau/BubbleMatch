@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {Nav,Navbar} from 'react-bootstrap';
+import {Nav,Navbar,Dropdown,Badge} from 'react-bootstrap';
+import './css/TopBar.css';
+import {profileImage} from '../../../img/profile.png';
 
 class TopBar extends Component{
 
@@ -12,16 +14,55 @@ class TopBar extends Component{
 
     render(){
         return(
-            <div className="topBar">
-                <Navbar bg="primary" variant="dark">
-                    <Navbar.Brand>BubbleMatch</Navbar.Brand>
-                        <Nav>
-                            <Nav.Link href="/profil">Profil</Nav.Link>
-                        </Nav>
+            
+                <Navbar className="navBar">
+                    <div>
+                        <Navbar.Brand className="brand">
+                            <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                LOL
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item >Championnat d'Italie</Dropdown.Item>
+                                <Dropdown.Divider />
+                                <Dropdown.Item >Grand Prix</Dropdown.Item>
+                            </Dropdown.Menu>
+                            </Dropdown>
+                        
+                        </Navbar.Brand>
+
+                        <Navbar.Brand className="brand">
+                            <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Super Smash Bros
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item >Championnat de France</Dropdown.Item>
+                                <Dropdown.Divider />
+                                <Dropdown.Item >CLT SLG Super Smash Bros</Dropdown.Item>
+                            </Dropdown.Menu>
+                            </Dropdown>
+                        
+                        </Navbar.Brand>
+                        
+                        <Navbar.Brand className="brand" href="/home">
+                            BubbleMatch
+                        </Navbar.Brand>    
+                        <Navbar.Brand className="brand" href="/profil" >
+                            Profil
+                        </Navbar.Brand>
+                        <Navbar.Brand className="brand" href="/autresTournois">
+                            Plus
+                        </Navbar.Brand>
+                    
+                    </div>
+                    
                 </Navbar>
 
                 
-            </div>
+            
         )
     }
 
