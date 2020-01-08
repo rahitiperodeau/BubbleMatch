@@ -4,15 +4,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.model.User;
 import app.service.UserService;
 
+@CrossOrigin
 @RestController
 public class UserRestController {
 	
@@ -38,7 +41,15 @@ public class UserRestController {
 	
 	@RequestMapping(method=RequestMethod.POST,value="/user")
 	public void addUser(@RequestBody User user) {
+		System.out.println(user.toString());
 		userService.addUser(user);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET,value="/signIn")
+	public boolean signInValidation(@RequestParam("email") String email, @RequestParam("password") String password) {
+		System.out.println(email);
+		System.out.println(userService.validateUserPassword(email,password));
+		return userService.validateUserPassword(email,password);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT,value="/user/{id}")

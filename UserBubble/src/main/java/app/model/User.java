@@ -58,6 +58,9 @@ public class User {
 	public Date getLastLoginDate() {
 		return lastLoginDate;
 	}
+	public String getPassword() {
+		return password;
+	}
 	
 	
 	public void setName(String name) {
@@ -79,19 +82,12 @@ public class User {
 		this.lastLoginDate = new Date();
 	}
 	
-	@Override
-    public String toString() {
-        return "User{" +
-                ", name='" 				+ name 		+ '\'' +
-                ", surname=" 			+ surname 	+ '\'' +
-                ", isAdmin=" 			+ isAdmin 	+ '\'' +
-                ", inscriptionDate=" 	+ inscriptionDate 	+ '\'' +
-                ", lastLoginDate=" 		+ lastLoginDate 	+ 
-                '}';
-    }
-
+	public void updateInscriptionDate() {
+		this.inscriptionDate = new Date();
+	}
+	
 	public Object getId() {
-		// TODO Auto-generated method stub
+		
 		return id;
 	}
 
@@ -99,5 +95,25 @@ public class User {
 		this.id = id;
 		
 	}
+
+	public boolean validatePassword(String password2) {
+		
+		return this.password.equals(password2);
+	}
+	
+	@Override
+    public String toString() {
+        return "User{" +
+                " name='" 				+ name 		+ '\'' +
+                ", surname=" 			+ surname 	+ '\'' +
+                ", isAdmin=" 			+ isAdmin 	+ '\'' +
+                ", inscriptionDate=" 	+ inscriptionDate 	+ '\'' +
+                ", lastLoginDate=" 		+ lastLoginDate 	+ '\'' +
+                ", email=" 			+ email 	+ '\'' +
+                ", password=" 			+ password 	+ 
+                '}';
+    }
+
+	
 	
 }

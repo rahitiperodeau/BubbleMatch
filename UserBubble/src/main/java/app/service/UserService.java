@@ -20,6 +20,9 @@ public class UserService {
 
 
 	public void addUser(User user) {
+		
+		user.updateLastLoginDate();
+		user.updateInscriptionDate();
 		this.userRepository.save(user);
 	}
 	
@@ -50,6 +53,20 @@ public class UserService {
 	
 	public void deleteAllUser() {
 		userRepository.deleteAll();
+	}
+
+
+	public boolean validateUserPassword(String email, String password) {
+		boolean lReturn = false;
+		User myUser = userRepository.findByEmail(email);
+		try {
+			lReturn = myUser.validatePassword(password);
+		}catch(Exception NullPointerException) {
+			System.out.println("No user in DB with this email:" + email);
+		}
+		return lReturn;
+
+		
 	}
 	
 }

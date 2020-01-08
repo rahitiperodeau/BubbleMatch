@@ -1,34 +1,43 @@
-import React, { Component } from 'react';
-import LoginInfo from './components/LoginInfo';
-import { connect } from 'tls';
+import React, { useState } from "react";
+import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import "./style/Login.css";
 
 
-class Login extends Component{
+var axios=require('axios') ;
 
-    constructor(props){
-        super(props);
-        this.processInput = this.processInput(this);
-        this.state ={
-            username:"",
-            pwd:"",
-        };
-    }
+export default function Login(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    processInput(pUsername,pPwd){
-        let self = this;
-        /*let vCurrentSession = this.props.session ;
-        axios.get('http://localhost:8082/authID', {
+  function validateForm() {
+
+    return email.length > 0 && password.length > 0;
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  function sendRequestSignIn() {
+
+    axios.get('http://localhost:8082/signIn', {
             params: {
-              login: pLogin,
-              pwd : pPwd
+              email: email,
+              password : password
             }
           })
           .then(function (response) {
-              if (response.data !== undefined){
-                vCurrentSession.state.login = pLogin;
-                vCurrentSession.state.userId = response.data;
+              if (response.data !== undefined && response.data == true){
+                /*vUser={
+                  username:pLogin,
+                  id:response.data
+                }*/
+                
+                alert("signed In");
+                /*
+                vCurrentSession.updateSession(vUser);
                 self.props.dispatch(openSession(vCurrentSession));
-                self.props.history.push('/home')
+                self.props.history.push('/home')*/
               }else{
                 alert("the username or password is incorrect, plese try again or contact it@cpe.fr")
               }
@@ -39,41 +48,35 @@ class Login extends Component{
           })
           .finally(function () {
             // always executed
-          }); */
-    }
+          });  
+  }
 
-    render(){
+  
 
-       /* return(
-            <div>
-                <div>
-                    {this.props.session.state.login}
-                </div>
-                <LoginInfo
-                    processInput  = {this.processInput}
-                    signinImg     = {UserImg}
-                />
-            </div>
-        );*/
-
-        return(
-            <div>
-                <LoginInfo
-                    processInput = {this.processInput}
-                />
-            </div>
-        )
-    }
+  return (
+    <div className="Login">
+      <form onSubmit={handleSubmit}>
+        <FormGroup controlId="email" bsSize="large">
+          <FormLabel>Email</FormLabel>
+          <FormControl
+            autoFocus
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup controlId="password" bsSize="large">
+          <FormLabel>Password</FormLabel>
+          <FormControl
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            type="password"
+          />
+        </FormGroup>
+        <Button block bsSize="large" onClick={()=>{sendRequestSignIn()}} disabled={!validateForm()} type="submit">
+          Login
+        </Button>
+      </form>
+    </div>
+  );
 }
-/*
-const mapStateToProps = (state, ownProps) => {
-    return {
-      session: state.sessionReducer
-    }
-  };
-
-
-//export the current classes in order to be used outside
-export default connect(mapStateToProps)(Login);*/
-
-export default Login;
