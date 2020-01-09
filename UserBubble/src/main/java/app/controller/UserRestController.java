@@ -44,17 +44,20 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/user")
-	public void addUser(@RequestBody User user) {
+	public boolean addUser(@RequestBody User user) {
 		System.out.println(user.toString());
 		userService.addUser(user);
+		return true;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/signIn")
 	public String signInValidation(@RequestParam("email") String email, @RequestParam("password") String password) {
 		String lReturn ="";
+		System.out.println(email);
 		if( userService.validateUserPassword(email,password)) {
 			lReturn = authentificationService.addSession();
 		}
+		System.out.println(lReturn);
 		return lReturn;
 	}
 	

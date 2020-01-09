@@ -19,12 +19,12 @@ public class AuthentificationService {
 		String randomKey = UUID.randomUUID().toString();
 		boolean isTaken = true;
 		while(isTaken) {
-			try {
-				Authentification myAuth = authentificationRepository.findBySessionId(randomKey);
-				randomKey = UUID.randomUUID().toString();
-			}catch(Exception NullPointerException ) {
-				isTaken = false;
-			}
+				System.out.println("yo");
+				if (authentificationRepository.findBySessionId(randomKey) == null) {
+					isTaken = false;
+				}else {
+					randomKey = UUID.randomUUID().toString();
+				}
 		}
 		Authentification newAuthentification = new Authentification(randomKey);
 		authentificationRepository.save(newAuthentification);

@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./style/Login.css";
 import sessionStorage from "sessionstorage";
-import { connect } from 'tls';
-
-let myvalue = sessionStorage.getItem('key');
-var passwordHash = require('password-hash');
 
 var axios=require('axios') ;
 
@@ -20,10 +16,12 @@ export default function Login(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    sendRequestSignIn();
   }
 
   function sendRequestSignIn() {
     let myvalue = sessionStorage.getItem('key');
+    let redirect = false;
     axios.get('http://localhost:8082/signIn', {
             params: {
               email: email,
@@ -32,18 +30,13 @@ export default function Login(props) {
           })
           .then(function (response) {
               if (response.data !== undefined && response.data != ""){
-                /*vUser={
-                  username:pLogin,
-                  id:response.data
-                }*/
+                              
+                sessionStorage.setItem("sessionId",response.data);
+                window.location = "/home"
                 
-                alert(response.data);
-                /*
-                vCurrentSession.updateSession(vUser);
-                self.props.dispatch(openSession(vCurrentSession));
-                self.props.history.push('/home')*/
+               
               }else{
-                alert("the username or password is incorrect, plese try again or contact it@cpe.fr")
+                alert("the username or password is incorrect, plese try again or contact christine.liatard@cpe.fr")
               }
               
           })
@@ -53,12 +46,18 @@ export default function Login(props) {
           .finally(function () {
             // always executed
           });  
+          
+          
+
   }
 
   
 
   return (
     <div className="Login">
+      
+    
+    
       <form onSubmit={handleSubmit}>
         <FormGroup controlId="email" bsSize="large">
           <FormLabel>Email</FormLabel>
@@ -77,7 +76,7 @@ export default function Login(props) {
             type="password"
           />
         </FormGroup>
-        <Button block bsSize="large" onClick={()=>{sendRequestSignIn()}} disabled={!validateForm()} type="submit">
+        <Button block bsSize="large"  disabled={!validateForm()} type="submit">
           Login
         </Button>
       </form>
