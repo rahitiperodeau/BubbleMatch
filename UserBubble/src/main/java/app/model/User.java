@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 @Entity
 @Table(name = "user")
@@ -22,6 +25,8 @@ public class User {
 	private boolean isAdmin;
 	private Date inscriptionDate;
 	private Date lastLoginDate;
+	
+	
 	
 	public User() {
 		
@@ -96,10 +101,7 @@ public class User {
 		
 	}
 
-	public boolean validatePassword(String password2) {
-		
-		return this.password.equals(password2);
-	}
+	
 	
 	@Override
     public String toString() {
@@ -113,6 +115,8 @@ public class User {
                 ", password=" 			+ password 	+ 
                 '}';
     }
+
+	
 
 	
 	

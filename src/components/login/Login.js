@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./style/Login.css";
+import sessionStorage from "sessionstorage";
 
+let myvalue = sessionStorage.getItem('key');
+var passwordHash = require('password-hash');
 
 var axios=require('axios') ;
 
@@ -19,7 +22,7 @@ export default function Login(props) {
   }
 
   function sendRequestSignIn() {
-
+    let myvalue = sessionStorage.getItem('key');
     axios.get('http://localhost:8082/signIn', {
             params: {
               email: email,
@@ -27,13 +30,13 @@ export default function Login(props) {
             }
           })
           .then(function (response) {
-              if (response.data !== undefined && response.data == true){
+              if (response.data !== undefined && response.data != ""){
                 /*vUser={
                   username:pLogin,
                   id:response.data
                 }*/
                 
-                alert("signed In");
+                alert(response.data);
                 /*
                 vCurrentSession.updateSession(vUser);
                 self.props.dispatch(openSession(vCurrentSession));

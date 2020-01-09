@@ -3,6 +3,7 @@ package app.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import app.model.User;
@@ -15,14 +16,15 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	public UserService() {}
 
 
 	public void addUser(User user) {
-		
 		user.updateLastLoginDate();
 		user.updateInscriptionDate();
+		user.updatePassword(passwordEncoder.encode(user.getPassword()));
 		this.userRepository.save(user);
 	}
 	
@@ -39,6 +41,8 @@ public class UserService {
 	}
 
 	public void updateUser(User user) {
+
+		user.updatePassword(passwordEncoder.encode(user.getPassword()));
 		this.userRepository.save(user);
 
 	}
@@ -57,10 +61,13 @@ public class UserService {
 
 
 	public boolean validateUserPassword(String email, String password) {
+
 		boolean lReturn = false;
 		User myUser = userRepository.findByEmail(email);
 		try {
-			lReturn = myUser.validatePassword(password);
+			lReturn = passwordEncoder.matches(password, myUser.getPassword());
+			myUser.updateLastLoginDate();
+			userRepository.save(myUser);
 		}catch(Exception NullPointerException) {
 			System.out.println("No user in DB with this email:" + email);
 		}

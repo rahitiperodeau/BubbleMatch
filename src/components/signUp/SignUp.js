@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl, FormLabel,   FormCheck  } from "react-bootstrap";
 import "./style/SignUp.css";
-import User from "../commonModel/user/User"
+import sessionStorage from "sessionstorage";
 
 var axios=require('axios') ;
+sessionStorage.setItem('key', 'value');
 
 export default function SignUp(props) {
     const [name, setName] = useState("");
@@ -28,10 +29,10 @@ export default function SignUp(props) {
     user.surname=surname;
     user.isAdmin=isAdmin;
     user.email=email;
-    user.password=password;
+    user.password= password;
     axios.post("http://localhost:8082/user",user)
                     .then((response)=>{
-                        if(response.data){
+                        if(response.data ){
                             alert("salut");
                             
                         }

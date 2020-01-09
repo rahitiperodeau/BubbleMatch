@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.model.User;
+import app.service.AuthentificationService;
 import app.service.UserService;
 
 @CrossOrigin
@@ -21,6 +22,9 @@ public class UserRestController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AuthentificationService authentificationService;
 	
 	@RequestMapping("/users")
 	private List<User> getAllUsers() {
@@ -46,10 +50,12 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/signIn")
-	public boolean signInValidation(@RequestParam("email") String email, @RequestParam("password") String password) {
-		System.out.println(email);
-		System.out.println(userService.validateUserPassword(email,password));
-		return userService.validateUserPassword(email,password);
+	public String signInValidation(@RequestParam("email") String email, @RequestParam("password") String password) {
+		String lReturn ="";
+		if( userService.validateUserPassword(email,password)) {
+			lReturn = authentificationService.addSession();
+		}
+		return lReturn;
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT,value="/user/{id}")
@@ -62,6 +68,8 @@ public class UserRestController {
 	public void deleteUser(@PathVariable String id) {
 		userService.deleteUser(Integer.parseInt(id));
 	}
+	
+	
 	
 
 }

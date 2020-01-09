@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import UserInfo from './components/UserInfo';
 
 class User extends Component {
     constructor(props){

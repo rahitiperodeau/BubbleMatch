@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Built-By: seraph
-Build-Jdk: 11.0.4
+Build-Jdk: 11.0.5
 Implementation-Title: UserBubble
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: UserBubble
