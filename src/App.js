@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 
 
-import SignOut from './components/signOut/SignOut';
-import Login from './components/login/Login';
-import SignUp from './components/signUp/SignUp';
+import SignOut from './components/auth/signOut/SignOut';
+import Login from './components/auth/login/Login';
+import SignUp from './components/auth/signUp/SignUp';
 import Home from './components/home/Home';
 import Chatbot from './components/chatBot/Chatbot';
 import Tournoi from './components/tournoi/Tournoi';
@@ -18,6 +18,7 @@ import {Provider} from 'react-redux';
 import globalReducer from './reducers';
 import InscriptionTournoi from './components/inscriptionTournoi/InscriptionTournoi';
 import TopBar from './components/home/topSide/TopBar';
+import NotFound from './components/auth/NotFound'
 
 import sessionStorage from "sessionstorage";
 
@@ -51,16 +52,17 @@ class App extends Component {
       </div>
       <Provider store={store}>
         <Router>
-          <Route exact path="/" component={Login} />
+          <PrivateRoute exact path="/" component={Home} />
           <Route exact path="/signIn" component={Login} />
+          <Route component={NotFound} />
           <PrivateRoute exact path="/home" component={Home} />
-          <Route path="/chatbot" component={Chatbot}/>
-          <Route path="/tournoi" component={Tournoi}/>
-          <Route path="/profil" component={Profil} />  
+          <PrivateRoute path="/chatbot" component={Chatbot}/>
+          <PrivateRoute path="/tournoi" component={Tournoi}/>
+          <PrivateRoute path="/profil" component={Profil} />  
           <Route path="/signUp" component={SignUp} /> 
-          <Route path="/signOut" component={SignOut} />  
-          <Route path="/autresTournois" component={AutresTournois}/>    
-          <Route path="/inscriptionTournoi" component={InscriptionTournoi}/>
+          <PrivateRoute path="/signOut" component={SignOut} />  
+          <PrivateRoute path="/autresTournois" component={AutresTournois}/>    
+          <PrivateRoute path="/inscriptionTournoi" component={InscriptionTournoi}/>
         </Router>
       </Provider>
       </div> 
