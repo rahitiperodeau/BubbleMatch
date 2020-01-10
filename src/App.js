@@ -10,7 +10,9 @@ import Chatbot from './components/chatBot/Chatbot';
 import Tournoi from './components/tournoi/Tournoi';
 import Profil from './components/profil/Profil';
 import AutresTournois from './components/autresTournois/AutresTournois';
+import UserModel from './components/commonModel/user/components/UserModel';
 import User from './components/commonModel/user/User';
+
 import { BrowserRouter as Router,Route,Redirect,Switch} from "react-router-dom";
 import {PrivateRoute} from "./components/auth/PrivateRoute";
 import { createStore } from'redux';
@@ -22,15 +24,19 @@ import NotFound from './components/auth/NotFound'
 
 import sessionStorage from "sessionstorage";
 
-const nUser = new User();
+const nUser = new UserModel();
 
 const initialStore = {
-  userReducer : nUser,
+  userReducer : nUser
 
 }
 
 
 const store=createStore(globalReducer,initialStore);
+
+
+
+
 
 class App extends Component {
   constructor(props){
