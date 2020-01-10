@@ -12,6 +12,7 @@ import Profil from './components/profil/Profil';
 import AutresTournois from './components/autresTournois/AutresTournois';
 import User from './components/commonModel/user/User';
 import { BrowserRouter as Router,Route} from "react-router-dom";
+import {PrivateRoute} from "./components/auth/PrivateRoute";
 import { createStore } from'redux';
 import {Provider} from 'react-redux';
 import globalReducer from './reducers';
@@ -27,16 +28,7 @@ const initialStore = {
 
 }
 
-function checkAuth(){
-  let lReturn;
-  
-  if(sessionStorage.getItem("sessionId" ) == null){
-    lReturn = Login;
-  }else{
-    lReturn = Home
-  }
-  return lReturn;
-}
+
 const store=createStore(globalReducer,initialStore);
 
 class App extends Component {
@@ -59,9 +51,9 @@ class App extends Component {
       </div>
       <Provider store={store}>
         <Router>
-          <Route exact path="/" component={checkAuth()} />
-          <Route exact path="/signIn" component={checkAuth()} />
-          <Route path="/home" component={Home} />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/signIn" component={Login} />
+          <PrivateRoute exact path="/home" component={Home} />
           <Route path="/chatbot" component={Chatbot}/>
           <Route path="/tournoi" component={Tournoi}/>
           <Route path="/profil" component={Profil} />  
