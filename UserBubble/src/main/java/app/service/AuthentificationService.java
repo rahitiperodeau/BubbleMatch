@@ -1,5 +1,6 @@
 package app.service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import app.model.Authentification;
 import app.model.AuthentificationRepository;
+import app.model.User;
+import app.model.UserRepository;
 
 
 @Service
@@ -14,21 +17,28 @@ public class AuthentificationService {
 	
 	@Autowired
 	private AuthentificationRepository authentificationRepository;
-
-	public String addSession() {
+	
+	@Autowired 
+	private UserRepository userRepository;
+	
+	public String addSession(String email) {
 		String randomKey = UUID.randomUUID().toString();
 		boolean isTaken = true;
 		while(isTaken) {
-				System.out.println("yo");
 				if (authentificationRepository.findBySessionId(randomKey) == null) {
 					isTaken = false;
 				}else {
 					randomKey = UUID.randomUUID().toString();
 				}
 		}
-		Authentification newAuthentification = new Authentification(randomKey);
+		Authentification newAuthentification = new Authentification(randomKey,userRepository.findByEmail(email).getId());
 		authentificationRepository.save(newAuthentification);
 		return randomKey;
+	}
+	
+	public Optional<User> getUser(String sessionId) {
+		Integer userId = authentificationRepository.findBySessionId(sessionId).getUserId();
+		return userRepository.findById(userId);
 	}
 	
 	public boolean validateSessionId(String sessionId) {

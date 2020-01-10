@@ -15,6 +15,7 @@ public class Authentification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String sessionId;
+	private Integer userId;
 	
 	
 	public Authentification() {
@@ -24,9 +25,22 @@ public class Authentification {
 	public Authentification(String key) {
 		this.sessionId = key;
 	}
+	
+	public Authentification(String key,Integer userId) {
+		this.sessionId = key;
+		this.userId = userId;
+	}
 
 	public String getSessionId() {
 		return sessionId;
+	}
+	
+	public Integer getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 	public void setSessionId(String newSessionId) {
