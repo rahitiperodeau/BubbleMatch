@@ -56,6 +56,9 @@ class TopBar extends Component{
                         <Navbar.Brand className="brand" href="/autresTournois">
                             Plus
                         </Navbar.Brand>
+                        <Navbar.Brand className="myUser" >
+                            {sessionStorage.getItem("sessionId")}
+                        </Navbar.Brand>
                     
                     </div>
                     

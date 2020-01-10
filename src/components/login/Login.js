@@ -1,37 +1,42 @@
-import React, { Component } from 'react';
-import LoginInfo from './components/LoginInfo';
-import {Form,Button } from 'react-bootstrap';
-import { connect } from 'tls';
+import React, { useState } from "react";
+import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import "./style/Login.css";
+import sessionStorage from "sessionstorage";
 
+var axios=require('axios') ;
 
-class Login extends Component{
+export default function Login(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    constructor(props){
-        super(props);
-        this.processInput = this.processInput(this);
-        this.state ={
-            username:"",
-            pwd:"",
-        };
-    }
+  function validateForm() {
 
-    processInput(pUsername,pPwd){
-        let self = this;
-        /*let vCurrentSession = this.props.session ;
-        axios.get('http://localhost:8082/authID', {
+    return email.length > 0 && password.length > 0;
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    sendRequestSignIn();
+  }
+
+  function sendRequestSignIn() {
+    let myvalue = sessionStorage.getItem('key');
+    let redirect = false;
+    axios.get('http://localhost:8082/signIn', {
             params: {
-              login: pLogin,
-              pwd : pPwd
+              email: email,
+              password : password
             }
           })
           .then(function (response) {
-              if (response.data !== undefined){
-                vCurrentSession.state.login = pLogin;
-                vCurrentSession.state.userId = response.data;
-                self.props.dispatch(openSession(vCurrentSession));
-                self.props.history.push('/home')
+              if (response.data !== undefined && response.data != ""){
+                              
+                sessionStorage.setItem("sessionId",response.data);
+                window.location = "/home"
+                
+               
               }else{
-                alert("the username or password is incorrect, plese try again or contact it@cpe.fr")
+                alert("the username or password is incorrect, plese try again or contact christine.liatard@cpe.fr")
               }
               
           })
@@ -40,43 +45,41 @@ class Login extends Component{
           })
           .finally(function () {
             // always executed
-          }); */
-    }
+          });  
+          
+          
 
-    render(){
+  }
 
-       /* return(
-            <div>
-                <div>
-                    {this.props.session.state.login}
-                </div>
-                <LoginInfo
-                    processInput  = {this.processInput}
-                    signinImg     = {UserImg}
-                />
-            </div>
-        );*/
+  
 
-        return(
-            <div>
-                <LoginInfo
-                    processInput = {this.processInput}
-                />
-            </div>
-
-            
-        )
-    }
+  return (
+    <div className="Login">
+      
+    
+    
+      <form onSubmit={handleSubmit}>
+        <FormGroup controlId="email" bsSize="large">
+          <FormLabel>Email</FormLabel>
+          <FormControl
+            autoFocus
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup controlId="password" bsSize="large">
+          <FormLabel>Password</FormLabel>
+          <FormControl
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            type="password"
+          />
+        </FormGroup>
+        <Button block bsSize="large"  disabled={!validateForm()} type="submit">
+          Login
+        </Button>
+      </form>
+    </div>
+  );
 }
-/*
-const mapStateToProps = (state, ownProps) => {
-    return {
-      session: state.sessionReducer
-    }
-  };
-
-
-//export the current classes in order to be used outside
-export default connect(mapStateToProps)(Login);*/
-
-export default Login;
