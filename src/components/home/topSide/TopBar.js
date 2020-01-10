@@ -59,6 +59,9 @@ class TopBar extends Component{
                         <Navbar.Brand className="myUser" >
                             {sessionStorage.getItem("sessionId")}
                         </Navbar.Brand>
+                        <Navbar.Brand className="signOut" href="/signOut">
+                            Deconnexion
+                        </Navbar.Brand>
                     
                     </div>
                     

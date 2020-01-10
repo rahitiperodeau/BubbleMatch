@@ -32,9 +32,11 @@ export default function SignUp(props) {
     user.password= password;
     axios.post("http://localhost:8082/user",user)
                     .then((response)=>{
-                        if(response.data ){
+                        if(response.data == ""){
                             window.location  = "/home"
                             
+                        }else{
+                          alert(response.data)
                         }
     
                     })

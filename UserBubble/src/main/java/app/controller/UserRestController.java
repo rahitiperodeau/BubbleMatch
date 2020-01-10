@@ -44,10 +44,10 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/user")
-	public boolean addUser(@RequestBody User user) {
+	public String addUser(@RequestBody User user) {
 		System.out.println(user.toString());
 		userService.addUser(user);
-		return true;
+		return userService.addUser(user);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/signIn")
