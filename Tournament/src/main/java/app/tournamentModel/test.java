@@ -20,7 +20,7 @@ public class test {
 	    
 	    int nbTeam = 8;
 	    for(int i = 1; i<= nbTeam ;i++) {
-	    	Team team = new Team("Gros tajine"+i);
+	    	Team team = new Team("Gros tajine"+i, i);
 		    team.addNewPlayer(p1);
 		    team.addNewPlayer(p2);
 		    team.addNewPlayer(p3);
@@ -70,12 +70,22 @@ public class test {
 	    
 	    Groups groupes = new Groups(2);
 	    //System.out.println(tur.teams);
-	    //System.out.println(groupes.toString());
-	    groupes.createGroups();
-	    Map<List<Object>,Integer> matchs = groupes.Matches();
+	    System.out.println(groupes.createGroups().get(0));
+	    System.out.println(groupes.toString());
+
+	    List<Match> matchs = groupes.Matches();
 	    
-	    groupes.results(matchs.keySet(), );
+	   // groupes.results(matchs.keySet(), );
+	    System.out.println(groupes.Matches().get(0));
+	    matchs.get(0).setResult(1);
+	    System.out.println(groupes.Matches().get(0));
+
+	    System.out.println(groupes.results(matchs.get(0)));
+	    System.out.println(groupes.groups.get(0).values());
+
 	    
+	    //System.out.println(groupes.groups);
+
 
 
 	    

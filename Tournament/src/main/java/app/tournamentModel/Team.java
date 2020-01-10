@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Team {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int team_id;
 	
 	private Tournament tournament;
 	List<Player> players = new ArrayList<Player>();
@@ -20,8 +20,8 @@ public class Team {
 	
 	
 	//ID
-	public int getId() {
-		return id;
+	public int getTeam_Id() {
+		return team_id;
 	}
 	
 
@@ -65,8 +65,9 @@ public class Team {
 		this.elo = elo;
 		}
 
-	public Team(String team_name) {
+	public Team(String team_name, int id) {
 		super();
+		this.team_id= id;
 		this.team_name = team_name;
 		this.tournament_id = tournament_id;
 		this.elo = 0;
@@ -88,11 +89,12 @@ public class Team {
 		return players;
 	}
 	
-	
+	public String teamName() {
+		return(team_name);
+	}
 	@Override
 	public String toString() {
-		return "Team [id=" + id + ", tournament=" + tournament + ", players=" + players + ", elo=" + elo
-				+ ", team_name=" + team_name + ", tournament_id=" + tournament_id + "]";
+		return team_name;
 	};
 	
 	
