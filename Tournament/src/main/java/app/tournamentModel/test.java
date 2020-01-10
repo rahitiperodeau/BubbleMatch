@@ -72,8 +72,8 @@ public class test {
 	    //System.out.println(tur.teams);
 	    //System.out.println(groupes.create().get(0));
 	    //System.out.println(groupes.toString());
-	    groupes.createGroups();
-	    Map<List<Object>,Integer> matchs = groupes.Matches();
+	    //groupes.createGroups();
+	    //Map<List<Object>,Integer> matchs = groupes.Matches();
 	    
 	    //groupes.results(matchs.keySet(), );
 	    
