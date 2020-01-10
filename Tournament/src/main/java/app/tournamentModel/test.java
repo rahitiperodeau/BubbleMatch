@@ -20,7 +20,7 @@ public class test {
 	    
 	    int nbTeam = 8;
 	    for(int i = 1; i<= nbTeam ;i++) {
-	    	Team team = new Team("Gros tajine"+i);
+	    	Team team = new Team("Gros tajine"+i, i);
 		    team.addNewPlayer(p1);
 		    team.addNewPlayer(p2);
 		    team.addNewPlayer(p3);
@@ -68,16 +68,29 @@ public class test {
 //	    p1.setEloPlayer(p1.getEloPlayer() + 100 );
 //	    System.out.println(team.getElo());
 	    
-	    Groups groupes = new Groups(2);
+	    Groups groupes = new Groups(tur.getTeams(),2);
 	    //System.out.println(tur.teams);
+	    //System.out.println(groupes.create().get(0));
 	    //System.out.println(groupes.toString());
-	    groupes.createGroups();
-	    Map<List<Object>,Integer> matchs = groupes.Matches();
+	    //List<Match> matchs = groupes.matches();
 	    
-	    groupes.results(matchs.keySet(), );
-	    
+	   // groupes.results(matchs.keySet(), );
+	   // System.out.println(groupes.matches().get(0));
+	    //matchs.get(0).setResult(1);
+	    //System.out.println(groupes.matches().get(0));
 
+	    //System.out.println(groupes.results(matchs.get(0)));
+	    //System.out.println(groupes.groups.get(0).values());
 
 	    
+	    //System.out.println(groupes.groups);
+
+	    Bracket bracket = new Bracket(tur.getTeams());
+	    //System.out.println(bracket.toString());
+	    bracket.createBracket(tur.getTeams()).get(0).get(0).setResult(1);;
+	    bracket.createBracket(tur.getTeams()).get(0).get(1).setResult(1);;
+
+	    List<List<Match>> mat = bracket.createBracket(tur.getTeams());
+	    System.out.println(bracket.results(mat.get(0)));
 	  }
 }

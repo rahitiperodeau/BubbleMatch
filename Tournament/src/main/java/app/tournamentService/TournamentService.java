@@ -29,7 +29,7 @@ public class TournamentService {
 	}
 	
 	public String getTournamentName() {
-		return tournamentRepository.findByTournament_id(tournament_id).getName();
+		return tournamentRepository.findById(tournament_id).getName();
 	}
 	
 	//get teams get description get structure

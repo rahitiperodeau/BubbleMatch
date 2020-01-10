@@ -3,25 +3,32 @@ package app.tournamentModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Team {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int team_id;
 	
-	private Tournament tournament;
+//	@ManyToOne
+//	private Tournament tournament;
+	
+	@OneToMany
 	List<Player> players = new ArrayList<Player>();
 	private int elo;
 	private String team_name;
-	private int tournament_id;
+	private int tournament_id_ref;
 	
 	
 	//ID
-	public int getId() {
-		return id;
+	public int getTeam_Id() {
+		return team_id;
 	}
 	
 
@@ -36,10 +43,10 @@ public class Team {
 	
 	//Tournament id 
 	public int getTournament_id() {
-		return tournament_id;
+		return tournament_id_ref;
 	}
 	public void setTournament_id(int tournament_id) {
-		this.tournament_id = tournament_id;
+		this.tournament_id_ref = tournament_id;
 	}
 
 	
@@ -65,10 +72,11 @@ public class Team {
 		this.elo = elo;
 		}
 
-	public Team(String team_name) {
+	public Team(String team_name, int id) {
 		super();
+		this.team_id= id;
 		this.team_name = team_name;
-		this.tournament_id = tournament_id;
+		this.tournament_id_ref = tournament_id_ref;
 		this.elo = 0;
 	}
 
@@ -88,11 +96,12 @@ public class Team {
 		return players;
 	}
 	
-	
+	public String teamName() {
+		return(team_name);
+	}
 	@Override
 	public String toString() {
-		return "Team [id=" + id + ", tournament=" + tournament + ", players=" + players + ", elo=" + elo
-				+ ", team_name=" + team_name + ", tournament_id=" + tournament_id + "]";
+		return team_name;
 	};
 	
 	

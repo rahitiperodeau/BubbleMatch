@@ -11,7 +11,7 @@ import app.tournamentModel.Tournament;
 public interface TournamentRepository extends CrudRepository<Tournament, Integer> {
 	
 	public Tournament findByName (String name);
-	public Tournament findByTournament_id (int tournament_id);
+	public Tournament findById (int tournament_id);
 
 
 
