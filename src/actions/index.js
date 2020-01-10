@@ -15,3 +15,10 @@ export const chatBotDisplay=(chatbot_state)=>{
     }
 }
 
+export const tournoiDisplay=(tournoi_state)=>{
+    return{
+        type:'SET_TOURNOI_STATE',
+        obj:tournoi_state
+    }
+}
+

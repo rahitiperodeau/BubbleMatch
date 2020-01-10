@@ -4,6 +4,7 @@ import ItemMatch from './itemMatch/ItemMatch';
 import ItemTournoi from './itemTournoi/ItemTournoi';
 import {Container,Row,Col} from 'react-bootstrap';
 import ChatBot from '../../chatBot/Chatbot';
+import Tournoi from '../../tournoi/Tournoi';
 import { connect } from 'react-redux';
 
 class MiddleSide extends Component{
@@ -12,19 +13,24 @@ class MiddleSide extends Component{
         super(props);
 
     }
-    render(){
+
+    itemChosen(){
+
         const ctState=this.props.chatbotState;
+        const tournoiState=this.props.tournoiState;
         let rendering = <div/>;
-        if (ctState!==undefined){
-            console.log(ctState)
-            console.log("coucou");
-            if (ctState==true){
-                console.log("coucou");
-                rendering=<ChatBot/>;
-            }else{
-                rendering=<div/>;
-            }
+        
+        if (ctState==true){
+            rendering=<ChatBot/>;
         }
+        if(tournoiState==true){
+            rendering=<Tournoi/>;
+        }
+        return rendering;
+    }
+
+    render(){
+        
         return(
             <div className="middleSide">
             
@@ -44,7 +50,7 @@ class MiddleSide extends Component{
                         </Col>
                     </Row>
                 </Container>
-                {rendering}
+                {this.itemChosen()}
                 
             </div>
         )
@@ -52,7 +58,8 @@ class MiddleSide extends Component{
 }
 const mapStateToProps =(state,ownProps)=>{
     return{
-        chatbotState: state.chatBotDisplayReducer
+        chatbotState: state.chatBotDisplayReducer,
+        tournoiState:state.tournoiDisplayReducer
     }
 }
 export default connect(mapStateToProps)(MiddleSide);

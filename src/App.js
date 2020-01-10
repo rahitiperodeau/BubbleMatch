@@ -14,6 +14,7 @@ import { createStore } from'redux';
 import {Provider} from 'react-redux';
 import globalReducer from './reducers';
 import InscriptionTournoi from './components/inscriptionTournoi/InscriptionTournoi';
+import TopBar from './components/home/topSide/TopBar';
 
 
 const nUser = new User();
@@ -32,7 +33,11 @@ class App extends Component {
 
   render(){
     return(
-      <Provider store={store}>
+      <div>
+        <div className="topBar">
+          <TopBar/>
+        </div>
+        <Provider store={store}>
         <Router>
           <Route exact path="/" component={Login} />
           <Route path="/home" component={Home} />
@@ -43,6 +48,8 @@ class App extends Component {
           <Route path="/inscriptionTournoi" component={InscriptionTournoi}/>
         </Router>
       </Provider>
+      </div>
+      
       
     )
   }

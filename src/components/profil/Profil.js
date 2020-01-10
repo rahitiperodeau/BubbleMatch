@@ -14,7 +14,7 @@ class Profil extends Component{
     render(){
         return(
             <div>
-                <TopBar/>
+                
                 <h1>Profil</h1>
                 <User 
                     /* 
