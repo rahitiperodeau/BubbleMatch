@@ -1,35 +1,49 @@
 import React, { Component } from 'react';
+import UserInfo from './components/UserInfo';
+
+import { connect } from 'react-redux';
+
 
 class User extends Component {
     constructor(props){
         super(props);
         this.state={
-            id:null,
-            name:null,
-            surname:null,
-            password:null,
-            email:null,
-            isAdmin:false
+           
         }
 
-        this.initUser =this.initUser.bind(this);
+        
+
     }
 
-    initUser(pUser){
-        this.setState(
-            {
-                id:pUser.id,
-                username:pUser.username,
-                surname:pUser.surname,
-                lastname:pUser.lastname,
-                mail:pUser.mail,
-                equipes:pUser.equipes
+    
 
-            }
-        );
+    render(){
+        let mv =this.props.user;
+        //this.getUserId(sessionStorage.getItem("sessionId"));
+        return(
+            <div className="panel-body">
+                test = {this.props.user.state.email}
+                <UserInfo
+                    
+                    id={this.props.user.state.id}
+                    name={this.props.user.state.name}
+                    surname={this.props.user.state.surname}
+                    email={this.props.user.state.email}
+                    
+			
+                />
+            </div>
+        )
     }
 
     
 }
 
-export default User;
+const mapStateToProps = (state, ownProps) => {
+    return {
+      user: state.userReducer
+    }
+  };
+  
+  //export the current classes in order to be used outside
+export default connect(mapStateToProps)(User);

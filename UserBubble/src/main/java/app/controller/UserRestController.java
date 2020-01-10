@@ -34,6 +34,7 @@ public class UserRestController {
 	
 	@RequestMapping("/user/{id}")
 	private User getUser(@PathVariable String id) {
+		
 		Optional<User> user;
 		user= userService.getUser(Integer.parseInt(id));
 		if(user.isPresent()) {
@@ -43,11 +44,21 @@ public class UserRestController {
 
 	}
 	
+	@RequestMapping("/user")
+	private Integer getUserId(@RequestParam("sessionId") String sessionId) {
+		Optional<User> user;
+		user= authentificationService.getUser(sessionId);
+		if(user.isPresent()) {
+			return user.get().getId();
+		}
+		return null;
+	}
+	
 	@RequestMapping(method=RequestMethod.POST,value="/user")
-	public boolean addUser(@RequestBody User user) {
+	public String addUser(@RequestBody User user) {
 		System.out.println(user.toString());
 		userService.addUser(user);
-		return true;
+		return userService.addUser(user);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/signIn")
@@ -55,7 +66,7 @@ public class UserRestController {
 		String lReturn ="";
 		System.out.println(email);
 		if( userService.validateUserPassword(email,password)) {
-			lReturn = authentificationService.addSession();
+			lReturn = authentificationService.addSession(email);
 		}
 		System.out.println(lReturn);
 		return lReturn;

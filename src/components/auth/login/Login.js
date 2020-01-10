@@ -22,6 +22,7 @@ export default function Login(props) {
   function sendRequestSignIn() {
     let myvalue = sessionStorage.getItem('key');
     let redirect = false;
+    
     axios.get('http://localhost:8082/signIn', {
             params: {
               email: email,

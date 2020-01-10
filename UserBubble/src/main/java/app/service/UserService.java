@@ -21,11 +21,17 @@ public class UserService {
 	public UserService() {}
 
 
-	public void addUser(User user) {
-		user.updateLastLoginDate();
-		user.updateInscriptionDate();
-		user.updatePassword(passwordEncoder.encode(user.getPassword()));
-		this.userRepository.save(user);
+	public String addUser(User user) {
+		String lReturn = "";
+		if(userRepository.findByEmail(user.getEmail()) == null) {
+			user.updateLastLoginDate();
+			user.updateInscriptionDate();
+			user.updatePassword(passwordEncoder.encode(user.getPassword()));
+			this.userRepository.save(user);
+		}else {
+			lReturn = "This email is already taken, please use another one";
+		}
+		return lReturn;
 	}
 	
 	public User findUserByName(String name) {

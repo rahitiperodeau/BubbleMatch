@@ -66,6 +66,9 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
+	public Integer getId() {
+		return id;
+	}
 	
 	
 	public void setName(String name) {
@@ -91,10 +94,7 @@ public class User {
 		this.inscriptionDate = new Date();
 	}
 	
-	public Object getId() {
-		
-		return id;
-	}
+	
 
 	public void setId(Integer id) {
 		this.id = id;
