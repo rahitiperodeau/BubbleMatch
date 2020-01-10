@@ -74,7 +74,7 @@ public class test {
 	    groupes.createGroups();
 	    Map<List<Object>,Integer> matchs = groupes.Matches();
 	    
-	    groupes.results(matchs.keySet(), );
+	    //groupes.results(matchs.keySet(), );
 	    
 
 
