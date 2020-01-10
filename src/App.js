@@ -53,10 +53,12 @@ class App extends Component {
       
       
       <div>
+
       <div className="topBar">
         <TopBar /> 
       </div>
       <Provider store={store}>
+
         <Router>
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
@@ -76,6 +78,7 @@ class App extends Component {
           </Switch>
         </Router>
       </Provider>
+
       </div> 
       
     )

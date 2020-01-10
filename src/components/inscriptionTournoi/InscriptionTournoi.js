@@ -11,7 +11,7 @@ class InscriptionTournoi extends Component{
     render(){
         return(
             <div>
-                <TopBar/>
+                
                 <Form>
                 <Form.Group controlId="email">
                     <Form.Label>Email du joueur</Form.Label>

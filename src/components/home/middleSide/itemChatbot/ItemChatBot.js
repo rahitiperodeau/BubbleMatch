@@ -10,7 +10,7 @@ class ItemChatBot extends Component{
 
     constructor(props){
         super(props);
-        let chatBotState;
+        
         this.state ={
             chatBotState:true
         }

@@ -12,7 +12,7 @@ class AutresTournois extends Component{
     render(){
         return(
             <div>
-                <TopBar/>
+                
                 <h1>Autres tournois</h1>
                 
                 <Accordion>
