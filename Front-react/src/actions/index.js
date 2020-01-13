@@ -22,3 +22,9 @@ export const tournoiDisplay=(tournoi_state)=>{
     }
 }
 
+export const matchDisplay=(match_state)=>{
+    return{
+        type:'SET_MATCH_STATE',
+        obj:match_state
+    }
+}

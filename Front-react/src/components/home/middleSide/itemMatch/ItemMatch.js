@@ -2,11 +2,22 @@ import React, {Component} from 'react';
 import {Image,Figure,Button} from 'react-bootstrap';
 import matchImage from '../../../../img/match.png';
 import './css/ItemMatch.css';
+import {matchDisplay} from '../../../../actions';
+import { connect } from 'react-redux';
 
-class Match extends Component{
+class ItemMatch extends Component{
 
     constructor(props){
         super(props);
+        this.state={
+            matchState:true
+        }
+        this.setMatchState=this.setMatchState.bind(this);
+    }
+
+    setMatchState(){
+        this.props.dispatch(matchDisplay(this.state.matchState));
+        this.state.matchState=!this.state.matchState;
     }
     render(){
         return(
@@ -17,10 +28,10 @@ class Match extends Component{
                         src={matchImage}
                     />
                     <Figure.Caption className="caption">
-                        <Button href="/match">Votre match</Button>
+                        <Button onClick={()=>{this.setMatchState()}}>Votre match</Button>
                     </Figure.Caption>
                 </Figure>
         )
     }
 }
-export default Match;
+export default connect()(ItemMatch);
