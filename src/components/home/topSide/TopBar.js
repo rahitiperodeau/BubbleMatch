@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Nav,Navbar,Dropdown,Badge} from 'react-bootstrap';
 import './css/TopBar.css';
 import {profileImage} from '../../../img/profile.png';
+import { connect } from 'react-redux';
 
 class TopBar extends Component{
 
@@ -57,7 +58,7 @@ class TopBar extends Component{
                             Plus
                         </Navbar.Brand>
                         <Navbar.Brand className="myUser" >
-                            {sessionStorage.getItem("sessionId")}
+                            {sessionStorage.getItem("userId")}
                         </Navbar.Brand>
                         <Navbar.Brand className="myAccount" href="/myAccount">
                             my account
@@ -76,4 +77,5 @@ class TopBar extends Component{
     }
 
 }
+
 export default TopBar;
