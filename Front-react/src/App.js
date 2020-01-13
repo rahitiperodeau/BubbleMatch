@@ -24,10 +24,10 @@ import NotFound from './components/auth/NotFound'
 
 import sessionStorage from "sessionstorage";
 
-const nUser = new UserModel();
+let nUser = new UserModel();
 
 const initialStore = {
-  userReducer : nUser
+  userReducer : nUser.state
 
 }
 
@@ -45,13 +45,7 @@ class App extends Component {
 
   render(){
     return(
-      
-    
-      
-      
-      
-      
-      
+
       <div>
 
       <div className="topBar">
