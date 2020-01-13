@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
+Built-By: seraph
+Build-Jdk: 11.0.5
 Implementation-Title: Tournament
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Rospote
 Implementation-Vendor-Id: Tournament
-Build-Jdk: 1.8.0_231
-Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
- ot-starter-parent/Tournament
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/Tournament
 Created-By: Maven Integration for Eclipse
 
