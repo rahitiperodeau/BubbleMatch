@@ -4,7 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-../chatBot/node_modules/
 # testing
 /coverage
 

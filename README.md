@@ -16,3 +16,10 @@ Une base de donnée MariaDB est également nécessaire (les fichiers .sql sont d
 Port: 3333
 User: root
 Password: bubblematch
+
+api  chatbot
+
+
+Adresse e-mail : 	dialogflow-fwogxp@bubblematchbot-dqyeec.iam.gserviceaccount.com
+ID de clé : 		b11f2fdbb39de4d3ba5ba4f055c71ad694e7b458
+
