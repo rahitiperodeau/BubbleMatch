@@ -63,6 +63,9 @@ class TopBar extends Component{
                         <Navbar.Brand className="myAccount" href="/myAccount">
                             my account
                         </Navbar.Brand>
+                        <Navbar.Brand className="uploadFile" href="/upload">
+                            upload file
+                        </Navbar.Brand>
                         <Navbar.Brand className="signOut" href="/signOut">
                             Deconnexion
                         </Navbar.Brand>

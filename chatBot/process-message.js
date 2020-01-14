@@ -2,11 +2,12 @@
 
 const Dialogflow = require('dialogflow');
 const Pusher = require('pusher');
+const getUserinfo = require('./request/user');
 
 // You can find your project ID in your Dialogflow agent settings
 const projectId = 'bubblematchbot-dqyeec'; //https://dialogflow.com/docs/agents#settings
 const sessionId = '123456';
-const languageCode = 'en-US';
+const languageCode = 'fr-FR';
 
 const config = {
   credentials: {
@@ -42,6 +43,19 @@ const processMessage = message => {
     .detectIntent(request)
     .then(responses => {
       const result = responses[0].queryResult;
+      //console.log(request);
+      //console.log(responses);
+      if(result.intent.displayName === 'user.info.userId'){
+        const userId = result.parameters.fields['number'].numberValue;
+        
+        return getUserinfo(userId).then(userInfo => {
+          return pusher.trigger('bot','bot-response',{
+            message : 'All your no-sensitive info are : ' + userInfo,
+          });
+        });
+      }
+
+
       return pusher.trigger('bot', 'bot-response', {
         message: result.fulfillmentText,
       });
