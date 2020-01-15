@@ -3,12 +3,14 @@ import userReducer from './UserReducer';
 import chatBotDisplayReducer from './ChatBotDisplayReducer';
 import tournoiDisplayReducer from './TournoiDisplayReducer';
 import matchDisplayReducer from './MatchDisplayReducer';
+import filesAvailableReducer from './FilesReducer'
 
 const globalReducer = combineReducers({
     userReducer:userReducer,
     chatBotDisplayReducer:chatBotDisplayReducer,
     tournoiDisplayReducer:tournoiDisplayReducer,
-    matchDisplayReducer:matchDisplayReducer
+    matchDisplayReducer:matchDisplayReducer,
+    filesAvailableReducer:filesAvailableReducer
 });
 
 

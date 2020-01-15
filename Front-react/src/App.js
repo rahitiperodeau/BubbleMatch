@@ -25,11 +25,14 @@ import NotFound from './components/auth/NotFound'
 
 
 let nUser = new UserModel();
+let filesAvailable =[{}];
 
 const initialStore = {
-  userReducer : nUser.state
+  userReducer : nUser.state,
+  filesAvailableReducer : filesAvailable
 
 }
+
 
 
 const store=createStore(globalReducer,initialStore);

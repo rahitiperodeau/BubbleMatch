@@ -20,6 +20,8 @@ public class FileModel {
 	private Integer countDownloaded;
 	private Date uploadedDate;
 	private Date lastDownloadedDate;
+	private String contentType;
+	private String filePath;
 	
 	
 	
@@ -37,8 +39,29 @@ public class FileModel {
 	}
 	
 
+	public FileModel(String fileName, String contentType) {
+		this.setFileName(fileName);
+		this.setCountDownloaded(0);
+		this.setUploadedDate(new Date());
+		this.setLastDownloadedDate(new Date());
+		this.setContentType(contentType);
+	}
+	
+	public FileModel(String fileName, String contentType, String filePath) {
+		this.setFileName(fileName);
+		this.setCountDownloaded(0);
+		this.setUploadedDate(new Date());
+		this.setLastDownloadedDate(new Date());
+		this.setContentType(contentType);
+		this.setFilePath(filePath);
+	}
+
 	public String getFileName() {
 		return fileName;
+	}
+	
+	public Integer getId() {
+		return id;
 	}
 
 	public void setFileName(String fileName) {
@@ -80,6 +103,22 @@ public class FileModel {
 
                 '}';
     }
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 
 	
 
