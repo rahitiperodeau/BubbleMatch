@@ -28,3 +28,10 @@ export const matchDisplay=(match_state)=>{
         obj:match_state
     }
 }
+
+export const filesAvailable=(files_obj) =>{
+    return{
+        type:'UPDATE_FILES_AVAILABLE',
+        obj:files_obj
+    }
+}
