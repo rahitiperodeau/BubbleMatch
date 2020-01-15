@@ -8,7 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+/**
+ * 
+ * @author seraphin Andrieux
+ * Model which represents a file uploaded on the server
+ *
+ */
 
 @Entity
 @Table(name = "files")
@@ -91,18 +96,6 @@ public class FileModel {
 	public void setLastDownloadedDate(Date lastDownloadedDate) {
 		this.lastDownloadedDate = lastDownloadedDate;
 	}
-	
-	@Override
-    public String toString() {
-        return "File {" +
-                " id='" 				+ id 		+ '\'' +
-                ", fileName=" 			+ fileName 	+ '\'' +
-                ", countDownloaded=" 	+ countDownloaded 	+ '\'' +
-                ", uploadedDate=" 		+ uploadedDate 	+ '\'' +
-                ", lastDownloadedDate=" + lastDownloadedDate 	+ 
-
-                '}';
-    }
 
 	public String getContentType() {
 		return contentType;
@@ -120,7 +113,22 @@ public class FileModel {
 		this.filePath = filePath;
 	}
 
-	
+	public void addCount() {
+		this.countDownloaded += 1;
+		
+	}
+
+	@Override
+    public String toString() {
+        return "File {" +
+                " id='" 				+ id 		+ '\'' +
+                ", fileName=" 			+ fileName 	+ '\'' +
+                ", countDownloaded=" 	+ countDownloaded 	+ '\'' +
+                ", uploadedDate=" 		+ uploadedDate 	+ '\'' +
+                ", lastDownloadedDate=" + lastDownloadedDate 	+ 
+
+                '}';
+    }
 
 	
 	

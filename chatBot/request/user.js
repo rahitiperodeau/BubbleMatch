@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 
+//function which returns userInfo
 const getUserInfo = userId =>
 
     fetch(
@@ -14,8 +15,7 @@ const getUserInfo = userId =>
         ' | surname : ' +surname + 
             ' | email : ' +email;
     
-        //console.log(userId);
-        //console.log(email);
+        
         return userInfo;
 
     })

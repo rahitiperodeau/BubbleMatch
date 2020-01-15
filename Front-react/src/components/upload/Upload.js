@@ -58,7 +58,7 @@ class Upload extends Component {
             <button type="submit">Upload</button>
           </form>
           <div className="download">
-          <Download/>
+          
           <FileAvailable/>
           </div>
           </div>

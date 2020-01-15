@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface TournamentFileRepository extends CrudRepository<TournamentFile, Integer>{
 	List<TournamentFile> findByTournamentId(Integer tournamentId);
+	TournamentFile findByFileId(Integer fileId);
 }

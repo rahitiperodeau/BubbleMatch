@@ -8,6 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author seraphin andrieux
+ * Class which represents a tournament file ; used to do joint between the folder and the file
+ * Without the folder which depends on the tournament id, we will replace each file which have the same name (guess 
+ * what could happen if we called a file rules.txt ... 
+ *
+ */
 @Entity
 @Table(name = "tournament_files")
 public class TournamentFile {

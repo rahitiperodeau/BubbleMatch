@@ -9,12 +9,13 @@ class FileAvailable extends Component {
     constructor(props) {
         super(props);
         this.state ={
-          fileAvailableinit:[
+          files:[
             
-            {  fileName: '', uploadedDate: '' }
+            {  fileName: '', uploaded_Date: '' ,action : ''}
             
           ]
         }
+        this.getAllFilesRender = this.getAllFilesRender.bind(this);
        
       }
 
@@ -38,7 +39,7 @@ class FileAvailable extends Component {
                     
                 
                 }else{
-                    alert("error no response from server")
+                    self.props.dispatch(filesAvailable(self.state.files))
                 }
                 
             })
@@ -54,15 +55,35 @@ class FileAvailable extends Component {
     }
 
     renderTableHeader() {
-        let header = Object.keys(this.state.fileAvailableinit[0])
+        let header = Object.keys(this.state.files[0])
         return header.map((key, index) => {
            return <th key={index}>{key.toUpperCase()}</th>
         })
      }
 
+     getAllFilesRender(){
+        let array_render=[];
+        
+   
+        for(var i=0;i<this.props.filesAvailable.length;i++){
+   
+            
+            array_render.push(
+                <FileInfo
+                   key={i}
+   
+                   item={this.props.filesAvailable[i]}
+                />
+                );
+        }
+        return array_render;
+    }
+
      
     
       render() {
+        const display_list= this.getAllFilesRender();
+        //this.getFilesList();
         return (
          
             <div>
@@ -70,9 +91,12 @@ class FileAvailable extends Component {
             <table id='filesAvailable'>
                <tbody>
                   <tr>{this.renderTableHeader()}</tr>
-                  {this.props.filesAvailable.map(item => (
+                  {
+                  display_list
+                  
+                  /*this.props.filesAvailable.map(item => (
                     <FileInfo key={item.id} item={item} />
-                    ))}
+                  ))*/}
                </tbody>
             </table>
             <button onClick={()=>this.getFilesList()}>UpdateFileList</button>
@@ -83,7 +107,7 @@ class FileAvailable extends Component {
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-      filesAvailable: state.filesAvailableReducer
+      filesAvailable: state.filesAvailableReducer.files
     }
   };
 

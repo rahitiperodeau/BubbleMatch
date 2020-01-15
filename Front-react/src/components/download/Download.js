@@ -13,7 +13,7 @@ class Download extends Component {
       }
 
       downloadfile(fileId){
-        fetch('http://localhost:8090/downloadFile/'+fileId)
+        fetch('http://localhost:8090/downloadFile/'+fileId+'/46')
         .then(response => {
             console.log(response.headers);
             const filename = "";
@@ -33,17 +33,23 @@ class Download extends Component {
      });
       }
 
+      
+
     
       render() {
+        if(this.props.fileId == null){
+          return(
+            ""
+          )
+        }else{
         return (
             <div>
 
-                <div className="App-intro">
-                <h3>Download the file 1 test</h3>
-                <button onClick={()=>this.downloadfile(9)}>Download</button>
+                <div className="ButtonDownload">
+                <button onClick={()=>this.downloadfile(this.props.fileId)}>Download</button>
                 </div>
           </div>
-       )
+       )}
       }
 }
 export default Download;

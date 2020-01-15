@@ -39,18 +39,24 @@ import javax.servlet.http.HttpServletResponse;
 @Service
 public class StorageService {
 
-    @Value("${upload.path}")
-    private String localPath;
+    @Value("${upload.path}") // defined on src/main/ressources/application.properties
+    private String localPath; // file Server rootPath 
     
     @Autowired
     private FileRepository fileRepository;
     
     @Autowired
     private TournamentFileRepository tournamentFileRepository;
-    
-    @Autowired
-    private ServletContext servletContext;
 
+    /**
+     * 
+     * Method used to upload a file on the server
+     * 
+     * @param file
+     * @param tournamentId used to define in which folder will be stock the file
+     * 
+     * 
+     */
     public void uploadFile(MultipartFile file,Integer tournamentId) {
 
         if (file.isEmpty()) {
@@ -58,17 +64,24 @@ public class StorageService {
         }
 
         try {
+        	// get back info from the file sent
             String fileName = file.getOriginalFilename();
             String contentType = file.getContentType();
+            
+            //create an input stream
             InputStream is = file.getInputStream();
+            
+            //define where the file will be stock
             String filePath = localPath + tournamentId.toString() +'/' +fileName;
             new File(localPath + tournamentId.toString() +'/').mkdir();
             Files.copy(is, Paths.get(filePath),
                     StandardCopyOption.REPLACE_EXISTING);
-            FileModel myFile =new FileModel(fileName,contentType,localPath + tournamentId.toString() +'/' +fileName);
             
+            // now we update DB
+            FileModel myFile =new FileModel(fileName,contentType,localPath + tournamentId.toString() +'/' +fileName);
             fileRepository.save(myFile);
             
+            //Don't forget to update also the second table
             TournamentFile myTournamentFile = new TournamentFile(tournamentId,fileRepository.findByFilePath(filePath).getId());
             tournamentFileRepository.save(myTournamentFile);
         } catch (IOException e) {
@@ -80,8 +93,18 @@ public class StorageService {
 
     }
     
+    /**
+     * 
+     * @param fileId
+     * @param tournamentId
+     * @return
+     */
     public ResponseEntity<Resource> downloadFileFromLocal(Integer fileId,Integer tournamentId) {
+    	
     	FileModel myFile = fileRepository.findById(fileId).get();
+    	
+    	myFile.addCount(); 								// we increment the download number 
+    	fileRepository.save(myFile); 					// update
     	Path path = Paths.get(localPath + tournamentId +"/" + myFile.getFileName());
     	Resource resource = null;
     	String contentType = myFile.getContentType();
@@ -101,12 +124,13 @@ public class StorageService {
     
     
     
-    public void deleteFile(Integer fileId) {
+    public void deleteFile(Integer fileId,Integer tournamentId) {
     	try{
     		FileModel fileToDelete = fileRepository.findById(fileId).get();
     		try {
-    			Files.delete(Paths.get(localPath + fileToDelete.getFileName()));
+    			Files.delete(Paths.get(localPath +tournamentId +"/"+ fileToDelete.getFileName()));
     			fileRepository.delete(fileToDelete);
+    			tournamentFileRepository.delete(tournamentFileRepository.findByFileId(fileId));
     		}catch (IOException ioException) {
     			String msg = String.format("error during deleting task :");
     			throw new StorageException(msg, ioException);
@@ -118,18 +142,26 @@ public class StorageService {
     	
     }
     
+    /**
+     * 
+     * @return all FileModel 
+     */
     public Iterable<FileModel> getFiles(){
     	
     	return fileRepository.findAll();
     }
 
+    /**
+     * 
+     * @param tournamentId
+     * @return all file associated with the tournamentId
+     */
 	public List<FileModel> getTournamentFiles(Integer tournamentId) {
 		List<TournamentFile> tournamentFiles = tournamentFileRepository.findByTournamentId(tournamentId);
 		
 		List<Integer> myIds =new ArrayList<Integer>();
 		for(Iterator<TournamentFile> it=tournamentFiles.iterator(); it.hasNext();) {
 			myIds.add(it.next().getFileId());
-			System.out.println(myIds.toString());
 		}
 		return (List<FileModel>) fileRepository.findAllById(myIds);
 		

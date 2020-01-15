@@ -16,6 +16,7 @@ const config = {
   },
 };
 
+//Pusher is used to create e websocket between the API and the server node
 const pusher = new Pusher({
   appId: process.env.PUSHER_APP_ID,
   key: process.env.PUSHER_APP_KEY,
@@ -24,10 +25,12 @@ const pusher = new Pusher({
   encrypted: true,
 });
 
+//Create a session between chatbot and API 
 const sessionClient = new Dialogflow.SessionsClient(config);
 
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
+//function which create the message to display
 const processMessage = message => {
   const request = {
     session: sessionPath,
@@ -40,15 +43,15 @@ const processMessage = message => {
   };
 
   sessionClient
-    .detectIntent(request)
+    .detectIntent(request) // get back the intent from the API
     .then(responses => {
-      const result = responses[0].queryResult;
+      const result = responses[0].queryResult; 
       //console.log(request);
       //console.log(responses);
-      if(result.intent.displayName === 'user.info.userId'){
-        const userId = result.parameters.fields['number'].numberValue;
+      if(result.intent.displayName === 'user.info.userId'){ //check the intent and call the right function (switch use)
+        const userId = result.parameters.fields['number'].numberValue; // getback the entity detected by API
         
-        return getUserinfo(userId).then(userInfo => {
+        return getUserinfo(userId).then(userInfo => { // we call getUserInfo
           return pusher.trigger('bot','bot-response',{
             message : 'All your no-sensitive info are : ' + userInfo,
           });
