@@ -10,6 +10,15 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 
+import {player_1} from '../../../data/data_player';
+import {champion_mastery_by_player} from '../../../data/data_champions';
+import {rank_info} from '../../../data/data_rank';
+import {champion_info} from '../../../data/data_champion';
+
+import {getSummoner} from '../../../api/index'
+
+
+
 const useStyles = makeStyles(theme => ({
     root: {
       width: 'fit-content',
@@ -60,12 +69,15 @@ const useStyles = makeStyles(theme => ({
 
 
 function MatchFunction(){
+
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
+
+    const summonerName = "Rospote";
 
     return(
         <Grid container alignItems="center" className={classes.root}>
@@ -81,10 +93,30 @@ function MatchFunction(){
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                votre équipe
+              {champion_mastery_by_player.map((champion,index)=>{
+                while (index <2) 
+                //if (champion.championId == champion_info.id)
+                //call API pour récup champion info
+                //champion_info = résultat du call de l'API avec champion.championId
+                    return(champion.championId == champion_info.id ? 
+                      <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default" + champion_info.squarePortraitPath.substr(21)}/>
+                     : 
+                     champion_info.name);
+
+                     // <div>{champion.championId}</div>
+                    //)
+              })}
+                {player_1.name}
+                {rank_info.map((info,index)=>
+                  info.tier)
+                }
             </TabPanel>
+
             <TabPanel value={value} index={1}>
                 équipe adverse
+                {getSummoner(summonerName).then(response => {
+                  return response;
+                })};
             </TabPanel>
             <Divider orientation="vertical"/>
             
