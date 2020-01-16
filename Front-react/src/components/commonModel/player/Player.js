@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import UserInfo from './components/UserInfo';
+import PlayerInfo from './components/PlayerInfo';
 
 import { connect } from 'react-redux';
 
 
-class User extends Component {
+class Player extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -18,18 +18,23 @@ class User extends Component {
     
 
     render(){
-        let mv =this.props.user;
-        //this.getUserId(sessionStorage.getItem("sessionId"));
+        let mv =this.props.player;
+        //this.getPlayerId(sessionStorage.getItem("sessionId"));
         return(
             <div className="panel-body">
-                test = {this.props.user.state.email}
-                <UserInfo
+                test = {this.props.player.state.name}
+                <PlayerInfo
                     
-                    id={this.props.user.state.id}
-                    name={this.props.user.state.name}
-                    surname={this.props.user.state.surname}
-                    email={this.props.user.state.email}
-                    
+                    id={this.props.player.state.id}
+                    name={this.props.player.state.name}
+                    profileIconId={this.props.player.state.profileIconId}
+                    rank_tier={this.props.player.state.rank_tier}
+                    champion_mastered_1_id={this.props.player.state.champion_mastered_1_id}
+                    champion_mastered_1_squarePortraitPath={this.props.player.state.champion_mastered_1_squarePortraitPath}
+                    champion_mastered_2_id={this.props.player.state.champion_mastered_2_id}
+                    champion_mastered_2_squarePortraitPath={this.props.player.state.champion_mastered_2_squarePortraitPath}
+                    champion_mastered_3_id={this.props.player.state.champion_mastered_3_id}
+                    champion_mastered_3_squarePortraitPath={this.props.player.state.champion_mastered_3_squarePortraitPath}
 			
                 />
             </div>
@@ -41,9 +46,9 @@ class User extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-      user: state.userReducer
+      player: state.playerReducer
     }
   };
   
   //export the current classes in order to be used outside
-export default connect(mapStateToProps)(User);
+export default connect(mapStateToProps)(Player);

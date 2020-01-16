@@ -114,10 +114,9 @@ function MatchFunction(){
 
             <TabPanel value={value} index={1}>
                 équipe adverse
-                {getSummoner(summonerName).then(response => {
-                  return response;
-                })};
+
             </TabPanel>
+            
             <Divider orientation="vertical"/>
             
         </Grid>

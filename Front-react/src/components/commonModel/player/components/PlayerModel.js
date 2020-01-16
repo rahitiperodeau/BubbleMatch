@@ -16,11 +16,6 @@ class PlayerModel  extends Component {
             champion_mastered_2_squarePortraitPath:null,
             champion_mastered_3_id:0,
             champion_mastered_3_squarePortraitPath:null,
-            champion_mastered_4_id:0,
-            champion_mastered_4_squarePortraitPath:null,
-            champion_mastered_5_id:0,
-            champion_mastered_5_squarePortraitPath:null
-
         }
 
 
