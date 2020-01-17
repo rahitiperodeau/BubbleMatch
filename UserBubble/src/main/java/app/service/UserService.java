@@ -23,6 +23,7 @@ public class UserService {
 
 	public String addUser(User user) {
 		String lReturn = "";
+		
 		if(userRepository.findByEmail(user.getEmail()) == null) {
 			user.updateLastLoginDate();
 			user.updateInscriptionDate();
