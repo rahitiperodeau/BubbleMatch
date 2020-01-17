@@ -9,11 +9,19 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
+import Player from '../player/Player'
+import PlayerFunction from '../player/Player'
+
 
 import {player_1} from '../../../data/data_player';
 import {champion_mastery_by_player} from '../../../data/data_champions';
 import {rank_info} from '../../../data/data_rank';
 import {champion_info} from '../../../data/data_champion';
+import {perfect_player} from '../../../data/perfect_player';
+import {team_blueside} from '../../../data/team_blueside';
+import {team_redside} from '../../../data/team_redside';
+
+
 
 import {getSummoner} from '../../../api/index'
 
@@ -68,8 +76,9 @@ const useStyles = makeStyles(theme => ({
   }
 
 
-function MatchFunction(){
-
+function MatchFunction(team1, team2){
+    let team_blueside= team1.param;
+    let team_redside = team2.param
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -94,15 +103,15 @@ function MatchFunction(){
             </AppBar>
             <TabPanel value={value} index={0}>
               {champion_mastery_by_player.map((champion,index)=>{
-                while (index <2) 
+                while (index <1){
                 //if (champion.championId == champion_info.id)
                 //call API pour récup champion info
                 //champion_info = résultat du call de l'API avec champion.championId
                     return(champion.championId == champion_info.id ? 
-                      <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default" + champion_info.squarePortraitPath.substr(21)}/>
+                      <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/" + champion.championId +".png"}/>
                      : 
                      champion_info.name);
-
+                    }
                      // <div>{champion.championId}</div>
                     //)
               })}
@@ -113,7 +122,8 @@ function MatchFunction(){
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-                équipe adverse
+                <Player param={team_redside}>
+                </Player>
 
             </TabPanel>
             
@@ -145,7 +155,7 @@ class MatchModel extends Component{
     render(){
         return(
             <div>
-                <MatchFunction/>
+                <MatchFunction param={team_blueside,team_redside}/>
             </div>
         )
     }
