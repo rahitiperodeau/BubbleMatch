@@ -4,26 +4,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "player")
 public class Player {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int player_id;
-	private String player_name;
+	private int playerId;
+	private String playerName;
 	private int eloPlayer;
 	
-	public int getPlayer_id() {
-		return player_id;
+	public int getPlayerId() {
+		return playerId;
 	}
 	
 	//Player_name
-	public String getPlayer_name() {
-		return player_name;
+	public String getPlayerName() {
+		return playerName;
 	}
-	public void setPlayer_name(String player_name) {
-		this.player_name = player_name;
+	public void setPlayerName(String player_name) {
+		this.playerName = player_name;
 	}
 	
 	
@@ -35,14 +37,21 @@ public class Player {
 		this.eloPlayer = eloPlayer;
 	}
 	
-	public Player(String player_name) {
+	public Player(String player_name, int elo) {
 		super();
-		this.player_name = player_name;
+		this.playerName = player_name;
+		this.eloPlayer = elo;
+	}
+	
+	public Player() {
+		super();
+		this.playerName = "Rospote";
 		this.eloPlayer = 500;
 	}
+	
 	@Override
 	public String toString() {
-		return "Player [player_id=" + player_id + ", player_name=" + player_name + ", eloPlayer=" + eloPlayer + "]";
+		return "Player [playerId=" + playerId + ", playerName=" + playerName + ", eloPlayer=" + eloPlayer + "]";
 	}
 	
 }
