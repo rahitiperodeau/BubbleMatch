@@ -2,10 +2,11 @@
 
 const Dialogflow = require('dialogflow');
 const Pusher = require('pusher');
-const getUserinfo = require('./request/user');
+
+const {getUserinfo,getTournamentInfoFromFile,getUserTournamentInfo} = require('./request/user');
 
 // You can find your project ID in your Dialogflow agent settings
-const projectId = 'bubblematchbot-dqyeec'; //https://dialogflow.com/docs/agents#settings
+const projectId = 'bubblematch-hndsoe'; //https://dialogflow.com/docs/agents#settings
 const sessionId = '123456';
 const languageCode = 'fr-FR';
 
@@ -31,7 +32,7 @@ const sessionClient = new Dialogflow.SessionsClient(config);
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 //function which create the message to display
-const processMessage = message => {
+const processMessage = (message,userId) => {
   const request = {
     session: sessionPath,
     queryInput: {
@@ -54,6 +55,23 @@ const processMessage = message => {
         return getUserinfo(userId).then(userInfo => { // we call getUserInfo
           return pusher.trigger('bot','bot-response',{
             message : 'All your no-sensitive info are : ' + userInfo,
+          });
+        });
+      }else if(result.intent.displayName === 'tournament.info.getTournaments'){
+        const userId = result.parameters.fields['number'].numberValue; // getback the entity detected by API
+        
+        return getTournamentInfo(userId).then(tournamentList => { // we call getUserInfo
+          return pusher.trigger('bot','bot-response',{
+            message : ' ' + tournamentList,
+          });
+        });
+      }
+      else if(result.intent.displayName === 'tournament.info'){
+        
+        
+        return getUserInfoTournament(userId).then(rulesReponse => { // we call getUserInfo
+          return pusher.trigger('bot','bot-response',{
+            message :  rulesReponse,
           });
         });
       }
