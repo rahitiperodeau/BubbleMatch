@@ -22,3 +22,7 @@ ChatBot/node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+Tournament/target/classes/META-INF/MANIFEST.MF
+
+Tournament/target/classes/META-INF/maven/Tournament/Tournament/pom.properties
