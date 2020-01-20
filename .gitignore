@@ -26,3 +26,9 @@ yarn-error.log*
 Tournament/target/classes/META-INF/MANIFEST.MF
 
 Tournament/target/classes/META-INF/maven/Tournament/Tournament/pom.properties
+
+TextMiningServer/app/__pycache__/__init__.cpython-36.pyc
+
+TextMiningServer/app/__pycache__/textMining.cpython-36.pyc
+
+TextMiningServer/app/__pycache__/views.cpython-36.pyc
