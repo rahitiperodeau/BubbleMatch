@@ -111,5 +111,5 @@ def getRulesAnswer(text,question) :
         wordFoundTab.append(str(len(wordFound)))
         #print('different word found :' + str(len(wordFound)))
         #print('  ')
-
+    print(myRulesTab[findLineIndex(countTab,wordFoundTab)])
     return myRulesTab[findLineIndex(countTab,wordFoundTab)]
