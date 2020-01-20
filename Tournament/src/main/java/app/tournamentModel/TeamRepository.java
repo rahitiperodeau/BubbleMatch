@@ -1,5 +1,7 @@
 package app.tournamentModel;
 
+import java.util.List;
+
 //import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -11,6 +13,7 @@ import app.tournamentModel.Tournament;
 public interface TeamRepository extends CrudRepository<Team, Integer> {
 	
 	public Team findByTeamId(int team_id);
+	public List<Team> findByPlayers_PlayerId(Integer playerId);
 
 
 
