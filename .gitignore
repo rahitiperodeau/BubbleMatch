@@ -23,10 +23,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+<<<<<<< HEAD
 Tournament/target/classes/META-INF/MANIFEST.MF
 
 Tournament/target/classes/META-INF/maven/Tournament/Tournament/pom.properties
 
+=======
+>>>>>>> develop
 TextMiningServer/app/__pycache__/__init__.cpython-36.pyc
 
 TextMiningServer/app/__pycache__/textMining.cpython-36.pyc
