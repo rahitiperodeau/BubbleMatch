@@ -35,6 +35,13 @@ public class PlayerRESTControler {
 		return playerService.getPlayer(id);
 	}
 	
+	@RequestMapping(method=RequestMethod.GET,value="/tournamentId/{playerId}")
+	private Integer getTournamentId(@PathVariable Integer playerId ) {
+		
+		return playerService.getTournamentId(playerId);
+	}
+	
+	
 	@RequestMapping(method=RequestMethod.POST,value="/player")
 	private void addPlayer(@RequestBody Player player) {
 		playerService.addPlayer(player);
