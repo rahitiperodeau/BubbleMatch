@@ -99,13 +99,13 @@ public class StorageService {
      * @param tournamentId
      * @return
      */
-    public ResponseEntity<Resource> downloadFileFromLocal(Integer fileId,Integer tournamentId) {
+    public ResponseEntity<Resource> downloadFileFromLocal(Integer fileId) {
     	
     	FileModel myFile = fileRepository.findById(fileId).get();
     	
     	myFile.addCount(); 								// we increment the download number 
     	fileRepository.save(myFile); 					// update
-    	Path path = Paths.get(localPath + tournamentId +"/" + myFile.getFileName());
+    	Path path = Paths.get(myFile.getFilePath());
     	Resource resource = null;
     	String contentType = myFile.getContentType();
     	try {
