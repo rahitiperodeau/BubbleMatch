@@ -28,7 +28,7 @@ def test():
     questions = 'Where may i register for NEO Cup 2015? '
     return getRulesAnswer(f,questions)
 
-@app.route('/getResponseFromRules/<int:fileId>/<question>')
+@app.route('/getResponseFromRules/<int:fileId>/<question>/')
 def getResponseFromRules(fileId,question):
     print(fileId)
     myFile = requests.get('http://localhost:8090/downloadFile/' + str(fileId))
