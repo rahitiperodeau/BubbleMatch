@@ -59,7 +59,7 @@ class App extends Component {
             <PrivateRoute exact path="/home" component={Home} />
             <PrivateRoute path="/chatbot" component={Chatbot}/>
             <PrivateRoute path="/tournoi" component={Tournoi}/>
-            <PrivateRoute path="/profil" component={User} />  
+            <PrivateRoute path="/myAccount" component={User} />  
             <Route path="/signUp" component={SignUp} /> 
             <PrivateRoute path="/signOut" component={SignOut} />  
             <PrivateRoute path="/autresTournois" component={AutresTournois}/>    

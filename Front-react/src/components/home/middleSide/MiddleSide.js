@@ -8,7 +8,6 @@ import Tournoi from '../../tournoi/Tournoi';
 import Match from '../../match/Match';
 import { connect } from 'react-redux';
 import './MiddleSide.css'
-import {updateMainComponent} from '../../../actions'
 class MiddleSide extends Component{
     constructor(props){
         super(props);

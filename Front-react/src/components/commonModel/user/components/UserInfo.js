@@ -55,43 +55,19 @@ class UserInfo extends Component{
       <form >
       <FormGroup controlId="surname" bsSize="large">
           <FormLabel>Surname : {this.props.user.surname}</FormLabel>
-          <FormControl
-            autoFocus
-            type="surname"
-            
-            
-          />
-          
         </FormGroup>
         
-        </form>
 
-
-        <form>
+      
         <FormGroup controlId="name" bsSize="large">
           <FormLabel>Name : {this.props.user.name}</FormLabel>
-          <FormControl
-            autoFocus
-            type="name"
-        
-            
-          />
         </FormGroup>
-        
-        </form>
-        <form>
+ 
         <FormGroup controlId="email" bsSize="large">
           <FormLabel>Email : {this.props.user.email}</FormLabel>
-          <FormControl
-            autoFocus
-            type="email"
-          
-            
-          />
+         
         </FormGroup>
-        
-        </form>
-            <form>
+        <h3>To change the password please fill this form</h3>
         <FormGroup controlId="password" bsSize="large">
           <FormLabel>Actual password</FormLabel>
           <FormControl
