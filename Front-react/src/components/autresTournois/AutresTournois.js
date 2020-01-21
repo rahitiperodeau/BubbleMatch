@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import {Button,Card,CardGroup, Accordion} from 'react-bootstrap';
+import {Button,Card, Accordion} from 'react-bootstrap';
 import './css/AutresTournois.css';
 
 
 
 import {DisplayTournaments} from '../../actions';
 import {connect} from 'react-redux';
-import {setTournamentIdAction} from '../../actions';
 var axios=require('axios') ;
 
 
@@ -21,7 +20,8 @@ class AutresTournois extends Component{
     }
 
     setTournamentId(tournamentId){
-        this.state.idTournoi= tournamentId;
+        
+        this.setState({idTournoi:tournamentId})
         console.log(this.state.idTournoi)
     }
     handleSubmit(event) {
@@ -44,7 +44,7 @@ class AutresTournois extends Component{
                         }
 
     render(){
-        let self = this;
+        
         if(this.props.tournaments.allTournaments === undefined){
             return(<div> Pas défini</div>)
         } else {

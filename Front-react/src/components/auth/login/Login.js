@@ -21,8 +21,7 @@ export default function Login(props) {
   }
 
   function sendRequestSignIn() {
-    let myvalue = sessionStorage.getItem('key');
-    let redirect = false;
+    
     
     axios.get('http://localhost:8082/signIn', {
             params: {
@@ -31,7 +30,7 @@ export default function Login(props) {
             }
           })
           .then(function (response) {
-              if (response.data !== undefined && response.data != ""){
+              if (response.data !== undefined && response.data !== ""){
                               
                 sessionStorage.setItem("sessionId",response.data);
                 window.location = "/home"

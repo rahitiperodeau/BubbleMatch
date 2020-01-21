@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios, { post } from 'axios';
+import axios from 'axios';
 import {filesAvailable} from '../../actions';
 import { connect } from 'react-redux';
 
@@ -21,14 +21,13 @@ class DeleteFile extends Component {
 
       deletefile(fileId){
         var self = this;
-        let tournamentId = 46;
-        //console.log()
-        var responseHttp;
+        
+        
         axios.delete('http://localhost:8090/deleteFile/'+ fileId + '/46')
             .then(function (response) {
-                if (response.data !== undefined && response.data != ""){
+                if (response.data !== undefined && response.data !== ""){
                     
-                    responseHttp = response.data;
+                    
                     //self.props.dispatch(filesAvailable(response.data))
                     
                 
@@ -51,13 +50,12 @@ class DeleteFile extends Component {
         
         var self = this;
         let tournamentId = 46;
-        //console.log()
-        var responseHttp;
+        
         axios.get('http://localhost:8090/files/'+ tournamentId)
             .then(function (response) {
-                if (response.data !== undefined && response.data != ""){
+                if (response.data !== undefined && response.data !== ""){
                     
-                    responseHttp = response.data;
+                   
                     //selfState.name = responseHttp.name;
                     //selfState.surname = responseHttp.surname;
                     //selfState.email = responseHttp.email;

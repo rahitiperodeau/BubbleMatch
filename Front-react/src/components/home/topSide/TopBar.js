@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Nav,Navbar,Dropdown,Badge} from 'react-bootstrap';
+import {Navbar,Dropdown} from 'react-bootstrap';
 import './css/TopBar.css';
-import {profileImage} from '../../../img/profile.png';
-import { connect } from 'react-redux';
+//import {profileImage} from '../../../img/profile.png';
+
 
 class TopBar extends Component{
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios, { post } from 'axios';
-import Download from '../download/Download';
+import { post } from 'axios';
 import FileAvailable from '../fileAvailable/FileAvailable';
 
 class Upload extends Component {
