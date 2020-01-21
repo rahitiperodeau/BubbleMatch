@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import {Form, Button} from 'react-bootstrap';
-import TopBar from '../home/topSide/TopBar';
 import { connect } from 'react-redux';
-import {AddTeam} from '../../actions';
 
 
-var axios=require('axios') ;
 
 class InscriptionTournoi extends Component{
     constructor(props){
@@ -19,25 +16,7 @@ class InscriptionTournoi extends Component{
     handleSubmit(event) {
         event.preventDefault();
       }
-    sendSubscribeTeam() {
-        let self = this;
-        let team = {};
-        /*user.name=name;
-        user.surname=surname;
-        user.isAdmin=isAdmin;
-        user.email=email;
-        user.password= password;*/
-       
     
-        // axios.put("http://localhost:8083/tournament", tournament)
-        //                 .then(function (response) {
-                                
-        //                     })
-        //                     .catch(function(error){
-        //                         console.log(error);
-        //                     })
-        //                 }
-    }
     render(){
         return(
             <div>

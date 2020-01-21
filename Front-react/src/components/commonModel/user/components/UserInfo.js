@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button, FormGroup, FormControl, FormLabel,   FormCheck  } from "react-bootstrap";
+import { Button, FormGroup, FormControl, FormLabel  } from "react-bootstrap";
 import { connect } from 'react-redux';
 import './UserInfo.css';
 
@@ -29,7 +29,7 @@ class UserInfo extends Component{
         user.password= password;*/
         axios.post("http://localhost:8082/user",user)
                         .then((response)=>{
-                            if(response.data == ""){
+                            if(response.data === ""){
                                 window.location  = "/home"
                                 
                             }else{

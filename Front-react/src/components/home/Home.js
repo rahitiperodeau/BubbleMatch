@@ -6,12 +6,7 @@ import { connect } from 'react-redux';
 
 
 class Home extends Component{
-    constructor(props){
-        super(props);
-        
-    }
-
-   
+     
 
     render(){
         //this.getUserId(sessionStorage.getItem("sessionId"));
