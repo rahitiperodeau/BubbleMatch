@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-
 import SignOut from './components/auth/signOut/SignOut';
 import Login from './components/auth/login/Login';
 import SignUp from './components/auth/signUp/SignUp';

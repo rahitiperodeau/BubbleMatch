@@ -30,6 +30,8 @@ public class PlayerRESTControler {
 		return players;
 	}
 	
+	
+	
 	@RequestMapping(method=RequestMethod.GET,value="/player/{id}")
 	private Player getPlayer(@PathVariable int id ) {
 		return playerService.getPlayer(id);
@@ -61,13 +63,5 @@ public class PlayerRESTControler {
 	}
 	
 	
-//	@RequestMapping(method = RequestMethod.GET, value="/teams")
-//	public List<Team> getAllTeams(){
-//		List<Team> teams=new ArrayList<>();
-//		for(Team t:tournamentService.getAllTeams()){
-//			teams.add(t);
-//		}
-//		return teams;
-//	}
 
 }

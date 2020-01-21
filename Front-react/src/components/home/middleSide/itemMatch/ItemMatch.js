@@ -23,13 +23,12 @@ class ItemMatch extends Component{
         return(
             <Figure>
                     <Figure.Image
-                        width={171}
-                        height={180}
+                     
                         src={matchImage}
+                        onClick={()=>{this.setMatchState()}}
+                        id="image"
                     />
-                    <Figure.Caption className="caption">
-                        <Button onClick={()=>{this.setMatchState()}}>Votre match</Button>
-                    </Figure.Caption>
+                   
                 </Figure>
         )
     }

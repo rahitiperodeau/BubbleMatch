@@ -23,7 +23,6 @@ public class TeamRESTControler {
 	
 	@RequestMapping(method = RequestMethod.GET, value="/teams")
 	public List<Team> getAllTeams(){
-		System.out.println("ICI");
 		List<Team> teams=new ArrayList<>();
 		for(Team t:teamService.getAllTeams()){
 			teams.add(t);

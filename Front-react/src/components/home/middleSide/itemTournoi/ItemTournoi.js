@@ -28,13 +28,12 @@ class Tournoi extends Component{
                 
                 <Figure>
                     <Figure.Image
-                        width={171}
-                        height={180}
+                        
                         src={tournoiImage}
+                        onClick={()=>{this.setTournoiState()}}
+                        id="image"
                     />
-                    <Figure.Caption className="caption">
-                    <Button onClick={()=>{this.setTournoiState()}}>Votre tournoi</Button>
-                    </Figure.Caption>
+                    
                 </Figure>
         )
     }

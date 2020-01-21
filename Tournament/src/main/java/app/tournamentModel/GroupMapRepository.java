@@ -5,14 +5,9 @@ package app.tournamentModel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import app.tournamentModel.Tournament;
-
 @Repository
-public interface GroupsRepository extends CrudRepository<Groups, Integer> {
-	public Groups findByStructureId(int id);
-
-
-
-
+public interface GroupMapRepository extends CrudRepository<GroupMap, Integer> {
+	
+	public GroupMap findByGroupMapId(int GroupMapId);
 
 }

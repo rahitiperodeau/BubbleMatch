@@ -51,6 +51,12 @@ public class PlayerService {
 	
 		playerRepository.save(player);
 }
+
+
+	public void updatePlayer(Player player, int elo) {
+		player.setEloPlayer(elo);
+		playerRepository.save(player);
+	}
 	
 	public Integer getTournamentId(Integer playerId) {
 		

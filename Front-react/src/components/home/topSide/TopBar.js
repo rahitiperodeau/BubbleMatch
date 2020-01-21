@@ -18,53 +18,38 @@ class TopBar extends Component{
             
                 <Navbar className="navBar">
                     <div>
-                        <Navbar.Brand className="brand">
-                            <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                LOL
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu>
-                                <Dropdown.Item >Championnat d'Italie</Dropdown.Item>
-                                <Dropdown.Divider />
-                                <Dropdown.Item >Grand Prix</Dropdown.Item>
-                            </Dropdown.Menu>
-                            </Dropdown>
-                        
-                        </Navbar.Brand>
-
-                        <Navbar.Brand className="brand">
-                            <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                Super Smash Bros
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu>
-                                <Dropdown.Item >Championnat de France</Dropdown.Item>
-                                <Dropdown.Divider />
-                                <Dropdown.Item >CLT SLG Super Smash Bros</Dropdown.Item>
-                            </Dropdown.Menu>
-                            </Dropdown>
-                        
-                        </Navbar.Brand>
-                        
-                        <Navbar.Brand className="brand" href="/home">
+                    <Navbar.Brand className="brand" href="/home">
                             BubbleMatch
-                        </Navbar.Brand>    
-                        <Navbar.Brand className="brand" href="/profil" >
-                            Profil
                         </Navbar.Brand>
+                        <Navbar.Brand className="brand">
+                            <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic" >
+                                Tournaments
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item > La Grosse Ligue </Dropdown.Item>
+                            </Dropdown.Menu>
+                            </Dropdown>
+                        
+                        </Navbar.Brand>
+    
+                        
                         <Navbar.Brand className="brand" href="/autresTournois">
                             Plus
                         </Navbar.Brand>
                         <Navbar.Brand className="myUser" >
                             {sessionStorage.getItem("userId")}
                         </Navbar.Brand>
+                        
                         <Navbar.Brand className="uploadFile" href="/upload">
                             upload file
                         </Navbar.Brand>
-                        <Navbar.Brand className="signOut" href="/signOut">
-                            Deconnexion
+                        <Navbar.Brand className="signOut" href="/signOut" id="barDec">
+                            Disconnect
+                        </Navbar.Brand>
+                        <Navbar.Brand className="myAccount" href="/myAccount" id="bar">
+                            My account
                         </Navbar.Brand>
                     
                     </div>

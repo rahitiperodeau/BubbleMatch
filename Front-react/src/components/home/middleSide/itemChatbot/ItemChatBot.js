@@ -30,10 +30,11 @@ class ItemChatBot extends Component{
                         width={171}
                         height={180}
                         src={chatbotImage}
+                        onClick={()=>{this.setChatBotState()}}
+
+                        id="image"
                     />
-                    <Figure.Caption className="caption">
-                    <Button onClick={()=>{this.setChatBotState()}}>Chatbot</Button>
-                    </Figure.Caption>
+                   
             </Figure>
 
             

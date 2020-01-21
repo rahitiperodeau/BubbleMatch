@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ChatBot from 'react-simple-chatbot';
-
+import './Chatbot.css';
 
 //faudra config steps pour avoir une bonne conversation
 const steps = [
@@ -34,6 +34,7 @@ class Chatbot extends Component{
                 <ChatBot
                  headerTitle="BubbleBot"
                  steps={steps}
+                 id="chatbot"
                 />
             </div>
         )

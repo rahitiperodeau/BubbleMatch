@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Button, FormGroup, FormControl, FormLabel,   FormCheck  } from "react-bootstrap";
 import { connect } from 'react-redux';
-
+import './UserInfo.css';
 
 var axios=require('axios') ;
 class UserInfo extends Component{
@@ -47,11 +47,7 @@ class UserInfo extends Component{
 
     render(){
         return(
-            <div>
-                <div>Id:{this.props.user.id}</div>
-                <div>Name:{this.props.user.name}</div>
-                <div>Surname:{this.props.user.surname}</div>
-                <div>email:{this.props.user.email}</div>
+            
                
                 <div className="SignUp">
 
@@ -67,9 +63,7 @@ class UserInfo extends Component{
           />
           
         </FormGroup>
-        <Button block bsSize="large" onClick={()=>{this.sendRequestUpdateAccount()}}  type="submit">
-          Update my surname :)!
-        </Button>
+        
         </form>
 
 
@@ -83,9 +77,7 @@ class UserInfo extends Component{
             
           />
         </FormGroup>
-        <Button block bsSize="large" onClick={()=>{this.sendRequestUpdateAccount()}}  type="submit">
-          Update my name :)!
-        </Button>
+        
         </form>
         <form>
         <FormGroup controlId="email" bsSize="large">
@@ -97,9 +89,7 @@ class UserInfo extends Component{
             
           />
         </FormGroup>
-        <Button block bsSize="large" onClick={()=>{this.sendRequestUpdateAccount()}}  type="submit">
-          Update my email :)!
-        </Button>
+        
         </form>
             <form>
         <FormGroup controlId="password" bsSize="large">
@@ -126,7 +116,7 @@ class UserInfo extends Component{
         
     </div>
 		
-            </div>
+            
             
         );
     }
