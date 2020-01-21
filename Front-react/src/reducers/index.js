@@ -15,6 +15,7 @@ import team2InfosReducer from './Team2InfosReducer';
 import matchBracketReducer from './MatchBracketReducer';
 import allTeamsReducer from './AllTeamsReducer';
 import equipesTabIndexReducer from './EquipesTabIndexReducer';
+import setTournamentIdsListReducer from './SetTournamentIdsListReducer';
 
 
 const globalReducer = combineReducers({
@@ -33,6 +34,7 @@ const globalReducer = combineReducers({
     matchBracketReducer:matchBracketReducer,
     allTeamsReducer:allTeamsReducer,
     equipesTabIndexReducer:equipesTabIndexReducer,
+    setTournamentIdsListReducer:setTournamentIdsListReducer
 });
 
 

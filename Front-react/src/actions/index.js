@@ -113,3 +113,17 @@ export const equipesTabIndexAction=(tab_index)=> {
         obj:tab_index
     }
 }
+
+export const tournamentIdsAction=(tournamentIds_list)=>{
+    return{
+        type:'SET_TOURNAMENT_IDS_LIST',
+        obj:tournamentIds_list
+    }
+}
+
+export const addTournamentNameAction=(tournament_obj)=>{
+    return{
+        type:'SET_TOURNAMENT_NAME',
+        obj:tournament_obj
+    }
+}

@@ -47,13 +47,14 @@ class App extends Component {
     return(
 
       <div>
-
-      <div className="topBar">
-        <TopBar /> 
-      </div>
+          
+     
       <Provider store={store}>
-
+          
+          
+          
         <Router>
+          <TopBar /> 
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
             <Route exact path="/signIn" component={Login} />

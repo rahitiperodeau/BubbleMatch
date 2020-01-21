@@ -127,7 +127,7 @@ class BracketInfo extends Component{
             self.props.team2R===undefined
             ){
                 return(
-                    <div>Team 1 ou 2 non def</div>
+                    <div></div>
                 )
         }
         else{

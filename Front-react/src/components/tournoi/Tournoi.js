@@ -28,6 +28,7 @@ const height=800;
 const width= 1000;
 
 
+
 const yMax = height - margin.top - margin.bottom;
 const xMax = width - margin.left - margin.right;
 //const yMax = height -500;
@@ -44,7 +45,7 @@ class Tournoi extends Component{
         this.treeCreation=this.treeCreation.bind(this);
         this.setBracket=this.setBracket.bind(this);
         this.getAllTeams=this.getAllTeams.bind(this);
-
+        
         this.getAllTeams();
         this.getBracket(1);
     }
@@ -59,6 +60,8 @@ class Tournoi extends Component{
         console.log("self.props.bracketR");
         console.log(self.props.bracketR);
     }
+
+    
 
 
     getBracket(bracketId){
@@ -113,7 +116,7 @@ class Tournoi extends Component{
             (self.props.allTeams===undefined) || (self.props.allTeams==={}) ||
       (Object.keys(self.props.allTeams).length===0)){
             return(<div>
-                bracketR non def
+                
             </div>);
         }
         else{
@@ -170,6 +173,7 @@ const mapStateToProps = (state,ownProps)=>{
         team1R: state.team1InfosReducer,
         team2R:state.team2InfosReducer,
         allTeams:state.allTeamsReducer,
+        tournamentIdsList:state.setTournamentIdsListReducer,
     }
 }
 export default connect(mapStateToProps)(Tournoi);
