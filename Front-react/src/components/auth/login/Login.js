@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./style/Login.css";
 import sessionStorage from "sessionstorage";
+import {getUserId} from '../../../lib/authFonction';
 
 var axios=require('axios') ;
 
@@ -24,6 +25,7 @@ export default function Login(props) {
     let myvalue = sessionStorage.getItem('key');
     let redirect = false;
     
+    
     axios.get('http://localhost:8082/signIn', {
             params: {
               email: email,
@@ -34,6 +36,7 @@ export default function Login(props) {
               if (response.data !== undefined && response.data != ""){
                               
                 sessionStorage.setItem("sessionId",response.data);
+                getUserId(sessionStorage.getItem("sessionId"));
                 window.location = "/home"
                 
                

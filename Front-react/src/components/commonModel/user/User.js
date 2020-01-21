@@ -13,7 +13,7 @@ class User extends Component {
            
         }
 
-        
+        this.getUserId = this.getUserId.bind(this);
 
     }
 
