@@ -67,13 +67,16 @@ class Node extends Component{
     console.log("getTeamName")
     console.log(p_team_id)
     let allTeamsFiltered=self.props.allTeams.filter((el)=>el.teamId==p_team_id);
-    return allTeamsFiltered[0].team_name;
+    console.log(allTeamsFiltered[0].teamName);
+    return allTeamsFiltered[0].teamName;
   }
 
   
 
   render(){
     let self=this;
+    console.log("--------")
+    console.log(self.props.node)
     if(this.props.allTeams===undefined || this.props.allTeams==={} ||
       (Object.keys(this.props.allTeams).length===0 && this.props.allTeams===Object)){
       return(<div></div>)

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import BracketModel from '../commonModel/bracket/BracketModel';
 import Poules from '../commonModel/poule/Poules';
 import {genTree,fillBracket} from '../commonModel/bracket/components/BracketFunctions';
 import { Group } from '@vx/group';
