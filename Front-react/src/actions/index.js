@@ -28,3 +28,25 @@ export const matchDisplay=(match_state)=>{
         obj:match_state
     }
 }
+
+export const DisplayTournaments=(tournaments) =>{
+    return{
+        type:'GET_TOURNAMENTS',
+        obj: tournaments
+    }
+}
+
+export const AddTeam=(team) =>{
+    return{
+        type:'ADD_TEAM',
+        obj: team
+    }
+}
+
+
+export const setTournamentIdAction=(id) =>{
+    return{
+        type:'SET_TOURNAMENT_ID',
+        obj: id
+    }
+}

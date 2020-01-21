@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapKey;
 import javax.persistence.Table;
 
 @Entity
@@ -16,10 +17,10 @@ import javax.persistence.Table;
 public class GroupMap {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int GroupMapId;
+	private int groupMapId;
 	
 	@ElementCollection(targetClass=Team.class)
-		private Map<Team,Integer> groupMap;
+	private Map<Team,Integer> groupMap;
 	  
 	public GroupMap() {
 		super();
@@ -54,6 +55,20 @@ public class GroupMap {
 		// TODO Auto-generated method stub
 		return get(findTeamById);
 	}
+
+	public int getGroupMapId() {
+		return groupMapId;
+	}
+
+	public void setGroupMapId(int groupMapId) {
+		groupMapId = groupMapId;
+	}
+
+	public void setGroupMap(Map<Team, Integer> groupMap) {
+		this.groupMap = groupMap;
+	}
+
+
 	  
 	  
 

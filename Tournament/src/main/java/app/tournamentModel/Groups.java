@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Groups extends StructureT {
 	
 	private int nbOfGroups;
 	
-    @ElementCollection(targetClass=GroupMap.class)
+	@OneToMany(cascade=CascadeType.ALL)
 	List<GroupMap> groups = new ArrayList<>();
     
    // int score = 0;
@@ -72,8 +73,8 @@ public class Groups extends StructureT {
 					Team team1 = findTeamByname(groups.get(i).keySet().toArray()[k].toString());
 					Team team2 = findTeamByname(groups.get(i).keySet().toArray()[g].toString());
 					//System.out.println(groups.get(i).keySet().toArray()[k]);
-					System.out.println(team2.getTeam_name());
-					System.out.println(team1.getTeam_name());
+					System.out.println(team2.getTeamName());
+					System.out.println(team1.getTeamName());
 
 					//System.out.println(groups.get(i).keySet().toArray()[k].toString());
 					Match match = new Match(team1.getTeamId(),team2.getTeamId(),0,0);
@@ -111,6 +112,19 @@ public class Groups extends StructureT {
 			groups.get(i).put(findTeamById(winner),groups.get(i).get(findTeamById(winner))+1);
 		}
 		return(groups);
+	}
+	
+	public int getNbOfGroups() {
+		return nbOfGroups;
+	}
+	public void setNbOfGroups(int nbOfGroups) {
+		this.nbOfGroups = nbOfGroups;
+	}
+	public List<GroupMap> getGroups() {
+		return groups;
+	}
+	public void setGroups(List<GroupMap> groups) {
+		this.groups = groups;
 	}
 	@Override
 	public String toString() {

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import app.tournamentModel.Tournament;
 
 @Repository
-public interface GroupsRepository extends CrudRepository<Tournament, Integer> {
-	
-	public Tournament findByName (String name);
-	public Tournament findById (int tournament_id);
+public interface GroupsRepository extends CrudRepository<Groups, Integer> {
+	public Groups findByStructureId(int id);
+
+
 
 
 

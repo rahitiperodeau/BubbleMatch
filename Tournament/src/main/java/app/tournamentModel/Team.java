@@ -3,6 +3,7 @@ package app.tournamentModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class Team {
 //	@ManyToOne
 //	private Tournament tournament;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	List<Player> players = new ArrayList<Player>();
 	
     @Column(name = "Elo")
@@ -42,11 +43,11 @@ public class Team {
 	
 
 	//Team name
-	public String getTeam_name() {
+	public String getTeamName() {
 		return teamName;
 	}
-	public void setTeam_name(String team_name) {
-		this.teamName = team_name;
+	public void setTeam_name(String teamName) {
+		this.teamName = teamName;
 	}
 
 	
@@ -77,7 +78,7 @@ public class Team {
 //			this.elo = elo + players.get(i).getEloPlayer();
 //		    System.out.println(getElo());
 //		}
-//		this.elo = this.elo/(5);
+//		this.elo = this.elo/(players.size());
 		this.elo = elo;
 		}
 
@@ -96,10 +97,18 @@ public class Team {
 		this.elo = 0;
 	}
 	
+	public Team(String teamName, int id, List<Player> players, int tournamentIdRef) {
+		super();
+		this.teamId = id;
+		this.teamName = teamName;
+		this.tournamentIdRef = tournamentIdRef;
+		this.players = players;
+		this.elo =0;
+	}
+	
 	public Team() {
 		super();
-		this.teamName = "Hello";
-		this.elo = 0;
+		this.teamName = "";
 	}
 
 	
@@ -118,16 +127,8 @@ public class Team {
 		return players;
 	}
 	
-	public String teamName() {
-		return(teamName);
-	}
-
 	
-	@Override
-	public String toString() {
-		return "Team [teamId=" + teamId + ", players=" + players + ", elo=" + elo + ", teamName=" + teamName
-				+ ", tournamentIdRef=" + tournamentIdRef + "]";
-	}
+
 	
 	
 }

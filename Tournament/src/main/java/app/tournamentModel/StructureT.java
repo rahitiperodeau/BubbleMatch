@@ -53,7 +53,7 @@ public class StructureT {
 		//System.out.println(teams);
 		int a = 0;
 		for(int i =0; i <= teams.size()-1;i++) {
-			if(teams.get(i).getTeam_name() == team) {
+			if(teams.get(i).getTeamName() == team) {
 				//System.out.println("okok");
 				a= i;
 			}

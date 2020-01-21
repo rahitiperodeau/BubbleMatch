@@ -7,7 +7,7 @@ import ChatBot from '../../chatBot/Chatbot';
 import Tournoi from '../../tournoi/Tournoi';
 import Match from '../../match/Match';
 import { connect } from 'react-redux';
-
+import './MiddleSide.css'
 class MiddleSide extends Component{
 
     constructor(props){
@@ -39,23 +39,27 @@ class MiddleSide extends Component{
         return(
             <div className="middleSide">
             
-                <Container>
-                    <Row>
-                        <Col xs={4} md={5}>
+                <div id="bulles">
+                    <Row xs={1} md={6}>
+                        <Col xs={1} md={6}>
                             <ItemMatch/>
                         </Col>
-                        <Col xs={1} md={4}>
+                        </Row>
+                        <Row>
+                        <Col xs={2} md={2}>
                             <ItemTournoi/>
                         </Col>
-                        
-                    </Row>
-                    <Row>
-                        <Col xs={1} md={4}>
+                        </Row>
+                        <Row>
+                        <Col xs={1} md={6}>
                             <ItemChatBot/>
                         </Col>
                     </Row>
-                </Container>
+                </div>
+                <div id="bulle">
                 {this.itemChosen()}
+
+                </div>
                 
             </div>
         )

@@ -49,6 +49,12 @@ public class Player {
 		this.eloPlayer = 500;
 	}
 	
+	public Player(String playername) {
+		super();
+		this.playerName = playername;
+		this.eloPlayer = 500;
+	}
+	
 	@Override
 	public String toString() {
 		return "Player [playerId=" + playerId + ", playerName=" + playerName + ", eloPlayer=" + eloPlayer + "]";
