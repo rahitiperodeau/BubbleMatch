@@ -11,13 +11,14 @@ class UserInfo extends Component{
         super(props);
         this.state={
          user : {
-           email:this.props.user.email,
-           name:this.props.user.name,
-           surname:this.props.user.surname,
+           email:"",
+           name:"",
+           surname:"",
            password:""
          }
             
         }
+        
     }
 
     handleSubmit(event) {
@@ -41,10 +42,16 @@ class UserInfo extends Component{
     }
 
     sendRequestUpdateAccount(newPassword) {
-
-        let user    = this.state.user;
-        user.password = newPassword;
-        axios.put("http://localhost:8082/user",user)
+      let userToGive = {
+        email:this.props.user.email,
+         name:this.props.user.name,
+         surname:this.props.user.surname,
+         password:newPassword
+      };
+        this.setState({user:userToGive})
+        
+        
+        axios.put("http://localhost:8082/user",userToGive)
                         .then((response)=>{
                             if(response.data === ""){
                                 window.location  = "/home"

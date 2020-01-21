@@ -84,9 +84,8 @@ public class UserRestController {
 		return lReturn;
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT,value="/user/{id}")
-	public void updateUser(@RequestBody User user,@PathVariable String id) {
-		user.setId(Integer.valueOf(id));
+	@RequestMapping(method=RequestMethod.PUT,value="/user")
+	public void updateUser(@RequestBody User user) {
 		userService.updateUser(user);
 	}
 	
