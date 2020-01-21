@@ -21,9 +21,9 @@ class DeleteFile extends Component {
 
       deletefile(fileId){
         var self = this;
+        let folderId = this.props.folderId;
         
-        
-        axios.delete('http://localhost:8090/deleteFile/'+ fileId + '/46')
+        axios.delete('http://localhost:8090/deleteFile/'+ fileId + '/' + folderId)
             .then(function (response) {
                 if (response.data !== undefined && response.data !== ""){
                     
@@ -49,7 +49,7 @@ class DeleteFile extends Component {
 
         
         var self = this;
-        let tournamentId = 46;
+        let tournamentId = this.props.folderId;
         
         axios.get('http://localhost:8090/files/'+ tournamentId)
             .then(function (response) {
