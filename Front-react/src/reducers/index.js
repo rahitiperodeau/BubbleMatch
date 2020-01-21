@@ -6,7 +6,7 @@ import matchDisplayReducer from './MatchDisplayReducer';
 import displayTournamentsReducer from './DisplayTournamentsReducer';
 import teamReducer from './TeamReducer';
 import setIdTournamentReducer from './SetIdTournamentReducer';
-import filesAvailableReducer from './FilesReducer'
+import filesAvailableReducer from './FilesReducer';
 
 const globalReducer = combineReducers({
     userReducer:userReducer,
