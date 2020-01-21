@@ -8,26 +8,21 @@ import Tournoi from '../../tournoi/Tournoi';
 import Match from '../../match/Match';
 import { connect } from 'react-redux';
 import './MiddleSide.css'
+import {updateMainComponent} from '../../../actions'
 class MiddleSide extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            mainComponent : <div/>
 
-    itemChosen(){
-
-        const ctState=this.props.chatbotState;
-        const tournoiState=this.props.tournoiState;
-        const matchState=this.props.matchState;
-        let rendering = <div/>;
-        
-        if (ctState===true){
-            rendering=<ChatBot/>;
         }
-        if(tournoiState===true){
-            rendering=<Tournoi/>;
-        }
-        if(matchState===true){
-            rendering=<Match/>;
-        }
-        return rendering;
     }
+
+    updateComponent(cmp){
+        
+        this.setState({mainComponent : cmp})
+    }
+
 
     render(){
         
@@ -37,22 +32,28 @@ class MiddleSide extends Component{
                 <div id="bulles">
                     <Row xs={1} md={6}>
                         <Col xs={1} md={6}>
-                            <ItemMatch/>
+                            <div className = "matchDiv" onClick={()=>{this.updateComponent(<Match/>)}}>
+                            <ItemMatch onclick={this.updateComponent}/>
+                            </div>
                         </Col>
                         </Row>
                         <Row>
                         <Col xs={2} md={2}>
-                            <ItemTournoi/>
+                            <div className = "tournoiDiv" onClick={()=>{this.updateComponent(<Tournoi/>)}}>
+                            <ItemTournoi onclick={this.updateComponent}/>
+                            </div>
                         </Col>
                         </Row>
                         <Row>
                         <Col xs={1} md={6}>
+                            <div className = "chatBotDiv" onClick={()=>{this.updateComponent(<ChatBot/>)}}>
                             <ItemChatBot/>
+                            </div>
                         </Col>
                     </Row>
                 </div>
                 <div id="bulle">
-                {this.itemChosen()}
+                {this.state.mainComponent}
 
                 </div>
                 
@@ -64,7 +65,7 @@ const mapStateToProps =(state,ownProps)=>{
     return{
         chatbotState: state.chatBotDisplayReducer,
         tournoiState:state.tournoiDisplayReducer,
-        matchState:state.matchDisplayReducer
+        matchState:state.matchDisplayReducer,
     }
 }
 export default connect(mapStateToProps)(MiddleSide);
