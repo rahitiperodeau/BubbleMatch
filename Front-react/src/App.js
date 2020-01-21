@@ -64,6 +64,7 @@ class App extends Component {
             <PrivateRoute path="/signOut" component={SignOut} />  
             <PrivateRoute path="/autresTournois" component={AutresTournois}/>    
             <PrivateRoute path="/inscriptionTournoi" component={InscriptionTournoi}/>
+	    <PrivateRoute path="/generationTournoi" component={GenerationTournoi} />
             <PrivateRoute path="/upload" component={Upload}/>
             <Route path="/404" component={NotFound} />
             <Redirect to="/404" />
