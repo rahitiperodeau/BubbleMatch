@@ -10,7 +10,12 @@ class UserInfo extends Component{
     constructor(props){
         super(props);
         this.state={
-         
+         user : {
+           email:this.props.user.email,
+           name:this.props.user.name,
+           surname:this.props.user.surname,
+           password:""
+         }
             
         }
     }
@@ -19,15 +24,27 @@ class UserInfo extends Component{
         event.preventDefault();
       }
 
-    sendRequestUpdateAccount() {
+    checkPassword(){
+      let oldPassword = document.getElementById("oldPassword").value;
+      let newPassword = document.getElementById("newPassword").value;
+      if(oldPassword.length < 5){
+        alert("the password is too short, please use a longer")
+      }else{
+        if(oldPassword===newPassword){
+          this.sendRequestUpdateAccount(newPassword)
+  
+        }else{
+          alert("the both password don't match please refill the form :)")
+        }
+      }
+      
+    }
 
-        let user    = {};
-        /*user.name=name;
-        user.surname=surname;
-        user.isAdmin=isAdmin;
-        user.email=email;
-        user.password= password;*/
-        axios.post("http://localhost:8082/user",user)
+    sendRequestUpdateAccount(newPassword) {
+
+        let user    = this.state.user;
+        user.password = newPassword;
+        axios.put("http://localhost:8082/user",user)
                         .then((response)=>{
                             if(response.data === ""){
                                 window.location  = "/home"
@@ -52,6 +69,8 @@ class UserInfo extends Component{
                 <div className="SignUp">
 
 
+      <h3>To change the password please fill this form</h3>
+
       <form >
       <FormGroup controlId="surname" bsSize="large">
           <FormLabel>Surname : {this.props.user.surname}</FormLabel>
@@ -67,24 +86,23 @@ class UserInfo extends Component{
           <FormLabel>Email : {this.props.user.email}</FormLabel>
          
         </FormGroup>
-        <h3>To change the password please fill this form</h3>
         <FormGroup controlId="password" bsSize="large">
-          <FormLabel>Actual password</FormLabel>
+          <FormLabel>New password</FormLabel>
           <FormControl
-           
+           id="oldPassword"
             
-            type="oldPassword"
+            type="password"
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
-          <FormLabel>New Password</FormLabel>
+          <FormLabel>Confirm Password</FormLabel>
           <FormControl
+            id="newPassword"
             
-            
-            type="newPassword"
+            type="password"
           />
         </FormGroup>
-        <Button block bsSize="large" onClick={()=>{this.sendRequestUpdateAccount()}}  type="submit">
+        <Button block bsSize="large" onClick={()=>{this.checkPassword()}}  >
           Update my password :)!
         </Button>
         </form>
