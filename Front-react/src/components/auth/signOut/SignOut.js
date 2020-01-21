@@ -21,6 +21,7 @@ class SignOut extends Component{
             }})
         .then((response)=>{
             sessionStorage.removeItem("sessionId");
+            sessionStorage.removeItem("userId");
             
             alert("you are deconnected");
             window.location = "/";
