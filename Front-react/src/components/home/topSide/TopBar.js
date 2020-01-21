@@ -42,6 +42,9 @@ class TopBar extends Component{
                             {sessionStorage.getItem("userId")}
                         </Navbar.Brand>
                         
+                        <Navbar.Brand className="uploadFile" href="/upload">
+                            upload file
+                        </Navbar.Brand>
                         <Navbar.Brand className="signOut" href="/signOut" id="barDec">
                             Disconnect
                         </Navbar.Brand>

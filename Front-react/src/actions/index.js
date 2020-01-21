@@ -49,4 +49,10 @@ export const setTournamentIdAction=(id) =>{
         type:'SET_TOURNAMENT_ID',
         obj: id
     }
+    
+export const filesAvailable=(files_obj) =>{
+    return{
+        type:'UPDATE_FILES_AVAILABLE',
+        obj:files_obj
+    }
 }
