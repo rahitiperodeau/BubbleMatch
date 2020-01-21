@@ -33,6 +33,7 @@ export default function Login(props) {
               if (response.data !== undefined && response.data !== ""){
                               
                 sessionStorage.setItem("sessionId",response.data);
+                
                 window.location = "/home"
                 
                

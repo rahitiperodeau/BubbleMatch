@@ -34,14 +34,10 @@ class TopBar extends Component{
                         
                         </Navbar.Brand>
     
-                        
                         <Navbar.Brand className="brand" href="/autresTournois">
                             Plus
                         </Navbar.Brand>
-                        <Navbar.Brand className="myUser" >
-                            {sessionStorage.getItem("userId")}
-                        </Navbar.Brand>
-                        
+                                             
                         <Navbar.Brand className="uploadFile" href="/upload">
                             upload file
                         </Navbar.Brand>

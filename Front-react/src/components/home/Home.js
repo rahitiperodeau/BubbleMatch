@@ -3,11 +3,18 @@ import MiddleSide from './middleSide/MiddleSide';
 import './css/Home.css'
 import { connect } from 'react-redux';
 
+import {getUserId} from '../../lib/authFunction'
 
 
 class Home extends Component{
-     
-
+    constructor(props){
+        super(props);
+        this.state={
+           
+        }
+        getUserId(sessionStorage.getItem("sessionId"));
+    }
+    
     render(){
         //this.getUserId(sessionStorage.getItem("sessionId"));
         return(

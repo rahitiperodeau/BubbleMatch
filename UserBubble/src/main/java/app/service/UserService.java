@@ -49,8 +49,6 @@ public class UserService {
 
 	public void updateUser(User user) {
 		User myUser = userRepository.findByEmail(user.getEmail());
-		System.out.println(myUser.toString());
-		System.out.println(user.toString());
 		myUser.updatePassword(passwordEncoder.encode(user.getPassword()));
 		this.userRepository.save(myUser);
 
