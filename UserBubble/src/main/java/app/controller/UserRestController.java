@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.model.Player;
 import app.model.User;
 import app.service.AuthentificationService;
+import app.service.PlayerService;
 import app.service.UserService;
 
 @CrossOrigin
@@ -25,6 +27,9 @@ public class UserRestController {
 	
 	@Autowired
 	private AuthentificationService authentificationService;
+	
+	@Autowired
+	private PlayerService playerService;
 	
 	@RequestMapping("/users")
 	private List<User> getAllUsers() {
@@ -42,6 +47,13 @@ public class UserRestController {
 		}
 		return null;
 
+	}
+	
+	@RequestMapping("/players/{userId}")
+	private List<Player> getPlayers(@PathVariable String userId) {
+		
+		List<Player> lReturn = playerService.getPlayerId(Integer.parseInt(userId));
+		return lReturn;
 	}
 	
 	@RequestMapping("/user")
