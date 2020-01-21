@@ -60,9 +60,6 @@ class TopBar extends Component{
                         <Navbar.Brand className="myUser" >
                             {sessionStorage.getItem("userId")}
                         </Navbar.Brand>
-                        <Navbar.Brand className="myAccount" href="/myAccount">
-                            my account
-                        </Navbar.Brand>
                         <Navbar.Brand className="uploadFile" href="/upload">
                             upload file
                         </Navbar.Brand>

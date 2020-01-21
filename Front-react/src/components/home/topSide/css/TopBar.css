@@ -8,5 +8,11 @@
     color:white;
 }
 
+.signOut{
+    position: absolute;
+    right: 10px;
+    color:red;
+}
+
 
 
