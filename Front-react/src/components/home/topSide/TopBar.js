@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
 import {Navbar,Dropdown} from 'react-bootstrap';
 import './css/TopBar.css';
-//import {profileImage} from '../../../img/profile.png';
+import Axios from 'axios';
+import {genTree,fillBracket} from '../../commonModel/bracket/components/BracketFunctions';
+import {tournamentListAction,setBracketAction} from '../../../actions';
+import { hierarchy } from 'd3-hierarchy';
+import {connect} from 'react-redux';
 
+const fakeUId=61;
+var axios = require('axios');
 
 class TopBar extends Component{
 
@@ -11,10 +17,70 @@ class TopBar extends Component{
         this.state={
 
         }
+
+        this.getPlayerId=this.getPlayerId.bind(this);
+        this.setBracket=this.setBracket.bind(this);
+        this.treeCreation=this.treeCreation.bind(this);
+        this.getPlayerId(fakeUId);
+
     }
 
+   
+
+    getPlayerId(userId){
+        let self=this;
+        axios.get(`http://localhost:8082/players/${userId}`)
+        .then(function(response){
+            //techniquement response.data est une liste de Player
+            for(let i=0;i<response.data.length;i++){
+                axios.get(`http://localhost:8083/tournamentId/${response.data[i].playerId}`)
+                .then(function(resp){
+                    console.log(resp.data)
+                    axios.get(`http://localhost:8083/tournament/${resp.data}`)
+                    .then(function(reponse){
+                        console.log(reponse.data)
+                        let obj={"tournamentId":resp.data,"tournament":reponse.data};
+                            
+                        
+                        self.props.dispatch(tournamentListAction(obj));
+                    })
+                    .catch(function(error){
+                        console.log(error)
+                    })
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+            }
+        
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+    
+    treeCreation(brckt){
+        let tree=genTree(brckt);
+        return tree;
+    }
+
+    setBracket(tournament){
+        let brckt=tournament.s.bracket;
+        let treeTmp=this.treeCreation(brckt);
+        let data=hierarchy(treeTmp);
+        let bracketFilled=fillBracket(data,brckt);
+        this.props.dispatch(setBracketAction(bracketFilled));
+    }
+
+
+
     render(){
-        return(
+        let self=this;
+        if(this.props.tournamentList===undefined){
+            return(<div></div>)
+        }
+        else{
+            return(
             
                 <Navbar className="navBar">
                     <div>
@@ -22,16 +88,22 @@ class TopBar extends Component{
                             BubbleMatch
                         </Navbar.Brand>
                         <Navbar.Brand className="brand">
-                            <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic" >
-                                Tournaments
-                            </Dropdown.Toggle>
+                        <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic" >
+                            Tournaments
+                        </Dropdown.Toggle>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item > La Grosse Ligue </Dropdown.Item>
-                            </Dropdown.Menu>
-                            </Dropdown>
+                        <Dropdown.Menu>
+                            {this.props.tournamentList.list.map((obj,i)=>{
+                                return <Dropdown.Item key={i} onClick={()=>{self.setBracket(obj.tournament)}}>{obj.tournament.name}</Dropdown.Item>
+                            })}
+                        </Dropdown.Menu>
+                        </Dropdown>
                         
+                        </Navbar.Brand>
+
+                        <Navbar.Brand className="brand" href="/generationTournoi">
+                            Creer tournoi
                         </Navbar.Brand>
     
                         <Navbar.Brand className="brand" href="/autresTournois">
@@ -54,9 +126,15 @@ class TopBar extends Component{
 
                 
             
-        )
+            )
+        }
+        
     }
 
 }
-
-export default TopBar;
+const mapStateToProps=(state,ownProps)=>{
+    return{
+        tournamentList:state.setTournamentsListReducer,
+    }
+}
+export default connect(mapStateToProps)(TopBar);

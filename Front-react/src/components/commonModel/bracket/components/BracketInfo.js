@@ -66,11 +66,13 @@ function BracketInfosFunction(obj){
         let rendering= <div>Match pas encore joué</div>
         if (obj.param[2].result!==undefined || obj.param[2].result!==null){
             if (obj.param[2].result==1){
-                rendering=<div>Winner: {obj.param[0].team_name}</div>
+
+                rendering=<div>Winner: {obj.param[0].teamName}</div>
             }
             else{
                 if (obj.param[2].result==2){
-                    rendering=<div>Winner: {obj.param[1].team_name}</div>
+                    rendering=<div>Winner: {obj.param[1].teamName}</div>
+
                 }
             }
             
@@ -93,8 +95,10 @@ function BracketInfosFunction(obj){
                     aria-label="Match Info tab"
                     className={classes.tabs}
                 >
-                    <Tab label={obj.param[0].team_name} {...a11yProps(0)} />
-                    <Tab label={obj.param[1].team_name} {...a11yProps(1)} />
+
+                    <Tab label={obj.param[0].teamName} {...a11yProps(0)} />
+                    <Tab label={obj.param[1].teamName} {...a11yProps(1)} />
+
                 </Tabs>
                 <TabPanel value={value} index={0}>
                 <BracketInfosTableFunc infoTeam={obj.param[0]} />
@@ -127,7 +131,9 @@ class BracketInfo extends Component{
             self.props.team2R===undefined
             ){
                 return(
-                    <div>Team 1 ou 2 non def</div>
+
+                    <div></div>
+
                 )
         }
         else{

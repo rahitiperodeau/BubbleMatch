@@ -18,6 +18,7 @@ class Tournoi extends Component{
     }
 
     setTournoiState(){
+        console.log(this.state.tournoiState)
         this.props.dispatch(tournoiDisplay(this.state.tournoiState));
         this.setState({tournoiState:!this.state.tournoiState})
     }

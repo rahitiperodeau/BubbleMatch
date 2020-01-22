@@ -64,10 +64,11 @@ class Node extends Component{
 
   getTeamName(p_team_id){
     let self=this;
-    console.log("getTeamName")
-    console.log(p_team_id)
+
     let allTeamsFiltered=self.props.allTeams.filter((el)=>el.teamId==p_team_id);
-    return allTeamsFiltered[0].team_name;
+    console.log(allTeamsFiltered[0].teamName);
+    return allTeamsFiltered[0].teamName;
+
   }
 
   
