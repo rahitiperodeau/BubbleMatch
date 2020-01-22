@@ -61,6 +61,7 @@ public class UserRestController {
 		Optional<User> user;
 		user= authentificationService.getUser(sessionId);
 		if(user.isPresent()) {
+			System.out.println("user found");
 			return user.get().getId();
 		}
 		return null;
@@ -68,7 +69,6 @@ public class UserRestController {
 	
 	@RequestMapping(method=RequestMethod.POST,value="/user")
 	public String addUser(@RequestBody User user) {
-		System.out.println(user.toString());
 		userService.addUser(user);
 		return userService.addUser(user);
 	}
@@ -84,9 +84,8 @@ public class UserRestController {
 		return lReturn;
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT,value="/user/{id}")
-	public void updateUser(@RequestBody User user,@PathVariable String id) {
-		user.setId(Integer.valueOf(id));
+	@RequestMapping(method=RequestMethod.PUT,value="/user")
+	public void updateUser(@RequestBody User user) {
 		userService.updateUser(user);
 	}
 	

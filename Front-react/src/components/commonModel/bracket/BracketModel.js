@@ -9,16 +9,11 @@ import { Group } from '@vx/group';
 import { Tree } from '@vx/hierarchy';
 import { LinkHorizontal } from '@vx/shape';
 import { hierarchy } from 'd3-hierarchy';
-import { LinearGradient } from '@vx/gradient';
 
 
 const peach = '#fd9b93';
-const pink = '#fe6e9e';
-const blue = '#03c0dc';
 const green = '#26deb0';
-const plum = '#71248e';
 const lightpurple = '#374469';
-const white = '#ffffff';
 const bg = '#172b4d';
 
 const margin = {

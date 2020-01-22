@@ -7,7 +7,8 @@ import SignUp from './components/auth/signUp/SignUp';
 import Home from './components/home/Home';
 import Chatbot from './components/chatBot/ChatBot';
 import Tournoi from './components/tournoi/Tournoi';
-import Profil from './components/profil/Profil';
+import TournamentInfo from './components/tournoi/TournamentInfo';
+
 import AutresTournois from './components/autresTournois/AutresTournois';
 import UserModel from './components/commonModel/user/components/UserModel';
 import User from './components/commonModel/user/User';
@@ -21,6 +22,7 @@ import globalReducer from './reducers';
 import InscriptionTournoi from './components/inscriptionTournoi/InscriptionTournoi';
 import TopBar from './components/home/topSide/TopBar';
 import NotFound from './components/auth/NotFound'
+import GenerationTournoi from './components/generationTournoi/GenerationTournoi';
 
 
 let nUser = new UserModel();
@@ -40,34 +42,35 @@ const store=createStore(globalReducer,initialStore);
 
 
 class App extends Component {
-  constructor(props){
-    super(props);
-  }
+  
 
   render(){
     return(
 
       <div>
-
-      <div className="topBar">
-        <TopBar /> 
-      </div>
+          
+     
       <Provider store={store}>
-
+          
+          
+          
         <Router>
+          <TopBar /> 
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
             <Route exact path="/signIn" component={Login} />
             <PrivateRoute exact path="/home" component={Home} />
             <PrivateRoute path="/chatbot" component={Chatbot}/>
             <PrivateRoute path="/tournoi" component={Tournoi}/>
-            <PrivateRoute path="/profil" component={Profil} />  
+            <PrivateRoute path="/signOut" component={SignOut} />  
+            <PrivateRoute path="/myAccount" component={User} />  
+            <PrivateRoute path="/tournamentInfo/:tournamentId" component={TournamentInfo} />  
             <Route path="/signUp" component={SignUp} /> 
             <PrivateRoute path="/signOut" component={SignOut} />  
             <PrivateRoute path="/autresTournois" component={AutresTournois}/>    
             <PrivateRoute path="/inscriptionTournoi" component={InscriptionTournoi}/>
+	          <PrivateRoute path="/generationTournoi" component={GenerationTournoi} />
             <PrivateRoute path="/upload" component={Upload}/>
-            <PrivateRoute path="/myAccount" component={User}/>
             <Route path="/404" component={NotFound} />
             <Redirect to="/404" />
           </Switch>

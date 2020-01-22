@@ -84,11 +84,11 @@ public class FileRestController {
      * @return the file stocked on the server
      * @throws IOException
      */
-    @RequestMapping("/downloadFile/{fileId}/{tournamentId}")
-    public ResponseEntity<?> downloadFile(@PathVariable("fileId") Integer fileId,@PathVariable("tournamentId") Integer tournamentId) throws IOException 
+    @RequestMapping("/downloadFile/{fileId}")
+    public ResponseEntity<?> downloadFile(@PathVariable("fileId") Integer fileId) throws IOException 
     {	
     	System.out.println("je download");
-    	return storageService.downloadFileFromLocal(fileId,tournamentId);
+    	return storageService.downloadFileFromLocal(fileId);
         
     }
 

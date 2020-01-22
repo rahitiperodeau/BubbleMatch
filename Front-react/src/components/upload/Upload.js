@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios, { post } from 'axios';
-import Download from '../download/Download';
-import FileAvailable from '../fileAvailable/FileAvailable';
+import { post } from 'axios';
 
 class Upload extends Component {
     constructor(props) {
@@ -26,7 +24,7 @@ class Upload extends Component {
         const url = 'http://localhost:8090/doUpload';
         const formData = new FormData();
         formData.append('file',file);
-        formData.append('folderId',46);
+        formData.append('folderId',this.props.folderId);
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -57,10 +55,7 @@ class Upload extends Component {
             <input type="file" onChange={this.onChange} />
             <button type="submit">Upload</button>
           </form>
-          <div className="download">
           
-          <FileAvailable/>
-          </div>
           </div>
        )
       }

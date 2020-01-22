@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios, { post } from 'axios';
-import {filesAvailable} from './../../actions'
+import axios from 'axios';
+import {filesAvailable} from '../../actions';
 import { connect } from 'react-redux';
 import FileInfo from './content/FileInfo'
 import "./style/FileTab.css";
@@ -22,17 +22,12 @@ class FileAvailable extends Component {
 
         
         var self = this;
-        let tournamentId = 46;
-        //console.log()
-        var responseHttp;
+        let tournamentId = this.props.folderId;
+       
         axios.get('http://localhost:8090/files/'+ tournamentId)
             .then(function (response) {
-                if (response.data !== undefined && response.data != ""){
+                if (response.data !== undefined && response.data !== ""){
                     
-                    responseHttp = response.data;
-                    //selfState.name = responseHttp.name;
-                    //selfState.surname = responseHttp.surname;
-                    //selfState.email = responseHttp.email;
                     console.log(response.data);
                     self.props.dispatch(filesAvailable(response.data))
                     
@@ -70,7 +65,7 @@ class FileAvailable extends Component {
             array_render.push(
                 <FileInfo
                    key={i}
-   
+                   folderId = {this.props.folderId}
                    item={this.props.filesAvailable[i]}
                 />
                 );
@@ -92,10 +87,7 @@ class FileAvailable extends Component {
                   <tr>{this.renderTableHeader()}</tr>
                   {
                   display_list
-                  
-                  /*this.props.filesAvailable.map(item => (
-                    <FileInfo key={item.id} item={item} />
-                  ))*/}
+                  }
                </tbody>
             </table>
             <button onClick={()=>this.getFilesList()}>UpdateFileList</button>

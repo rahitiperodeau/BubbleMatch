@@ -30,7 +30,7 @@ class User extends Component {
                 }
             })
             .then(function (response) {
-                if (response.data !== undefined && response.data != ""){
+                if (response.data !== undefined && response.data !== ""){
                                 
                     sessionStorage.setItem("userId",response.data);
                     
@@ -55,19 +55,16 @@ class User extends Component {
     getUserInfo(){
 
         //this.getUserId(sessionStorage.getItem("sessionId"));
-        var selfState = this.state;
+        
         var self = this;
 
         //console.log()
-        var responseHttp;
+       
         axios.get('http://localhost:8082/user/' + sessionStorage.getItem("userId"))
             .then(function (response) {
-                if (response.data !== undefined && response.data != ""){
+                if (response.data !== undefined && response.data !== ""){
                     
-                    responseHttp = response.data;
-                    //selfState.name = responseHttp.name;
-                    //selfState.surname = responseHttp.surname;
-                    //selfState.email = responseHttp.email;
+                 
                     self.props.dispatch(userConnection(response.data))
                     
                 
@@ -89,7 +86,7 @@ class User extends Component {
     
 
     render(){
-        let mv =this.props.user;
+        
         this.getUserId(sessionStorage.getItem("sessionId"));
         return(
             <div className="panel-body">

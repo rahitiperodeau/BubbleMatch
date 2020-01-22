@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios, { post } from 'axios';
 
 
 class Download extends Component {
@@ -13,10 +12,10 @@ class Download extends Component {
       }
 
       downloadfile(fileId){
-        fetch('http://localhost:8090/downloadFile/'+fileId+'/46')
+        fetch('http://localhost:8090/downloadFile/'+fileId)
         .then(response => {
             console.log(response.headers);
-            const filename = "";
+            let filename = "";
             try{
               filename =  response.header.get('Content-Disposition').split('filename=')[1];
             }catch(e){

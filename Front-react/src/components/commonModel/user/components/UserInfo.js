@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button, FormGroup, FormControl, FormLabel,   FormCheck  } from "react-bootstrap";
+import { Button, FormGroup, FormControl, FormLabel  } from "react-bootstrap";
 import { connect } from 'react-redux';
 import './UserInfo.css';
 
@@ -10,26 +10,50 @@ class UserInfo extends Component{
     constructor(props){
         super(props);
         this.state={
-         
+         user : {
+           email:"",
+           name:"",
+           surname:"",
+           password:""
+         }
             
         }
+        
     }
 
     handleSubmit(event) {
         event.preventDefault();
       }
 
-    sendRequestUpdateAccount() {
+    checkPassword(){
+      let oldPassword = document.getElementById("oldPassword").value;
+      let newPassword = document.getElementById("newPassword").value;
+      if(oldPassword.length < 5){
+        alert("the password is too short, please use a longer")
+      }else{
+        if(oldPassword===newPassword){
+          this.sendRequestUpdateAccount(newPassword)
+  
+        }else{
+          alert("the both password don't match please refill the form :)")
+        }
+      }
+      
+    }
 
-        let user    = {};
-        /*user.name=name;
-        user.surname=surname;
-        user.isAdmin=isAdmin;
-        user.email=email;
-        user.password= password;*/
-        axios.post("http://localhost:8082/user",user)
+    sendRequestUpdateAccount(newPassword) {
+      let userToGive = {
+        email:this.props.user.email,
+         name:this.props.user.name,
+         surname:this.props.user.surname,
+         password:newPassword
+      };
+        this.setState({user:userToGive})
+        
+        
+        axios.put("http://localhost:8082/user",userToGive)
                         .then((response)=>{
-                            if(response.data == ""){
+                            if(response.data === ""){
                                 window.location  = "/home"
                                 
                             }else{
@@ -52,63 +76,40 @@ class UserInfo extends Component{
                 <div className="SignUp">
 
 
+      <h3>To change the password please fill this form</h3>
+
       <form >
       <FormGroup controlId="surname" bsSize="large">
           <FormLabel>Surname : {this.props.user.surname}</FormLabel>
-          <FormControl
-            autoFocus
-            type="surname"
-            
-            
-          />
-          
         </FormGroup>
         
-        </form>
 
-
-        <form>
+      
         <FormGroup controlId="name" bsSize="large">
           <FormLabel>Name : {this.props.user.name}</FormLabel>
-          <FormControl
-            autoFocus
-            type="name"
-        
-            
-          />
         </FormGroup>
-        
-        </form>
-        <form>
+ 
         <FormGroup controlId="email" bsSize="large">
           <FormLabel>Email : {this.props.user.email}</FormLabel>
-          <FormControl
-            autoFocus
-            type="email"
-          
-            
-          />
+         
         </FormGroup>
-        
-        </form>
-            <form>
         <FormGroup controlId="password" bsSize="large">
-          <FormLabel>Actual password</FormLabel>
+          <FormLabel>New password</FormLabel>
           <FormControl
-           
+           id="oldPassword"
             
-            type="oldPassword"
+            type="password"
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
-          <FormLabel>New Password</FormLabel>
+          <FormLabel>Confirm Password</FormLabel>
           <FormControl
+            id="newPassword"
             
-            
-            type="newPassword"
+            type="password"
           />
         </FormGroup>
-        <Button block bsSize="large" onClick={()=>{this.sendRequestUpdateAccount()}}  type="submit">
+        <Button block bsSize="large" onClick={()=>{this.checkPassword()}}  >
           Update my password :)!
         </Button>
         </form>

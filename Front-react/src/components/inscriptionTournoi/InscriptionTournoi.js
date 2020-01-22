@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import {Form, Button} from 'react-bootstrap';
-import TopBar from '../home/topSide/TopBar';
 import { connect } from 'react-redux';
 import './css/Inscription.css';
 
 
-var axios=require('axios') ;
 
 class InscriptionTournoi extends Component{
     constructor(props){

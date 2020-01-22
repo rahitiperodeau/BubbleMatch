@@ -23,7 +23,10 @@ class FileInfo extends Component {
                <td><Download 
                         fileId ={this.props.item.id}>
                    </Download>
-                   <DeleteFile fileId ={this.props.item.id}>
+                   <DeleteFile 
+                    fileId ={this.props.item.id}
+                    folderId={this.props.folderId}
+                   >
                    </DeleteFile></td>
             </tr>
                 
