@@ -128,6 +128,7 @@ class TournamentInfo extends Component {
     render(){
         //const display_list= this.getRenderFileManager();
         return(
+            <div>
             <div className="row">
                 <div className="column">
                 <TournamentInfoText
@@ -138,8 +139,39 @@ class TournamentInfo extends Component {
                 <div className="column">
                     {this.state.renderFile}
                 </div>
-                
+                       
             </div>
+            <div id="ListTeam">
+
+            <h3> Teams registered</h3>
+
+            {this.state.tournamentTeams.map((team,i)=>{
+               return(
+                                   <div>   
+                                      <Accordion className="accordion">
+
+                                          <Accordion.Toggle as={Button} variant="link" eventKey="0" className="tournamentName">
+                                          <div id="tournamentName"> {team.teamName}</div>
+                                          </Accordion.Toggle>
+                                          <Accordion.Collapse eventKey="0">
+                                    <div id="hehe">
+                                    {team.players.map((player,i)=>{
+                                        return(<div>
+                                        <div id="tournamentDes"> {player.playerName} </div>
+                                        </div>
+                                        )
+                                    })}
+                                
+                                    </div>
+                        </Accordion.Collapse>
+                                 
+                                 </Accordion>
+                                  </div> 
+               )
+           })}
+           </div>
+           </div>
+        
         )
     }
 
