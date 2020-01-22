@@ -38,3 +38,28 @@ h1
 .accordion.Toggle{
   color: white;
 }
+
+#tournamentName{
+  margin:10px;
+  color: black;
+  font-size: large;
+
+}
+
+#tournamentDes{
+  margin-top: 10;
+  margin-left: 10;
+}
+
+#inscription{
+  color: white;
+  background-color: rgb(153, 4, 4);
+}
+
+#hehe{
+  width:80%;
+}
+
+.accordion:{
+  color:white;
+}

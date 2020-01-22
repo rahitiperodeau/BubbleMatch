@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios, { post } from 'axios';
-import {filesAvailable} from '../../actions';
+import {filesAvailable} from './../../actions';
 import { connect } from 'react-redux';
 
 

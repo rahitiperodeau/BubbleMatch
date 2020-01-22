@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import axios, { post } from 'axios';
-import {filesAvailable} from '../../actions';
+import {filesAvailable} from './../../actions'
 import { connect } from 'react-redux';
 import FileInfo from './content/FileInfo'
 import "./style/FileTab.css";
-
 class FileAvailable extends Component {
     constructor(props) {
         super(props);
