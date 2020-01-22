@@ -12,8 +12,6 @@ import TournamentInfo from './components/tournoi/TournamentInfo';
 import AutresTournois from './components/autresTournois/AutresTournois';
 import UserModel from './components/commonModel/user/components/UserModel';
 import User from './components/commonModel/user/User';
-import Upload from './components/upload/Upload';
-//import Upload from './components/upload/Upload';
 import { BrowserRouter as Router,Route,Redirect,Switch} from "react-router-dom";
 import {PrivateRoute} from "./components/auth/PrivateRoute";
 import { createStore } from'redux';
@@ -70,7 +68,6 @@ class App extends Component {
             <PrivateRoute path="/autresTournois" component={AutresTournois}/>    
             <PrivateRoute path="/inscriptionTournoi/:tournamentId" component={InscriptionTournoi}/>
 	          <PrivateRoute path="/generationTournoi" component={GenerationTournoi} />
-            <PrivateRoute path="/upload" component={Upload}/>
             <Route path="/404" component={NotFound} />
             <Redirect to="/404" />
           </Switch>

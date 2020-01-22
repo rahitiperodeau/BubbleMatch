@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { post } from 'axios';
+import axios from 'axios';
+import {filesAvailable} from '../../actions';
+import { connect } from 'react-redux';
 
 class Upload extends Component {
     constructor(props) {
@@ -15,6 +18,7 @@ class Upload extends Component {
         e.preventDefault() // Stop form submit
         this.fileUpload(this.state.file).then((response)=>{
           console.log(response.data);
+          this.updateFileList();
         })
       }
       onChange(e) {
@@ -32,6 +36,42 @@ class Upload extends Component {
         }
         return  post(url, formData,config)
       }
+
+      updateFileList(){
+
+        
+        var self = this;
+        let tournamentId = this.props.folderId;
+        
+        axios.get('http://localhost:8090/files/'+ tournamentId)
+            .then(function (response) {
+                if (response.data !== undefined && response.data !== ""){
+                    
+                   
+                    //selfState.name = responseHttp.name;
+                    //selfState.surname = responseHttp.surname;
+                    //selfState.email = responseHttp.email;
+                    console.log(response.data);
+                    self.props.dispatch(filesAvailable(response.data))
+                    
+                
+                }else{
+
+                    self.props.dispatch(filesAvailable(self.state.files))
+                }
+                
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });  
+
+        
+
+    }
+
 
       downloadfile = (fileId) => {
         fetch('http://localhost:8080/downloadFile/'+fileId)
@@ -60,6 +100,6 @@ class Upload extends Component {
        )
       }
 }
-export default Upload;
+export default connect()(Upload);
 
 

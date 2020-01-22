@@ -111,16 +111,13 @@ class TopBar extends Component{
                         </Navbar.Brand>
 
                         <Navbar.Brand className="brand" href="/generationTournoi">
-                            Creer tournoi
+                            Create a Tournament
                         </Navbar.Brand>
     
                         <Navbar.Brand className="brand" href="/autresTournois">
                             Plus
                         </Navbar.Brand>
-                                             
-                        <Navbar.Brand className="uploadFile" href="/upload">
-                            upload file
-                        </Navbar.Brand>
+                      
                         <Navbar.Brand className="signOut" href="/signOut" id="barDec">
                             Disconnect
                         </Navbar.Brand>

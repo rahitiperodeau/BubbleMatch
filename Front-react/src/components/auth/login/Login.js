@@ -82,6 +82,9 @@ export default function Login(props) {
           Login
         </Button>
       </form>
+      <Button className="signUp" block bsSize="large"  href="/signUp">
+          Sign-Up Now !!!!!
+        </Button>
     </div>
   );
 }

@@ -25,15 +25,7 @@ class DeleteFile extends Component {
         
         axios.delete('http://localhost:8090/deleteFile/'+ fileId + '/' + folderId)
             .then(function (response) {
-                if (response.data !== undefined && response.data !== ""){
-                    
-                    
-                    //self.props.dispatch(filesAvailable(response.data))
-                    
                 
-                }else{
-                    alert("error no response from server")
-                }
                 self.updateFileList();
                 
             })
