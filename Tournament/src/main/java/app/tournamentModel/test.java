@@ -1,6 +1,7 @@
 package app.tournamentModel;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import app.tournamentModel.Tournament;
@@ -53,17 +54,20 @@ public class test {
 	    
 	    
 	    //System.out.println(groupes.groups);
-
-	    Bracket bracket = new Bracket(tur.getTeams());
-	    //System.out.println(tur.getTeams());
+	    List<MatchList> matchListInit = new ArrayList<>();
+	    Bracket bracket = new Bracket(matchListInit);
+	    System.out.println(tur.getTeams());
 	    //List<List<Match>> bra = new ArrayList<>();
 	    //System.out.println(bracket.toString());
 	    //System.out.println(bracket.createBracket2(bracket.getBracket(), tur.getTeams()));
+	    System.out.println(bracket.getBracket());
 
-	    List<MatchList> mat = bracket.createBracket2(bracket.getBracket(),tur.getTeams());
+	    List<MatchList> mat = bracket.createBracket2(matchListInit,tur.getTeams());
 	     mat.get(0).getMatchList().get(6).setResult(2);
-	    // mat.get(0).get(7).setResult(2);
-	    System.out.println(bracket.results(mat));
+	    mat.get(0).getMatchList().get(7).setResult(2);
+	     System.out.println(bracket.results(mat,tur.getTeams()));
+		    System.out.println(tur.getTeams());
+
 	    //System.out.println(bracket.results(mat).get(1));
 
 

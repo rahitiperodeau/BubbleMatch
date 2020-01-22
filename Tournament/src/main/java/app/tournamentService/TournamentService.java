@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import app.tournamentModel.TournamentRepository;
 import app.tournamentModel.Team;
+import app.tournamentModel.TeamRepository;
 //import app.tournamentModel.TeamRepository;
 import app.tournamentModel.Tournament;
 
@@ -18,9 +19,10 @@ public class TournamentService {
 	@Autowired
 	private TournamentRepository tournamentRepository;
 	//private String name;
+	
 	@Autowired
-//	private TeamRepository teamRepository;
-
+	private TeamRepository teamRepository;
+	
 	
 	public List<Tournament> getAllTournaments() {
 		List<Tournament> tournaments = new ArrayList<>();
@@ -51,6 +53,12 @@ public class TournamentService {
 	
 		tournamentRepository.save(tournament);
 }
+
+
+	public void addNewTeamToTournament(int id, Team team) {
+		tournamentRepository.findById(id).addNewTeam(team);
+		teamRepository.save(team);
+	}
 
 
 //	public List<Team> getAllTeams() {

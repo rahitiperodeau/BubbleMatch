@@ -17,9 +17,6 @@ public class PlayerService {
 	//private String name;
 	@Autowired
 	private PlayerRepository playerRepository;
-	
-	@Autowired
-	private TeamRepository teamRepository;
 
 	
 	public List<Player> getAllPlayers() {
@@ -56,13 +53,6 @@ public class PlayerService {
 	public void updatePlayer(Player player, int elo) {
 		player.setEloPlayer(elo);
 		playerRepository.save(player);
-	}
-	
-	public Integer getTournamentId(Integer playerId) {
-		
-		List<Team> team = teamRepository.findByPlayers_PlayerId(playerId);
-		
-		return team.get(0).getTournamentId();
 	}
 	
 	//get teams get description get structure

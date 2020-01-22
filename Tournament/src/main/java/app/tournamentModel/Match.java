@@ -26,6 +26,7 @@ public class Match {
 		this.teamId2 = teamId2;
 		this.result = 0;
 		this.step = step;
+		this.tournament_code = "";
 	}
 	
 	public Match() {
