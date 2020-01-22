@@ -38,61 +38,49 @@ class Tournoi extends Component{
     constructor(props){
         super(props);
         this.state={
-            bracketFilled:null,
-            
+                        
         }
-        this.getBracket=this.getBracket.bind(this);
-        this.treeCreation=this.treeCreation.bind(this);
-        this.setBracket=this.setBracket.bind(this);
+        //this.getBracket=this.getBracket.bind(this);
+        //this.treeCreation=this.treeCreation.bind(this);
+        
         this.getAllTeams=this.getAllTeams.bind(this);
         
         this.getAllTeams();
-        this.getBracket(1);
+        //this.getBracket(1);
     }
 
-    treeCreation(brckt){
-        let tree=genTree(brckt);
-        return tree;
-    }
+    // treeCreation(brckt){
+    //     let tree=genTree(brckt);
+    //     return tree;
+    // }
 
-    setBracket(){
-        let self =this;
-        console.log("self.props.bracketR");
-        console.log(self.props.bracketR);
-    }
-
-    
-
-
-    getBracket(bracketId){
-        let self = this
-        let bracketTmp;
-        axios.get(`http://localhost:8083/bracket/${bracketId}`)
-        .then(function (response){
-            if(response.data !==undefined){
-                bracketTmp=response.data.bracket;
-                //reponse.data ={structureId: 1, bracket: Array(2)}
+    // getBracket(bracketId){
+    //     let self = this
+    //     let bracketTmp;
+    //     axios.get(`http://localhost:8083/bracket/${bracketId}`)
+    //     .then(function (response){
+    //         if(response.data !==undefined){
+    //             console.log(response.data)
+    //             bracketTmp=response.data.bracket;
+    //             //reponse.data ={structureId: 1, bracket: Array(2)}
                 
-                let treeTmp=self.treeCreation(bracketTmp);
-                let data = hierarchy(treeTmp);
-                let bracketFilled = fillBracket(data,bracketTmp);
+    //             let treeTmp=self.treeCreation(bracketTmp);
+    //             let data = hierarchy(treeTmp);
+    //             let bracketFilled = fillBracket(data,bracketTmp);
                
-                self.props.dispatch(setBracketAction(bracketFilled));
-            }
-            else{
-                console.log("pas de bracket avec l'id donné");
-            }
-        })
-        .catch(function (error){
-            console.log(error);
-        })
-        .finally(function(){
-            //always executed
-        });
-        
-        
-          
-    }
+    //             self.props.dispatch(setBracketAction(bracketFilled));
+    //         }
+    //         else{
+    //             console.log("pas de bracket avec l'id donné");
+    //         }
+    //     })
+    //     .catch(function (error){
+    //         console.log(error);
+    //     })
+    //     .finally(function(){
+    //         //always executed
+    //     });
+    // }
 
     getAllTeams(){
         let self=this;
@@ -107,14 +95,14 @@ class Tournoi extends Component{
         }).finally(function(){
     
         })
-      }
+    }
 
 
     render(){
         let self=this;
         if(self.props.bracketR.bracket.data===undefined || self.props.bracketR.bracket.data=={} || self.props.bracketR.bracket.data==null ||
             (self.props.allTeams===undefined) || (self.props.allTeams==={}) ||
-      (Object.keys(self.props.allTeams).length===0)){
+      (Object.keys(self.props.allTeams).length===0)||(self.props.tournoiState===false)){
             return(<div>
                 
             </div>);
@@ -173,7 +161,8 @@ const mapStateToProps = (state,ownProps)=>{
         team1R: state.team1InfosReducer,
         team2R:state.team2InfosReducer,
         allTeams:state.allTeamsReducer,
-        tournamentIdsList:state.setTournamentIdsListReducer,
+        tournamentList:state.setTournamentsListReducer,
+        tournoiState:state.tournoiDisplayReducer
     }
 }
 export default connect(mapStateToProps)(Tournoi);

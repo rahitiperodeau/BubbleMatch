@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import {Navbar,Dropdown} from 'react-bootstrap';
 import './css/TopBar.css';
 import Axios from 'axios';
-import {addTournamentNameAction} from '../../../actions';
+import {genTree,fillBracket} from '../../commonModel/bracket/components/BracketFunctions';
+import {tournamentListAction,setBracketAction} from '../../../actions';
+import { hierarchy } from 'd3-hierarchy';
 import {connect} from 'react-redux';
 
+const fakeUId=61;
 var axios = require('axios');
 
 class TopBar extends Component{
@@ -14,56 +17,70 @@ class TopBar extends Component{
         this.state={
 
         }
+
+        this.getPlayerId=this.getPlayerId.bind(this);
+        this.setBracket=this.setBracket.bind(this);
+        this.treeCreation=this.treeCreation.bind(this);
+        this.getPlayerId(fakeUId);
+
     }
 
-    /**
-     * recupere les les noms des tournois à partir de leur ids
-     * en vue de les afficher dans le composant DropDown "Tournaments" 
-     */
+   
 
-    getTournamentNames(){
-        
+    getPlayerId(userId){
         let self=this;
-        //à partir de la liste des ids de tournament on recupere les obj tournaments
-        for(let i=0;i<this.props.tournamentList;i++){
-            axios.get(`http://localhost:8083/tournament/${self.props.tournamentList[i]}`)
-            .then(function(response){
-                console.log("getTournName");
-                console.log(response.data);
-                self.props.dispatch(addTournamentNameAction(response.data));
-            })
-            .catch(function(err){
-                console.log(err)
-            })
-            .finally(function(a){
-                console.log(a)
-            })
-        }
-
-    }
-
-    /**
-     *  pour afficher les tournois auxquels l'utilisateur
-     *  est inscrit
-     */
-    renderTournaments(){
-        let rendering;
-        this.props.tournamentList.forEach((tourn)=>{
-            if(tourn.tournamentName!==undefined){
-                //rendering+=<Dropdown.Item > {tourn.tournamentName} </Dropdown.Item>
+        axios.get(`http://localhost:8082/players/${userId}`)
+        .then(function(response){
+            //techniquement response.data est une liste de Player
+            for(let i=0;i<response.data.length;i++){
+                axios.get(`http://localhost:8083/tournamentId/${response.data[i].playerId}`)
+                .then(function(resp){
+                    console.log(resp.data)
+                    axios.get(`http://localhost:8083/tournament/${resp.data}`)
+                    .then(function(reponse){
+                        console.log(reponse.data)
+                        let obj={"tournamentId":resp.data,"tournament":reponse.data};
+                            
+                        
+                        self.props.dispatch(tournamentListAction(obj));
+                    })
+                    .catch(function(error){
+                        console.log(error)
+                    })
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
             }
-            else{
-                rendering=<div>Fail</div>
-            }
+        
         })
-        console.log(rendering);
-        return rendering;
+        .catch(function(error){
+            console.log(error);
+        })
     }
+    
+    treeCreation(brckt){
+        let tree=genTree(brckt);
+        return tree;
+    }
+
+    setBracket(tournament){
+        let brckt=tournament.s.bracket;
+        let treeTmp=this.treeCreation(brckt);
+        let data=hierarchy(treeTmp);
+        let bracketFilled=fillBracket(data,brckt);
+        this.props.dispatch(setBracketAction(bracketFilled));
+    }
+
+
 
     render(){
-        console.log("TOPBAR");
-        console.log(this.props.tournamentList);
-        return(
+        let self=this;
+        if(this.props.tournamentList===undefined){
+            return(<div></div>)
+        }
+        else{
+            return(
             
                 <Navbar className="navBar">
                     <div>
@@ -71,15 +88,17 @@ class TopBar extends Component{
                             BubbleMatch
                         </Navbar.Brand>
                         <Navbar.Brand className="brand">
-                            <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic" >
-                                Tournaments
-                            </Dropdown.Toggle>
+                        <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic" >
+                            Tournaments
+                        </Dropdown.Toggle>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item > La Grosse Ligue </Dropdown.Item>
-                            </Dropdown.Menu>
-                            </Dropdown>
+                        <Dropdown.Menu>
+                            {this.props.tournamentList.list.map((obj,i)=>{
+                                return <Dropdown.Item key={i} onClick={()=>{self.setBracket(obj.tournament)}}>{obj.tournament.name}</Dropdown.Item>
+                            })}
+                        </Dropdown.Menu>
+                        </Dropdown>
                         
                         </Navbar.Brand>
 
@@ -111,13 +130,15 @@ class TopBar extends Component{
 
                 
             
-        )
+            )
+        }
+        
     }
 
 }
 const mapStateToProps=(state,ownProps)=>{
     return{
-        tournamentList:state.setTournamentIdsListReducer,
+        tournamentList:state.setTournamentsListReducer,
     }
 }
 export default connect(mapStateToProps)(TopBar);

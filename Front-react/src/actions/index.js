@@ -114,16 +114,11 @@ export const equipesTabIndexAction=(tab_index)=> {
     }
 }
 
-export const tournamentIdsAction=(tournamentIds_list)=>{
+export const tournamentListAction=(tournaments_list)=>{
     return{
-        type:'SET_TOURNAMENT_IDS_LIST',
-        obj:tournamentIds_list
+        type:'ADD_EL_TOURNAMENT_LIST',
+        obj:tournaments_list
     }
 }
 
-export const addTournamentNameAction=(tournament_obj)=>{
-    return{
-        type:'SET_TOURNAMENT_NAME',
-        obj:tournament_obj
-    }
-}
+
