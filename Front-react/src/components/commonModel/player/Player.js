@@ -35,8 +35,9 @@ class Player extends Component {
         //this.firstDisplay();
         //for(const playerNb in this.props.team.players){
           //  console.log(this.props.team.players[playerNb].playerName)
-            this.getSummoner(this.props.team.players[0].playerName)
-            console.log(this.props.team.players[0].playerName)
+            //this.getSummoner(this.props.team.players[0].playerName)
+            //console.log(this.props.team.players[0].playerName)
+            this.getSummoner(this.props.team);
 
             this.getChampions(this.props.player.id);
             this.props.dispatch(teamsDisplay(this.props.player));

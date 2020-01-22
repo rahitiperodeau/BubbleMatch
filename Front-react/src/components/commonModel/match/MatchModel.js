@@ -130,7 +130,7 @@ class MatchModel extends Component{
         rendering=<TabPanel value={classIndex} index={classIndex} >
           <div>
             <Player
-            team={team_blueside}
+            team={this.getUserState()}
             />
           </div>
           {/* <div>En cours de Dev</div> */}
@@ -141,7 +141,7 @@ class MatchModel extends Component{
           rendering= <TabPanel value={classIndex} index={classIndex}>
                 
           <Player
-           team={team_redside}
+           team={team_redside.players[0].playerName}
           />
 
       </TabPanel>
@@ -150,6 +150,17 @@ class MatchModel extends Component{
 
       return(rendering);
 
+    }
+
+    getUserState(){
+
+      if(this.props.userState.user.pseudo != undefined){
+        return this.props.userState.user.pseudo
+      }
+      else{
+        return "Rospote";
+      }
+      
     }
     
 
@@ -187,7 +198,9 @@ const mapStateToProps =(state,ownProps)=>{
       playerState: state.playerReducer,
       matchTabState: state.matchTabReducer,
       championState: state.championsReducer,
-      listPlayersReducer: state.listChampionsReducer
+      listPlayersReducer: state.listChampionsReducer,
+      userState: state.userReducer
+
       }
 }
 
