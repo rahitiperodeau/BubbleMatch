@@ -9,7 +9,6 @@ export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   function validateForm() {
 
     return email.length > 0 && password.length > 0;
@@ -21,7 +20,8 @@ export default function Login(props) {
   }
 
   function sendRequestSignIn() {
-    
+    let myvalue = sessionStorage.getItem('key');
+    let redirect = false;
     
     axios.get('http://localhost:8082/signIn', {
             params: {

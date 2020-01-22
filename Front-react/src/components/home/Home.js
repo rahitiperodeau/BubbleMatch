@@ -14,7 +14,7 @@ class Home extends Component{
         }
         getUserId(sessionStorage.getItem("sessionId"));
     }
-    
+
     render(){
         //this.getUserId(sessionStorage.getItem("sessionId"));
         return(
@@ -28,10 +28,10 @@ class Home extends Component{
 
 const mapStateToProps = (state, ownProps) => {
     return {
-      user: state.userReducer
+      user: state.userReducer,
     }
   };
   
-  //export the current classes in order to be used outside
+//export the current classes in order to be used outside
 export default connect(mapStateToProps)(Home);
 
