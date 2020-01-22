@@ -14,7 +14,8 @@ class UserInfo extends Component{
            email:"",
            name:"",
            surname:"",
-           password:""
+           password:"",
+           pseudo:""
          }
             
         }
@@ -28,11 +29,12 @@ class UserInfo extends Component{
     checkPassword(){
       let oldPassword = document.getElementById("oldPassword").value;
       let newPassword = document.getElementById("newPassword").value;
+      let pseudo      = document.getElementById("pseudo").value;
       if(oldPassword.length < 5){
         alert("the password is too short, please use a longer")
       }else{
         if(oldPassword===newPassword){
-          this.sendRequestUpdateAccount(newPassword)
+          this.sendRequestUpdateAccount(newPassword,pseudo)
   
         }else{
           alert("the both password don't match please refill the form :)")
@@ -41,12 +43,13 @@ class UserInfo extends Component{
       
     }
 
-    sendRequestUpdateAccount(newPassword) {
+    sendRequestUpdateAccount(newPassword,pseudo) {
       let userToGive = {
         email:this.props.user.email,
          name:this.props.user.name,
          surname:this.props.user.surname,
-         password:newPassword
+         password:newPassword,
+         pseudo:pseudo
       };
         this.setState({user:userToGive})
         
@@ -92,6 +95,14 @@ class UserInfo extends Component{
         <FormGroup controlId="email" bsSize="large">
           <FormLabel>Email : {this.props.user.email}</FormLabel>
          
+        </FormGroup>
+        <FormGroup controlId="pseudo" bsSize="large">
+          <FormLabel>Pseudo </FormLabel>
+          <FormControl
+            id="pseudo"
+            defaultValue={this.props.user.pseudo}
+            type="text"
+          />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
           <FormLabel>New password</FormLabel>
