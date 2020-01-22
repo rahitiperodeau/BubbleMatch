@@ -62,7 +62,7 @@ public class StructureT {
 	}
 	
 	
-	public Team findTeamById(int id) {
+	public Team findTeamById(int id, List<Team> teams) {
 		//System.out.println(teams);
 		int a = 0;
 		for(int i =0; i <= teams.size()-1;i++) {

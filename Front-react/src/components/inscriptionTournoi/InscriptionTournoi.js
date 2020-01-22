@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Form, Button} from 'react-bootstrap';
 import { connect } from 'react-redux';
+import './css/Inscription.css';
+var axios=require('axios') ;
 
 
 
@@ -11,50 +13,77 @@ class InscriptionTournoi extends Component{
             
         }
         this.sendSubscribeTeam= this.sendSubscribeTeam.bind(this);
-        this.sendSubscribeTeam();
     }
     handleSubmit(event) {
         event.preventDefault();
       }
+    sendSubscribeTeam() {
+        let self = this;
+        let team = {};
+        
+        let playerName = document.getElementById("playerName1").value;
+        let player1= {playerName};
+
+        playerName = document.getElementById("playerName2").value;
+        let player2= {playerName};
+
+        playerName = document.getElementById("playerName3").value;
+        let player3= {playerName};
+
+        playerName = document.getElementById("playerName4").value;
+        let player4= {playerName};
+
+        playerName = document.getElementById("playerName5").value;
+        let player5= {playerName};
+       
+        team.teamName= document.getElementById("teamName").value;
+
+        console.log(team);
+
+        team.players = [player1, player2, player3, player4, player5];
+        console.log(team);
+
+        axios.put("http://localhost:8083/tournament/1/addTeam", team)
+                        .then(function (response) {
+                                
+                            })
+                            .catch(function(error){
+                                console.log(error);
+                            })
+                        }
     
     render(){
         return(
-            <div>
+            <div id="conteneur">
                 
                 <Form>
-                {/* <Form.Group controlId="email">
-                    <Form.Label>Email du joueur</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
-                    <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                    </Form.Text>
-                </Form.Group> */}
-                    <Form.Group controlId="teamName">
-                    <Form.Label> Team name </Form.Label>
-                    <Form.Control type="text" />
+                
+                    <Form.Group controlId="teamName" className="forms">
+                    <Form.Label className="labels"> Team name </Form.Label>
+                    <Form.Control type="text" id="teamName"/>
                 </Form.Group>
                 <Form.Group controlId="playerName1">
-                    <Form.Label> Pseudo 1 </Form.Label>
-                    <Form.Control type="text" />
+                    <Form.Label className="labels"> Pseudo 1 </Form.Label>
+                    <Form.Control type="text" id="playerName1" />
                 </Form.Group>
 
                 <Form.Group controlId="playerName2">
-                    <Form.Label> Pseudo 2 </Form.Label>
-                    <Form.Control type="text" />
+                    <Form.Label className="labels"> Pseudo 2 </Form.Label>
+                    <Form.Control type="text" id="playerName2" />
                 </Form.Group>
                 <Form.Group controlId="playerName3">
-                    <Form.Label> Pseudo 3 </Form.Label>
-                    <Form.Control type="text" />
+                    <Form.Label className="labels"> Pseudo 3 </Form.Label>
+                    <Form.Control type="text" id="playerName3" />
                 </Form.Group>
                 <Form.Group controlId="playerName4">
-                    <Form.Label> Pseudo 4 </Form.Label>
-                    <Form.Control type="text" />
+                    <Form.Label className="labels"> Pseudo 4 </Form.Label>
+                    <Form.Control type="text" id="playerName4" />
                 </Form.Group>
                 <Form.Group controlId="playerName5">
-                    <Form.Label> Pseudo 5 </Form.Label>
-                    <Form.Control type="text" />
+                    <Form.Label className="labels"> Pseudo 5 </Form.Label>
+                    <Form.Control type="text" id="playerName5" />
                 </Form.Group>
-                <Button variant="primary" onClick={()=>{this.sendSubscribeTeam()}} type="submit">
+                <Button variant="primary" onClick={()=>{this.sendSubscribeTeam()}} >
                     Envoyer
                 </Button>
                 </Form>

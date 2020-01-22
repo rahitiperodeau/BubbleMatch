@@ -1,5 +1,6 @@
 package app.tournamentModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,6 +25,7 @@ public class MatchList {
 	  
 	public MatchList() {
 		super();
+		this.matchList= new ArrayList<Match>();
 		
 	}
 
@@ -41,6 +43,11 @@ public class MatchList {
 
 	public void setMatchListId(int matchListId) {
 		this.matchListId = matchListId;
+	}
+
+	@Override
+	public String toString() {
+		return "MatchList [matchListId=" + matchListId + ", matchList=" + matchList + "]";
 	}
 
 	

@@ -56,22 +56,20 @@ class AutresTournois extends Component{
                 {/* <div>{this.props.tournaments.allTournaments}</div> */}
                 {this.props.tournaments.allTournaments.map((tournament,i)=>{
                     return(
-                        <Accordion>
+                        <Accordion className="accordion">
 
-                        <Card className="cardTournoi">
-                    <Card.Header>
-                    <Accordion.Toggle as={Button} variant="link" eventKey="0" class="toggle">
-                    <div> {tournament.name} </div>
-                    </Accordion.Toggle>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey="0">
-                    <Card.Body>
-                    <div> {tournament.description} </div>
-                    <Button  href= "/inscriptionTournoi" id="inscription">Subscription</Button>
-                    <Button  href={"/tournamentInfo/"+tournament.id} >+ Info</Button>
-                    </Card.Body>
+                    <Card className="cardTournoi">
+                        <Accordion.Toggle as={Button} variant="link" eventKey="0" className="tournamentName">
+                        <div id="tournamentName"> {tournament.name} </div>
+                        </Accordion.Toggle>
+                        <Accordion.Collapse eventKey="0">
+                        <div id="hehe">
+                        <div id="tournamentDes"> {tournament.description} </div>
+                        <Button  href='/inscriptionTournoi' id="inscription">S'inscrire</Button>
+                        <Button  href={"/tournamentInfo/"+tournament.id} id="inscription">+ Info</Button>
 
-                    </Accordion.Collapse>
+                        </div>
+                        </Accordion.Collapse>
                 </Card>
                 </Accordion>
                     )
