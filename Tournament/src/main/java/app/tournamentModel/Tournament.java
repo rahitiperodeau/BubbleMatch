@@ -88,9 +88,9 @@ public class Tournament {
 	};
 	
 	
-	public List<MatchList> createTournament(List<MatchList> bracket, List<Team> teams){
+	public void createTournament(List<MatchList> bracket, List<Team> teams){
 		bracket = b.createBracket2(bracket, teams);
-		return(bracket);
+		//return(bracket);
 	}
 	
 	@Override

@@ -134,7 +134,7 @@ class TournamentInfo extends Component {
         var self = this;
         let tournamentId = this.props.match.params.tournamentId;
         
-        axios.put('http://localhost:8083/tournament/'+tournamentId+'/createBracket',this.state.teams)
+        axios.post('http://localhost:8083/tournament/'+tournamentId+'/createBracket',this.state.teams)
             .catch(function (error) {
                 console.log(error);
             })
