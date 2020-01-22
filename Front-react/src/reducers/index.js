@@ -7,11 +7,9 @@ import displayTournamentsReducer from './DisplayTournamentsReducer';
 import teamReducer from './TeamReducer';
 import setIdTournamentReducer from './SetIdTournamentReducer';
 import filesAvailableReducer from './FilesReducer';
-import filesAvailableReducer from './FilesReducer'
 import matchTabReducer from './MatchTabReducer';
 import playerReducer from './PlayerReducer';
 import listPlayersReducer from './ListPlayersReducer';
-import teamReducer from './TeamReducer';
 
 import setInfoTournoiGenReducer from './SetInfoTournoiGenReducer';
 import setBracketReducer from './SetBracketReducer';
@@ -21,6 +19,7 @@ import matchBracketReducer from './MatchBracketReducer';
 import allTeamsReducer from './AllTeamsReducer';
 import equipesTabIndexReducer from './EquipesTabIndexReducer';
 import setTournamentsListReducer from './SetTournamentsListReducer';
+import yourMatchTeamReducer from './YourMatchTeamReducer';
 
 
 const globalReducer = combineReducers({
@@ -32,7 +31,7 @@ const globalReducer = combineReducers({
     matchTabReducer:matchTabReducer,
     playerReducer:playerReducer,
     listPlayersReducer:listPlayersReducer,
-    teamReducer:teamReducer
+    yourMatchTeamReducer:yourMatchTeamReducer,
     displayTournamentsReducer: displayTournamentsReducer,
     teamReducer: teamReducer,
     setIdTournamentReducer: setIdTournamentReducer,

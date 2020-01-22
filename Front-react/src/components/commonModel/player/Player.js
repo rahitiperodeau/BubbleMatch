@@ -106,7 +106,7 @@ class Player extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
       player: state.playerReducer,
-      teams : state.teamsReducer
+      teams : state.yourMatchTeamReducer
     }
   };
   

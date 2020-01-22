@@ -19,8 +19,8 @@ class PlayerInfo extends Component{
         else {
             return(
                 <div>
-                    <div>Id:{this.props.playerState.id}</div>
                     <div>Name:{this.props.playerState.name}</div>
+                    <div>Id:{this.props.playerState.id}</div>
                     <img src = {"https://raw.communitydragon.org/latest/game/assets/ux/summonericons/profileicon"+ this.props.playerState.profileIconId +".png"}/>
                     <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/" + this.props.playerState.champions[0].championId +".png"} key="champ1-img"/>
                     <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/" + this.props.playerState.champions[1].championId +".png"} key="champ2-img"/>                    
@@ -35,7 +35,7 @@ class PlayerInfo extends Component{
 const mapStateToProps = (state, ownProps) => {
     return {
        playerState: state.playerReducer,
-       teamState : state.teamsReducer
+       teamState : state.yourMatchTeamReducer
     }
   };
 
