@@ -128,10 +128,12 @@ class MatchModel extends Component{
 
       if (classIndex===0){
         rendering=<TabPanel value={classIndex} index={classIndex} >
-          {/* <Player
-           team={team_blueside}
-          /> */}
-          <div>En cours de Dev</div>
+          <div>
+            <Player
+            team={team_blueside}
+            />
+          </div>
+          {/* <div>En cours de Dev</div> */}
       </TabPanel>;
       }
       else{
