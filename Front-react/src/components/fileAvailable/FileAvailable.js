@@ -23,7 +23,7 @@ class FileAvailable extends Component {
 
         
         var self = this;
-        let tournamentId = 46;
+        let tournamentId = this.props.folderId;
        
         axios.get('http://localhost:8090/files/'+ tournamentId)
             .then(function (response) {
@@ -66,7 +66,7 @@ class FileAvailable extends Component {
             array_render.push(
                 <FileInfo
                    key={i}
-   
+                   folderId = {this.props.folderId}
                    item={this.props.filesAvailable[i]}
                 />
                 );
@@ -88,10 +88,7 @@ class FileAvailable extends Component {
                   <tr>{this.renderTableHeader()}</tr>
                   {
                   display_list
-                  
-                  /*this.props.filesAvailable.map(item => (
-                    <FileInfo key={item.id} item={item} />
-                  ))*/}
+                  }
                </tbody>
             </table>
             <button onClick={()=>this.getFilesList()}>UpdateFileList</button>

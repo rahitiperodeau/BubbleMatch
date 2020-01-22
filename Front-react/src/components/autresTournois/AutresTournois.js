@@ -67,7 +67,8 @@ class AutresTournois extends Component{
                     <Accordion.Collapse eventKey="0">
                     <Card.Body>
                     <div> {tournament.description} </div>
-                    <Button  onClick={()=>{this.setTournamentId(tournament.id)}}>S'inscrire</Button>
+                    <Button  onClick={()=>{this.setTournamentId(tournament.id)}}>Subscription</Button>
+                    <Button  href={"/tournamentInfo/"+tournament.id} >+ Info</Button>
                     </Card.Body>
 
                     </Accordion.Collapse>

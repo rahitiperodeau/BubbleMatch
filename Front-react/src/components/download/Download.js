@@ -12,7 +12,7 @@ class Download extends Component {
       }
 
       downloadfile(fileId){
-        fetch('http://localhost:8090/downloadFile/'+fileId+'/46')
+        fetch('http://localhost:8090/downloadFile/'+fileId)
         .then(response => {
             console.log(response.headers);
             let filename = "";

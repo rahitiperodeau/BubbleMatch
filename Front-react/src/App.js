@@ -7,6 +7,7 @@ import SignUp from './components/auth/signUp/SignUp';
 import Home from './components/home/Home';
 import Chatbot from './components/chatBot/ChatBot';
 import Tournoi from './components/tournoi/Tournoi';
+import TournamentInfo from './components/tournoi/TournamentInfo';
 
 import AutresTournois from './components/autresTournois/AutresTournois';
 import UserModel from './components/commonModel/user/components/UserModel';
@@ -61,7 +62,9 @@ class App extends Component {
             <PrivateRoute exact path="/home" component={Home} />
             <PrivateRoute path="/chatbot" component={Chatbot}/>
             <PrivateRoute path="/tournoi" component={Tournoi}/>
+            <PrivateRoute path="/signOut" component={SignOut} />  
             <PrivateRoute path="/myAccount" component={User} />  
+            <PrivateRoute path="/tournamentInfo/:tournamentId" component={TournamentInfo} />  
             <Route path="/signUp" component={SignUp} /> 
             <PrivateRoute path="/signOut" component={SignOut} />  
             <PrivateRoute path="/autresTournois" component={AutresTournois}/>    
