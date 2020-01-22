@@ -8,6 +8,8 @@ import { hierarchy } from 'd3-hierarchy';
 import {connect} from 'react-redux';
 
 const fakeUId=61;
+const UID=sessionStorage.getItem("userId");
+console.log(UID)
 var axios = require('axios');
 
 class TopBar extends Component{
@@ -21,7 +23,8 @@ class TopBar extends Component{
         this.getPlayerId=this.getPlayerId.bind(this);
         this.setBracket=this.setBracket.bind(this);
         this.treeCreation=this.treeCreation.bind(this);
-        this.getPlayerId(fakeUId);
+       
+        this.getPlayerId(UID);
 
     }
 
