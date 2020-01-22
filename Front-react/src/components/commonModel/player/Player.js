@@ -62,7 +62,6 @@ class Player extends Component {
               return response.data; 
           
           }else{
-              //res = {};
               return {}
           };
         })
@@ -93,10 +92,7 @@ class Player extends Component {
 
     
 
-    render(){
-        //let team_info =this.props.team
-        //this.getPlayerId(sessionStorage.getItem("sessionId"));
-        
+    render(){        
         return(
             <div className="panel-body">
                 <PlayerFunction param ={this.props}/>

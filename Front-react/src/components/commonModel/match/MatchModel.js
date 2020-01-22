@@ -5,27 +5,17 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import { Typography } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Player from '../player/Player'
-import PlayerFunction from '../player/Player'
 
 import { connect } from 'react-redux';
 
-import {player_1} from '../../../data/data_player';
-import {champion_mastery_by_player} from '../../../data/data_champions';
-import {rank_info} from '../../../data/data_rank';
-import {champion_info} from '../../../data/data_champion';
-import {perfect_player} from '../../../data/perfect_player';
 import {team_blueside} from '../../../data/team_blueside';
 import {team_redside} from '../../../data/team_redside';
 import {playerDisplay,matchTabAction,championsDisplay, setTeamToDisplay} from '../../../actions'
 
-
-import {getSummoner} from '../../../api/index'
-import Axios from 'axios';
 
 
 

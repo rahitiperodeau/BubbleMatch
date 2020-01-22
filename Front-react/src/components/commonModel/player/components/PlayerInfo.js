@@ -14,7 +14,7 @@ class PlayerInfo extends Component{
     render(){
 
         if(this.props.playerState.champions === undefined){
-            return(<div></div>)
+            return(<div>Data not fully fetched yet, try again!</div>)
         }
         else {
             return(
