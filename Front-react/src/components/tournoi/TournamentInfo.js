@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import FileAvailable from '../fileAvailable/FileAvailable'
 import Upload from '../upload/Upload';
 import TournamentInfoText from './components/TournamentInfoText';
+import {Button,Card, Accordion} from 'react-bootstrap';
 import './style/TournamentInfo.css'
 import {userConnection} from '../../actions'
 
@@ -172,6 +173,36 @@ class TournamentInfo extends Component {
                 <div className="ValidateTournament">
                     {this.authValidate()}
                 </div>
+                <div id="ListTeam">
+
+                <h3> Teams registered</h3>
+
+                {this.state.teams.map((team,i)=>{
+                return(
+                                    <div>   
+                                        <Accordion className="accordion">
+
+                                            <Accordion.Toggle as={Button} variant="link" eventKey="0" className="tournamentName">
+                                            <div id="tournamentName"> {team.teamName}</div>
+                                            </Accordion.Toggle>
+                                            <Accordion.Collapse eventKey="0">
+                                        <div id="hehe">
+                                        {team.players.map((player,i)=>{
+                                            return(<div>
+                                            <div id="tournamentDes"> {player.playerName} </div>
+                                            </div>
+                                            )
+                                        })}
+                                    
+                                        </div>
+                            </Accordion.Collapse>
+                                    
+                                    </Accordion>
+                                    </div> 
+                )
+                })}
+                </div>
+
             </div>
         )
     }
