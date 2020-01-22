@@ -3,50 +3,60 @@ package app.tournamentModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "team")
 public class Team {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int team_id;
+	private int teamId;
 	
 //	@ManyToOne
 //	private Tournament tournament;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	List<Player> players = new ArrayList<Player>();
+	
+    @Column(name = "Elo")
 	private int elo;
-	private String team_name;
-	private int tournament_id_ref;
+    
+    @Column(name = "TeamName")
+	private String teamName;
+    
+    private int EloVictoires;
+	private int tournamentIdRef;
 	
 	
 	//ID
-	public int getTeam_Id() {
-		return team_id;
+	public int getTeamId() {
+		return teamId;
 	}
 	
 
 	//Team name
-	public String getTeam_name() {
-		return team_name;
+	public String getTeamName() {
+		return teamName;
 	}
-	public void setTeam_name(String team_name) {
-		this.team_name = team_name;
+	public void setTeam_name(String teamName) {
+		this.teamName = teamName;
 	}
 
 	
 	//Tournament id 
-	public int getTournament_id() {
-		return tournament_id_ref;
+	public int getTournamentId() {
+		return tournamentIdRef;
 	}
-	public void setTournament_id(int tournament_id) {
-		this.tournament_id_ref = tournament_id;
+	public void setTournamentId(int tournamentId) {
+		this.tournamentIdRef = tournamentId;
 	}
 
 	
@@ -62,22 +72,43 @@ public class Team {
 	public int getElo() {
 		return elo;
 		}
-	public void setElo(int elo) {
-//		this.elo = 0;
-//		for(int i = 0; i <= players.size(); i++){
-//			this.elo = elo + players.get(i).getEloPlayer();
-//		    System.out.println(getElo());
-//		}
-//		this.elo = this.elo/(5);
-		this.elo = elo;
+	public void setElo() {
+		this.elo = 0;
+		for(int i = 0; i <= players.size(); i++){
+			this.elo = elo + players.get(i).getEloPlayer();
+		    System.out.println(getElo());
+		}
+		this.elo = this.elo/(players.size());
+		this.elo = elo + EloVictoires;
 		}
 
-	public Team(String team_name, int id) {
+	public Team(String teamName) {
 		super();
-		this.team_id= id;
-		this.team_name = team_name;
-		this.tournament_id_ref = tournament_id_ref;
+		this.teamName = teamName;
+		this.tournamentIdRef = tournamentIdRef;
 		this.elo = 0;
+	}
+	
+	public Team(String teamName, int id) {
+		super();
+		this.teamId = id;
+		this.teamName = teamName;
+		this.tournamentIdRef = tournamentIdRef;
+		this.elo = 0;
+	}
+	
+	public Team(String teamName, int id, List<Player> players, int tournamentIdRef) {
+		super();
+		this.teamId = id;
+		this.teamName = teamName;
+		this.tournamentIdRef = tournamentIdRef;
+		this.players = players;
+		this.elo =0;
+	}
+	
+	public Team() {
+		super();
+		this.teamName = "";
 	}
 
 	
@@ -85,24 +116,34 @@ public class Team {
 		if (players.size()< 5) {
 			players.add(player);
 			}
-		//setElo
+		this.elo = this.elo + player.getEloPlayer();
 		return(players);
 	}
 
 	
 	public List<Player> DeletePlayer(Player player){
 		players.remove(player);
-		//setElo();
+		this.elo = this.elo - player.getEloPlayer();
 		return players;
 	}
-	
-	public String teamName() {
-		return(team_name);
+
+
+	public int getEloVictoires() {
+		return EloVictoires;
 	}
+
+
+	public void setEloVictoires(int addElo) {
+		EloVictoires = this.EloVictoires + addElo;
+	}
+	
 	@Override
 	public String toString() {
-		return team_name;
-	};
+		return "Team [teamId=" + teamId + ", players=" + players + ", elo=" + elo + ", teamName=" + teamName
+				+ ", EloVictoires=" + EloVictoires + ", tournamentIdRef=" + tournamentIdRef + "]";
+	}
+	
+	
 	
 	
 }

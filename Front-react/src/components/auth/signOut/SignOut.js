@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, {  Component } from "react";
 
 import sessionStorage from "sessionstorage";
 
@@ -21,6 +21,7 @@ class SignOut extends Component{
             }})
         .then((response)=>{
             sessionStorage.removeItem("sessionId");
+            sessionStorage.removeItem("userId");
             
             alert("you are deconnected");
             window.location = "/";

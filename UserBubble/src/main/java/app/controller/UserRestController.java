@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.model.Player;
+import app.model.PlayerTournament;
 import app.model.User;
 import app.service.AuthentificationService;
+import app.service.PlayerService;
 import app.service.UserService;
 
 @CrossOrigin
@@ -25,6 +28,9 @@ public class UserRestController {
 	
 	@Autowired
 	private AuthentificationService authentificationService;
+	
+	@Autowired
+	private PlayerService playerService;
 	
 	@RequestMapping("/users")
 	private List<User> getAllUsers() {
@@ -44,11 +50,26 @@ public class UserRestController {
 
 	}
 	
+	@RequestMapping("/players/{userId}")
+	private List<Player> getPlayers(@PathVariable String userId) {
+		
+		List<Player> lReturn = playerService.getPlayerId(Integer.parseInt(userId));
+		return lReturn;
+	}
+	
+	@RequestMapping(method=RequestMethod.POST,value="/tournamentPlayer")
+	private void setPlayer(@RequestBody List<PlayerTournament> playerTournamentList) {
+		playerService.setPlayerUserJoint( playerTournamentList);
+		//List<Player> lReturn = playerService.getPlayerId(Integer.parseInt(userId));
+		//return lReturn;
+	}
+	
 	@RequestMapping("/user")
 	private Integer getUserId(@RequestParam("sessionId") String sessionId) {
 		Optional<User> user;
 		user= authentificationService.getUser(sessionId);
 		if(user.isPresent()) {
+			System.out.println("user found");
 			return user.get().getId();
 		}
 		return null;
@@ -56,7 +77,6 @@ public class UserRestController {
 	
 	@RequestMapping(method=RequestMethod.POST,value="/user")
 	public String addUser(@RequestBody User user) {
-		System.out.println(user.toString());
 		userService.addUser(user);
 		return userService.addUser(user);
 	}
@@ -72,9 +92,8 @@ public class UserRestController {
 		return lReturn;
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT,value="/user/{id}")
-	public void updateUser(@RequestBody User user,@PathVariable String id) {
-		user.setId(Integer.valueOf(id));
+	@RequestMapping(method=RequestMethod.PUT,value="/user")
+	public void updateUser(@RequestBody User user) {
 		userService.updateUser(user);
 	}
 	

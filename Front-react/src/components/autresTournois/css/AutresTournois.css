@@ -1,5 +1,65 @@
-.cardTournoi{
-    width:50%;
-    border-style: solid;
-    border-color: rgb(29, 117, 231);
+h1
+{
+  font-size: 32px;
+  font-family:Arial, Helvetica, sans-serif;
+  color: rgb(141, 6, 6);
+  padding:16px;
+  font-weight:lighter;
+  text-align:center;
+  display:block;
+  margin:16px;
+}
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active, .accordion:hover {
+    background-color: rgb(153, 4, 4);
+    color: white;
+  }
+  
+  /* Style the accordion panel. Note: hidden by default */
+  .panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+  }
+
+.accordion.Toggle{
+  color: white;
+}
+
+#tournamentName{
+  margin:10px;
+  color: black;
+  font-size: large;
+
+}
+
+#tournamentDes{
+  margin-top: 10;
+  margin-left: 10;
+}
+
+#inscription{
+  color: white;
+  background-color: rgb(153, 4, 4);
+}
+
+#hehe{
+  width:80%;
+}
+
+.accordion:{
+  color:white;
 }

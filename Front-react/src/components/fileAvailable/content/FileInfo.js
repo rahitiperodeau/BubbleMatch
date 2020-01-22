@@ -12,6 +12,16 @@ class FileInfo extends Component {
        
       }
 
+      checkDeleteAuth(){
+        if(this.props.user.isAdmin){
+          return <DeleteFile 
+          fileId ={this.props.item.id}
+          folderId={this.props.folderId}>
+         </DeleteFile>
+        }else{
+          return ""
+        }
+      }
       
 
       render() {
@@ -23,12 +33,18 @@ class FileInfo extends Component {
                <td><Download 
                         fileId ={this.props.item.id}>
                    </Download>
-                   <DeleteFile fileId ={this.props.item.id}>
-                   </DeleteFile></td>
+                   {this.checkDeleteAuth()}
+                   </td>
             </tr>
                 
           
        )
       }
 }
-export default connect()(FileInfo);
+
+const mapStateToProps = (state,ownProps) => {
+  return{
+    user: state.userReducer.user
+  }
+}
+export default connect(mapStateToProps)(FileInfo);

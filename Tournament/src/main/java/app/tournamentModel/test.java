@@ -1,8 +1,8 @@
 package app.tournamentModel;
 
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import app.tournamentModel.Tournament;
 public class test {
@@ -12,15 +12,17 @@ public class test {
 		
 	    Tournament tur = new Tournament();
 	    //System.out.println(tur.toString());
-	    Player p1 = new Player("rospote");
-	    Player p2 = new Player("rospote");
-	    Player p3 = new Player("rospote");
-	    Player p4 = new Player("rospote");
-	    Player p5 = new Player("rospote");
+	   
 	    
-	    int nbTeam = 8;
+	    int nbTeam =10;
 	    for(int i = 1; i<= nbTeam ;i++) {
 	    	Team team = new Team("Gros tajine"+i, i);
+		    Player p1 = new Player("rospote",100*i);
+		    Player p2 = new Player("rospote",200*i);
+		    Player p3 = new Player("rospote",300*i);
+		    Player p4 = new Player("rospote",400*i);
+		    Player p5 = new Player("rospote",500*i);
+	    	
 		    team.addNewPlayer(p1);
 		    team.addNewPlayer(p2);
 		    team.addNewPlayer(p3);
@@ -30,38 +32,6 @@ public class test {
 		    //System.out.println(team);
 		    tur.addNewTeam(team);
 	    }
-//	   Team team = new Team("Gros tajine");
-//	    team.addNewPlayer(p1);
-//	    team.addNewPlayer(p2);
-//	    team.addNewPlayer(p3);
-//	    team.addNewPlayer(p4);
-//	    team.addNewPlayer(p5);
-//	    System.out.println(p1.toString());
-//       Team team2 = new Team("Je TECLATE");
-//        team2.addNewPlayer(p1);
-//	    team2.addNewPlayer(p2);
-//	    team2.addNewPlayer(p3);
-//	    team2.addNewPlayer(p4);
-//	    team2.addNewPlayer(p5);
-//	    
-//	    Team team3 = new Team("EZ");
-//	        team3.addNewPlayer(p1);
-//		    team3.addNewPlayer(p2);
-//		    team3.addNewPlayer(p3);
-//		    team3.addNewPlayer(p4);
-//		    team3.addNewPlayer(p5);
-//		Team team4 = new Team("YOLO");
-//		       team4.addNewPlayer(p1);
-//			   team4.addNewPlayer(p2);
-//			   team4.addNewPlayer(p3);
-//			   team4.addNewPlayer(p4);
-//			   team4.addNewPlayer(p5);
-//	 System.out.println(team3);
-
-//		tur.addNewTeam(team);
-//		tur.addNewTeam(team2);
-//		tur.addNewTeam(team3);
-//		tur.addNewTeam(team4);
 
 //	    System.out.println(team.getElo());
 //	     
@@ -72,10 +42,7 @@ public class test {
 	    //System.out.println(tur.teams);
 	    //System.out.println(groupes.create().get(0));
 	    //System.out.println(groupes.toString());
-	    //groupes.createGroups();
-	    //Map<List<Object>,Integer> matchs = groupes.Matches();
-	    
-	    //groupes.results(matchs.keySet(), );
+	    //List<Match> matchs = groupes.matches();
 	    
 	   // groupes.results(matchs.keySet(), );
 	   // System.out.println(groupes.matches().get(0));
@@ -84,16 +51,25 @@ public class test {
 
 	    //System.out.println(groupes.results(matchs.get(0)));
 	    //System.out.println(groupes.groups.get(0).values());
-
+	    
 	    
 	    //System.out.println(groupes.groups);
-
-	    Bracket bracket = new Bracket(tur.getTeams());
+	    List<MatchList> matchListInit = new ArrayList<>();
+	    Bracket bracket = new Bracket(matchListInit);
+	    System.out.println(tur.getTeams());
+	    //List<List<Match>> bra = new ArrayList<>();
 	    //System.out.println(bracket.toString());
-	    bracket.createBracket(tur.getTeams()).get(0).get(0).setResult(1);;
-	    bracket.createBracket(tur.getTeams()).get(0).get(1).setResult(1);;
+	    //System.out.println(bracket.createBracket2(bracket.getBracket(), tur.getTeams()));
+	    System.out.println(bracket.getBracket());
 
-	    List<List<Match>> mat = bracket.createBracket(tur.getTeams());
-	    System.out.println(bracket.results(mat.get(0)));
+	    List<MatchList> mat = bracket.createBracket2(matchListInit,tur.getTeams());
+	     mat.get(0).getMatchList().get(6).setResult(2);
+	    mat.get(0).getMatchList().get(7).setResult(2);
+	     System.out.println(bracket.results(mat,tur.getTeams()));
+		    System.out.println(tur.getTeams());
+
+	    //System.out.println(bracket.results(mat).get(1));
+
+
 	  }
 }

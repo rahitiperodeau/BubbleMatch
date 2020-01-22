@@ -3,22 +3,30 @@ package app.tournamentModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.InheritanceType;
 
 @Entity
 @Table(name = "tournament")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Tournament {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	protected int id;
 	
+    @Column(name = "Name")
 	private String name;
+    
+    @Column(name = "Description")
 	private String description;
 	//private String imgurl;
 	//private String contact;
@@ -26,7 +34,7 @@ public class Tournament {
 	@OneToOne
 	private StructureT s;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Team> teams = new ArrayList<Team>();
 
 
@@ -35,12 +43,19 @@ public class Tournament {
 		description = "Description du tournoi";
 	}
 	
-	public Tournament(int tournament_id, String name, String description, StructureT structure) {
+	
+	public Tournament(int tournamentId, String name, String description, StructureT structure) {
 		super();
-		this.id = tournament_id;
+		this.id = tournamentId;
 		this.name = name;
 		this.description = description;
 		this.s = structure;
+		
+	}
+	
+	public Tournament(String name, String description) {
+		this.name = name;
+		this.description = description ;
 	}
 	
 	public String getName() {
@@ -91,8 +106,8 @@ public class Tournament {
 		return id;
 	}
 
-	public void setId(int tournament_id) {
-		this.id = tournament_id;
+	public void setId(int tournamentId) {
+		this.id = tournamentId;
 	}
 
 	public StructureT getS() {

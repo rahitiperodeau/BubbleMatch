@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {Image,Figure,Button} from 'react-bootstrap';
+import {Figure} from 'react-bootstrap';
 import chatbotImage from '../../../../img/chatbot.png';
-import {Widget,addResponseMessage} from 'react-chat-widget';
 import './css/ItemChatBot.css';
 import { connect } from 'react-redux';
 import {chatBotDisplay} from '../../../../actions';
@@ -20,7 +19,7 @@ class ItemChatBot extends Component{
     setChatBotState(){
         
         this.props.dispatch(chatBotDisplay(this.state.chatBotState));
-        this.state.chatBotState=!this.state.chatBotState;
+        this.setState({chatBotState:!this.state.chatBotState})
     }
 
     render(){
@@ -30,10 +29,11 @@ class ItemChatBot extends Component{
                         width={171}
                         height={180}
                         src={chatbotImage}
+                        onClick={()=>{this.setChatBotState()}}
+
+                        id="image"
                     />
-                    <Figure.Caption className="caption">
-                    <Button onClick={()=>{this.setChatBotState()}}>Chatbot</Button>
-                    </Figure.Caption>
+                   
             </Figure>
 
             

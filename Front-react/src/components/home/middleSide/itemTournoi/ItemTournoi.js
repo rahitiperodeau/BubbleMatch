@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image,Figure,Button} from 'react-bootstrap';
+import {Figure} from 'react-bootstrap';
 
 import tournoiImage from '../../../../img/tournoi.png';
 import './css/ItemTournoi.css';
@@ -18,8 +18,9 @@ class Tournoi extends Component{
     }
 
     setTournoiState(){
+        console.log(this.state.tournoiState)
         this.props.dispatch(tournoiDisplay(this.state.tournoiState));
-        this.state.tournoiState=!this.state.tournoiState;
+        this.setState({tournoiState:!this.state.tournoiState})
     }
 
     render(){
@@ -28,13 +29,12 @@ class Tournoi extends Component{
                 
                 <Figure>
                     <Figure.Image
-                        width={171}
-                        height={180}
+                        
                         src={tournoiImage}
+                        onClick={()=>{this.setTournoiState()}}
+                        id="image"
                     />
-                    <Figure.Caption className="caption">
-                    <Button onClick={()=>{this.setTournoiState()}}>Votre tournoi</Button>
-                    </Figure.Caption>
+                    
                 </Figure>
         )
     }

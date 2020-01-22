@@ -1,22 +1,36 @@
 package app.tournamentModel;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "matchs")
 public class Match {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int match_id;
+	private int matchId;
 	
 	private String tournament_code;
-	private int team_id1;
-	private int team_id2;
+	private int teamId1;
+	private int teamId2;
 	private int result;
-	public Match(int team_id1, int team_id2) {
+	private int step;
+	
+	public Match(int teamId1, int teamId2, int score,int step) {
 		super();
-		this.team_id1 = team_id1;
-		this.team_id2 = team_id2;
+		this.teamId1 = teamId1;
+		this.teamId2 = teamId2;
+		this.result = 0;
+		this.step = step;
+		this.tournament_code = "";
+	}
+	
+	public Match() {
+		super();
 		this.result = 0;
 	}
 	public String getTournament_code() {
@@ -25,17 +39,17 @@ public class Match {
 	public void setTournament_code(String tournament_code) {
 		this.tournament_code = tournament_code;
 	}
-	public int getTeam_id1() {
-		return team_id1;
+	public int getTeamId1() {
+		return teamId1;
 	}
-	public void setTeam_id1(int team_id1) {
-		this.team_id1 = team_id1;
+	public void setTeamId1(int teamId1) {
+		this.teamId1 = teamId1;
 	}
-	public int getTeam_id2() {
-		return team_id2;
+	public int getTeamId2() {
+		return teamId2;
 	}
-	public void setTeam_id2(int team_id2) {
-		this.team_id2 = team_id2;
+	public void setTeamId2(int teamId2) {
+		this.teamId2 = teamId2;
 	}
 	public int getResult() {
 		return result;
@@ -43,15 +57,31 @@ public class Match {
 	public void setResult(int result) {
 		this.result = result;
 	}
-	public int getMatch_id() {
-		return match_id;
+	public int getMatchId() {
+		return matchId;
 	}
 	
 	
+	
+	public int getStep() {
+		return step;
+	}
+
+	public void setStep(int step) {
+		this.step = step;
+	}
+	
+	
+//	public void resultMatch(int id) {
+//			this.setResult(this.result +1);
+//		
+//	}
+
+
 	@Override
 	public String toString() {
-		return "Match [match_id=" + match_id + ", tournament_code=" + tournament_code + ", team_id1=" + team_id1
-				+ ", team_id2=" + team_id2 + ", result=" + result + "]";
+		return "Match [match_id=" + matchId + ", tournament_code=" + tournament_code + ", team_id1=" + teamId1
+				+ ", team_id2=" + teamId2 + ", result=" + result + "]";
 	}
 	
 	

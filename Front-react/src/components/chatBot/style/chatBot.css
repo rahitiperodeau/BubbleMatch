@@ -20,13 +20,16 @@ html, body {
     width: 750px;
     margin: auto;
     border: 1px solid #d5d5d5;
+    
   }
 
   .conversation-view {
     width: 100%;
     min-height: 600px;
+    max-height: 600px;
     padding: 20px 40px;
     background-color: #e5ddd5;
+    overflow: scroll;
   }
 
   .message-box {

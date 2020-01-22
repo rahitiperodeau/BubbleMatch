@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image,Figure,Button} from 'react-bootstrap';
+import {Figure} from 'react-bootstrap';
 import matchImage from '../../../../img/match.png';
 import './css/ItemMatch.css';
 import {matchDisplay} from '../../../../actions';
@@ -17,19 +17,19 @@ class ItemMatch extends Component{
 
     setMatchState(){
         this.props.dispatch(matchDisplay(this.state.matchState));
-        this.state.matchState=!this.state.matchState;
+        this.setState({matchState:!this.state.matchState})
+        
     }
     render(){
         return(
             <Figure>
                     <Figure.Image
-                        width={171}
-                        height={180}
+                     
                         src={matchImage}
+                        onClick={()=>{this.setMatchState()}}
+                        id="image"
                     />
-                    <Figure.Caption className="caption">
-                        <Button onClick={()=>{this.setMatchState()}}>Votre match</Button>
-                    </Figure.Caption>
+                   
                 </Figure>
         )
     }

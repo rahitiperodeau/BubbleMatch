@@ -9,7 +9,6 @@ export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   function validateForm() {
 
     return email.length > 0 && password.length > 0;
@@ -31,9 +30,10 @@ export default function Login(props) {
             }
           })
           .then(function (response) {
-              if (response.data !== undefined && response.data != ""){
+              if (response.data !== undefined && response.data !== ""){
                               
                 sessionStorage.setItem("sessionId",response.data);
+                
                 window.location = "/home"
                 
                
