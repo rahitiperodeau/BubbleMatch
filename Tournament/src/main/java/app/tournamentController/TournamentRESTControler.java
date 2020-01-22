@@ -38,6 +38,7 @@ public class TournamentRESTControler {
 	
 	@RequestMapping(method=RequestMethod.POST,value="/tournament")
 	private void addTournament(@RequestBody Tournament tournament) {
+		System.out.println(tournament.toString());
 		tournamentService.addTournament(tournament);
 
 	}
