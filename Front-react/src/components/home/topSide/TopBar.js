@@ -41,7 +41,7 @@ class TopBar extends Component{
                     console.log(resp.data)
                     axios.get(`http://localhost:8083/tournament/${resp.data}`)
                     .then(function(reponse){
-                        console.log(reponse.data)
+                        console.log("top bar :" +reponse.data)
                         let obj={"tournamentId":resp.data,"tournament":reponse.data};
                             
                         
@@ -68,11 +68,16 @@ class TopBar extends Component{
     }
 
     setBracket(tournament){
+        if (tournament.s!==null){
         let brckt=tournament.s.bracket;
         let treeTmp=this.treeCreation(brckt);
         let data=hierarchy(treeTmp);
         let bracketFilled=fillBracket(data,brckt);
         this.props.dispatch(setBracketAction(bracketFilled));
+        }else{
+            console.log("tournament is not yet available to look this feature")
+        }
+
     }
 
 

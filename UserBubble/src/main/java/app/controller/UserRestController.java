@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Player;
+import app.model.PlayerTournament;
 import app.model.User;
 import app.service.AuthentificationService;
 import app.service.PlayerService;
@@ -54,6 +55,13 @@ public class UserRestController {
 		
 		List<Player> lReturn = playerService.getPlayerId(Integer.parseInt(userId));
 		return lReturn;
+	}
+	
+	@RequestMapping(method=RequestMethod.POST,value="/tournamentPlayer")
+	private void setPlayer(@RequestBody List<PlayerTournament> playerTournamentList) {
+		playerService.setPlayerUserJoint( playerTournamentList);
+		//List<Player> lReturn = playerService.getPlayerId(Integer.parseInt(userId));
+		//return lReturn;
 	}
 	
 	@RequestMapping("/user")

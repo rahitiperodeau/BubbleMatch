@@ -1,5 +1,6 @@
 package app.tournamentController;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class TournamentRESTControler {
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT,value="/tournament/{id}/addTeam")
-	private void addNewTeamToTournament(@PathVariable int id, @RequestBody Team team ) {
+	private void addNewTeamToTournament(@PathVariable int id, @RequestBody Team team ) throws URISyntaxException {
 		tournamentService.addNewTeamToTournament(id, team);
 
 	}

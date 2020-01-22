@@ -43,10 +43,6 @@ public class Tournament {
 		description = "Description du tournoi";
 	}
 	
-	public Tournament(String name,String description) {
-		this.setName(name);
-		this.setDescription(description);
-	}
 	
 	public Tournament(int tournamentId, String name, String description, StructureT structure) {
 		super();

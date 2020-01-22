@@ -20,6 +20,7 @@ public class User {
 	private String surname;
 	private String password;
 	private String email;
+	private String pseudo;
 	private boolean isAdmin;
 	private Date inscriptionDate;
 	private Date lastLoginDate;
@@ -113,6 +114,14 @@ public class User {
                 ", password=" 			+ password 	+ 
                 '}';
     }
+
+	public String getPseudo() {
+		return pseudo;
+	}
+
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
 
 	
 

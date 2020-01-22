@@ -42,8 +42,8 @@ class InscriptionTournoi extends Component{
 
         team.players = [player1, player2, player3, player4, player5];
         console.log(team);
-
-        axios.put("http://localhost:8083/tournament/1/addTeam", team)
+        console.log(this.props.match.params.tournamentId);
+        axios.put("http://localhost:8083/tournament/" + self.props.match.params.tournamentId +"/addTeam", team)
                         .then(function (response) {
                                 
                             })
