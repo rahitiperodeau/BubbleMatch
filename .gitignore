@@ -39,3 +39,5 @@ TextMiningServer/app/__pycache__/views.cpython-36.pyc
 FileServer/target/classes/META-INF/maven/fileServer/fileServer/pom.properties
 
 UserBubble/target/classes/META-INF/maven/UserBubble/UserBubble/pom.properties
+
+*.MF

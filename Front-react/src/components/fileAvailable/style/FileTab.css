@@ -9,6 +9,8 @@
     border-collapse: collapse;
     border: 3px solid #ddd;
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   #filesAvailable td, #filesAvailable th {
@@ -24,7 +26,7 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
-    background-color: #4CAF50;
+    background-color: rgb(151, 39, 45);
     color: white;
   }
   

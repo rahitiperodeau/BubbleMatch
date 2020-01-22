@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import FileAvailable from '../fileAvailable/FileAvailable'
 import Upload from '../upload/Upload';
 import TournamentInfoText from './components/TournamentInfoText';
+import './style/TournamentInfo.css'
+import {userConnection} from '../../actions'
 
 var axios=require('axios') ;
 class TournamentInfo extends Component {
@@ -15,6 +17,32 @@ class TournamentInfo extends Component {
         }
         this.getTournamentInfo();
         this.getRenderFileManager();
+        this.getUserInfo();
+    }
+
+
+
+     getUserInfo(){
+        let self =this;
+        axios.get('http://localhost:8082/user/' + sessionStorage.getItem("userId"))
+                .then(function (response) {
+                    if (response.data !== undefined && response.data !== ""){
+                        
+                    
+                        self.props.dispatch(userConnection(response.data))
+                        
+                    
+                    }else{
+                        alert("error no response from server")
+                    }
+                    
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .finally(function () {
+                    // always executed
+                }); 
     }
 
     getTournamentInfo(){
@@ -58,6 +86,7 @@ class TournamentInfo extends Component {
                 <FileAvailable
                    key="fileAvailable"
                    folderId = {this.props.match.params.tournamentId}
+                  
                 />
                 );
         
@@ -99,14 +128,14 @@ class TournamentInfo extends Component {
     render(){
         //const display_list= this.getRenderFileManager();
         return(
-            <div className="panel-body">
-                <div className="info-panel">
+            <div className="row">
+                <div className="column">
                 <TournamentInfoText
                     tournamentName = {this.state.tournamentName}
                     tournamentDescription = {this.state.tournamentDescription}
                     />               
                  </div>
-                <div className="file-panel">
+                <div className="column">
                     {this.state.renderFile}
                 </div>
                 
