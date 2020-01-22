@@ -42,6 +42,7 @@ public class Bracket extends StructureT  {
 	
 	
 	public List<MatchList> createBracket2(List<MatchList> Resbracket, List<Team> teamsQualified){
+		System.out.println("coucou");
 		int tailleTeams = teamsQualified.size();
 		int tailleBracket =0;
 		int nbEquipesFictives=0;

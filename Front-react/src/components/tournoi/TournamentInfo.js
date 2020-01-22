@@ -13,7 +13,11 @@ class TournamentInfo extends Component {
         this.state={
            renderFile :"",
            tournamentName:"",
-           tournamentDescription:""
+           tournamentDescription:"",
+           teams:[],
+           user:{
+               isAdmin:false,
+           }
         }
         this.getTournamentInfo();
         this.getRenderFileManager();
@@ -29,7 +33,8 @@ class TournamentInfo extends Component {
                     if (response.data !== undefined && response.data !== ""){
                         
                     
-                        self.props.dispatch(userConnection(response.data))
+                        self.props.dispatch(userConnection(response.data));
+                        self.setState({user:response.data});
                         
                     
                     }else{
@@ -56,7 +61,8 @@ class TournamentInfo extends Component {
                     
                  self.setState({
                     tournamentName:response.data.name,
-                    tournamentDescription:response.data.description
+                    tournamentDescription:response.data.description,
+                    teams:response.data.teams
                  })
                    
                 
@@ -122,23 +128,50 @@ class TournamentInfo extends Component {
         
 
     }
+
     
+    validateTournament(){
+        var self = this;
+        let tournamentId = this.props.match.params.tournamentId;
+        
+        axios.put('http://localhost:8083/tournament/'+tournamentId+'/createBracket',this.state.teams)
+            .catch(function (error) {
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });  
+
+    }
+
+    authValidate(){
+        if(this.state.user.isAdmin){
+            return (<button  onClick={()=>this.validateTournament()}>Validate Tournament</button>)
+        }else{
+            return ""
+        }
+    }
     
 
     render(){
         //const display_list= this.getRenderFileManager();
         return(
-            <div className="row">
-                <div className="column">
-                <TournamentInfoText
-                    tournamentName = {this.state.tournamentName}
-                    tournamentDescription = {this.state.tournamentDescription}
-                    />               
-                 </div>
-                <div className="column">
-                    {this.state.renderFile}
+            <div>
+                <div className="row">
+                    <div className="column">
+                    <TournamentInfoText
+                        tournamentName = {this.state.tournamentName}
+                        tournamentDescription = {this.state.tournamentDescription}
+                        />               
+                    </div>
+                    <div className="column">
+                        {this.state.renderFile}
+                    </div>
+                    
                 </div>
-                
+                <div className="ValidateTournament">
+                    {this.authValidate()}
+                </div>
             </div>
         )
     }

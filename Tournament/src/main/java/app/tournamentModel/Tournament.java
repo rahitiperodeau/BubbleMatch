@@ -36,13 +36,14 @@ public class Tournament {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Team> teams = new ArrayList<Team>();
-
+	
+	@OneToOne
+	private Bracket b;
 
 	public Tournament() {
 		name = "Nom du tournoi";
 		description = "Description du tournoi";
 	}
-	
 	
 	public Tournament(int tournamentId, String name, String description, StructureT structure) {
 		super();
@@ -87,9 +88,9 @@ public class Tournament {
 	};
 	
 	
-	public boolean CreateTournament(){
-	
-		return(true);
+	public List<MatchList> createTournament(List<MatchList> bracket, List<Team> teams){
+		bracket = b.createBracket2(bracket, teams);
+		return(bracket);
 	}
 	
 	@Override

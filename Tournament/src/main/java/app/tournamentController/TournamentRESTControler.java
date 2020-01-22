@@ -64,6 +64,12 @@ public class TournamentRESTControler {
 
 	}
 	
+	@RequestMapping(method=RequestMethod.PUT,value="/tournament/{id}/createBracket")
+	private void createBracketTournament(@PathVariable int id, @RequestBody List<Team> teams ) {
+		tournamentService.createBracketTournament(id, teams);
+
+	}
+	
 	
 //	@RequestMapping(method = RequestMethod.GET, value="/teams")
 //	public List<Team> getAllTeams(){

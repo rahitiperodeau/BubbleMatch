@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import app.tournamentModel.TournamentRepository;
+import app.tournamentModel.Bracket;
+import app.tournamentModel.BracketRepository;
+import app.tournamentModel.MatchList;
 import app.tournamentModel.Player;
 import app.tournamentModel.Team;
 import app.tournamentModel.TeamRepository;
-//import app.tournamentModel.TeamRepository;
 import app.tournamentModel.Tournament;
 
 @Service
@@ -27,6 +29,9 @@ public class TournamentService {
 	
 	@Autowired
 	private TeamRepository teamRepository;
+	
+	@Autowired 
+	private BracketRepository bracketRepository;
 	
 	
 	public List<Tournament> getAllTournaments() {
@@ -75,6 +80,17 @@ public class TournamentService {
 	    ResponseEntity<String> result = restTemplate.postForEntity(uri, listToSend, String.class);
 	    System.out.println(result);
 		//todo get back playerList
+	}
+	
+	public void createBracketTournament(int id, List<Team> teams) {
+		// TODO Auto-generated method stub
+		//System.out.println(teams.toString());
+		List<MatchList> bracket = new ArrayList<MatchList>();
+		//System.out.println(bracket.toString());
+		System.out.println("tournament "+tournamentRepository.findById(id));
+		Tournament myTournament = tournamentRepository.findById(id);
+		myTournament.createTournament(bracket, teams);
+
 	}
 
 

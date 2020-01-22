@@ -25,7 +25,7 @@ public class BracketRESTControler {
 
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT,value="/bracket")
+	@RequestMapping(method=RequestMethod.POST,value="/bracket")
 	private void addBracket(@RequestBody Bracket bracket) {
 		bracketService.addBracket(bracket);
 
