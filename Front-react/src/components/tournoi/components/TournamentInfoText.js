@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
-var axios=require('axios') ;
 class TournamentInfoText extends Component {
     
       
@@ -16,8 +14,9 @@ class TournamentInfoText extends Component {
         
         return(
             <div className="tournamentPanel">
+                My Tournament :
                 <h1>{this.props.tournamentName}</h1>
-                <h4>{this.props.description}</h4>
+                <h4>{this.props.tournamentDescription}</h4>
             </div>
         )
     }
