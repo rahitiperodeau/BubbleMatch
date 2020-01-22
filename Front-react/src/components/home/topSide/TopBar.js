@@ -103,7 +103,7 @@ class TopBar extends Component{
 
                         <Dropdown.Menu>
                             {this.props.tournamentList.list.map((obj,i)=>{
-                                return <Dropdown.Item key={i} onClick={()=>{self.setBracket(obj.tournament)}}>{obj.tournament.name}</Dropdown.Item>
+                                return <div id={i}><Dropdown.Item key={i} onClick={()=>{self.setBracket(obj.tournament)}}>{obj.tournament.name}</Dropdown.Item> </div>
                             })}
                         </Dropdown.Menu>
                         </Dropdown>
