@@ -3,11 +3,11 @@ import PlayerInfo from './components/PlayerInfo';
 import {perfect_player} from '../../../data/perfect_player';
 import {team_blueside} from '../../../data/team_blueside';
 import axios from "axios";
-import {playerDisplay, championDisplay,allTeamDisplay} from '../../../actions'
+import {playerDisplay, championDisplay,allTeamDisplay, teamsDisplay} from '../../../actions'
 import { connect } from 'react-redux';
 
 
-export const api_key = "RGAPI-b63a1986-694e-4bf6-9476-2ed691136246";
+export const api_key = "RGAPI-e01c0112-a698-440f-8462-420dd1a107da";
 
 
 
@@ -33,17 +33,19 @@ class Player extends Component {
         }
 
         //this.firstDisplay();
-        for(const playerNb in team_blueside.players){
-            console.log(team_blueside.players[playerNb].playerName)
-            this.getSummoner(team_blueside.players[playerNb].playerName)
+        //for(const playerNb in this.props.team.players){
+          //  console.log(this.props.team.players[playerNb].playerName)
+            this.getSummoner(this.props.team.players[0].playerName)
+            console.log(this.props.team.players[0].playerName)
 
-            this.getChampions("lJY9dSXgRH23K5MBFMHGOHnsflpDT0ZE_i6mf66JrwdeOIM");
+            this.getChampions(this.props.player.id);
+            this.props.dispatch(teamsDisplay(this.props.player));
 
             //if(this.props.playerState!= undefined){
                 
             //}
             //this.getChampions(this.props.playerState.id);
-        }
+        //}
         //this.getSummoner("Rospote");
         //this.getChampions();
     }
@@ -56,21 +58,15 @@ class Player extends Component {
         axios.get(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${playerName}?api_key=${api_key}`) .then(function (response) {
           if (response.data !== undefined && response.data != ""){
               
-              self.props.dispatch(playerDisplay(response.data))
+              self.props.dispatch(playerDisplay(response.data));
               return response.data; 
           
           }else{
-              alert("error no response from server")
               //res = {};
               return {}
           };
         })
         
-        //const res = await axios.get(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Rospote?api_key=RGAPI-2466e900-3827-4ea3-afc5-3e7cf66ff42b`);
-        //console.log(res.data);
-    
-        
-        //return res;
     
     }
     getChampions(summonerId){
@@ -78,7 +74,7 @@ class Player extends Component {
         //var summonerId ="lJY9dSXgRH23K5MBFMHGOHnsflpDT0ZE_i6mf66JrwdeOIM";
         var self= this;
 
-
+        console.log("Je commence getChampions")
         axios.get(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerId}?api_key=${api_key}`) .then(function (response) {
               if (response.data !== undefined && response.data != ""){
                   
@@ -113,7 +109,8 @@ class Player extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-      player: state.playerReducer
+      player: state.playerReducer,
+      teams : state.teamsReducer
     }
   };
   

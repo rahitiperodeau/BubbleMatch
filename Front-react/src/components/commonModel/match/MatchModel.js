@@ -21,7 +21,7 @@ import {champion_info} from '../../../data/data_champion';
 import {perfect_player} from '../../../data/perfect_player';
 import {team_blueside} from '../../../data/team_blueside';
 import {team_redside} from '../../../data/team_redside';
-import {playerDisplay,matchTabAction,championsDisplay} from '../../../actions'
+import {playerDisplay,matchTabAction,championsDisplay, setTeamToDisplay} from '../../../actions'
 
 
 import {getSummoner} from '../../../api/index'
@@ -77,41 +77,12 @@ const useStyles = makeStyles(theme => ({
     };
   }
 
-
-// function MatchFunction(team1, team2){
-//     let team_blueside= team1.param;
-//     let team_redside = team2.param
-//     const classes = useStyles();
-//     const [value, setValue] = React.useState(0);
-
-//     const handleChange = (event, newValue) => {
-//       setValue(newValue);
-//     };
-
-//     const summonerName = "Rospote";
-    
-// }
-
-
-
-// function tryHook(){
-//   const [value, setValue] = React.useState(0);
-//   const handleChange = (event, newValue) => {
-//     setValue(newValue);
-//   };
-//   return ([[value,setValue],handleChange]);
-// }
-
-
 //model d'un match
 class MatchModel extends Component{
     constructor(props){
         super(props);
-        //let summoner = {};
-        //summoner = getSummoner("Rospote");
         this.state={
           tabSelected:1,
-          //summoner : getSummoner("Rospote")
         }
 
 
@@ -119,6 +90,8 @@ class MatchModel extends Component{
         this.sendPlayerInfo=this.sendPlayerInfo.bind(this);
         this.selectedTab=this.selectedTab.bind(this);
         this.renderTab=this.renderTab.bind(this);
+        this.sendTeamInfo=this.sendTeamInfo.bind(this);
+
         
         this.selectedTab(0)
     }
@@ -138,6 +111,10 @@ class MatchModel extends Component{
 
     sendPlayerInfo(summoner){
       this.props.dispatch(playerDisplay(summoner));
+    }
+
+    sendTeamInfo(list_team){
+      this.props.dispatch(setTeamToDisplay(list_team));
     }
 
     getChampionsInfo(summoner){
@@ -161,31 +138,19 @@ class MatchModel extends Component{
 
       if (classIndex===0){
         rendering=<TabPanel value={classIndex} index={classIndex} >
-        {champion_mastery_by_player.map((champion,index)=>{
-          while (index <2){
-          //if (champion.championId == champion_info.id)
-          //call API pour récup champion info
-          //champion_info = résultat du call de l'API avec champion.championId
-              return(champion.championId == champion_info.id ? 
-                <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/" + champion.championId +".png"} key="cait-img"/>
-               : 
-               champion_info.name);
-              }
-               // <div>{champion.championId}</div>
-              //)
-        })}
-          {player_1.name}
-          {rank_info.map((info,index)=>
-            info.tier)
-          }
+          <Player
+           team={team_blueside}
+          />
+          
       </TabPanel>;
       }
       else{
         if (classIndex===1){
           rendering= <TabPanel value={classIndex} index={classIndex}>
                 
-          <Player>
-          </Player>
+          <Player
+           team={team_redside}
+          />
 
       </TabPanel>
         }
@@ -215,7 +180,7 @@ class MatchModel extends Component{
             
             {this.renderTab(this.props.matchTabState)}
             
-            {/* <Divider orientation="vertical"/> */}
+            <Divider orientation="vertical"/>
             
         </Grid>
             </div>
@@ -229,7 +194,8 @@ const mapStateToProps =(state,ownProps)=>{
   return{
       playerState: state.playerReducer,
       matchTabState: state.matchTabReducer,
-      championState: state.championsReducer
+      championState: state.championsReducer,
+      listPlayersReducer: state.listChampionsReducer
       }
 }
 

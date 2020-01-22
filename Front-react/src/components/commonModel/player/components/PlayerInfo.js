@@ -21,11 +21,11 @@ class PlayerInfo extends Component{
                 <div>
                     <div>Id:{this.props.playerState.id}</div>
                     <div>Name:{this.props.playerState.name}</div>
-                    <div>RankTier:{this.props.rank_tier}</div>
                     <img src = {"https://raw.communitydragon.org/latest/game/assets/ux/summonericons/profileicon"+ this.props.playerState.profileIconId +".png"}/>
                     <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/" + this.props.playerState.champions[0].championId +".png"} key="champ1-img"/>
                     <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/" + this.props.playerState.champions[1].championId +".png"} key="champ2-img"/>                    
-                    <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/" + this.props.playerState.champions[2].championId +".png"} key="champ3-img"/>            
+                    <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/" + this.props.playerState.champions[2].championId +".png"} key="champ3-img"/> 
+                    {/* <div>Test:{this.props.teamState.players[0]}</div>     */}
                 </div>
             );
         }
@@ -34,7 +34,8 @@ class PlayerInfo extends Component{
 
 const mapStateToProps = (state, ownProps) => {
     return {
-       playerState: state.playerReducer
+       playerState: state.playerReducer,
+       teamState : state.teamsReducer
     }
   };
 

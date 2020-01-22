@@ -74,3 +74,12 @@ export const championsDisplay=(champions_obj)=>{
         
     };
 }
+
+
+export const setTeamToDisplay=(listPlayers_obj)=>{
+    return {
+        type: 'TEAM_SELECTED',
+        obj:listPlayers_obj
+        
+    };
+}

@@ -7,6 +7,8 @@ import filesAvailableReducer from './FilesReducer'
 import matchTabReducer from './MatchTabReducer';
 import playerReducer from './PlayerReducer';
 import listPlayersReducer from './ListPlayersReducer';
+import teamReducer from './TeamReducer';
+
 
 const globalReducer = combineReducers({
     userReducer:userReducer,
@@ -16,7 +18,8 @@ const globalReducer = combineReducers({
     filesAvailableReducer:filesAvailableReducer,
     matchTabReducer:matchTabReducer,
     playerReducer:playerReducer,
-    listPlayersReducer:listPlayersReducer
+    listPlayersReducer:listPlayersReducer,
+    teamReducer:teamReducer
 });
 
 
