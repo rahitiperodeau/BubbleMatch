@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import FileAvailable from '../fileAvailable/FileAvailable'
 import Upload from '../upload/Upload';
 import TournamentInfoText from './components/TournamentInfoText';
+import {Button,Card, Accordion} from 'react-bootstrap';
 import './style/TournamentInfo.css'
 import {userConnection} from '../../actions'
 
@@ -13,7 +14,11 @@ class TournamentInfo extends Component {
         this.state={
            renderFile :"",
            tournamentName:"",
-           tournamentDescription:""
+           tournamentDescription:"",
+           teams:[],
+           user:{
+               isAdmin:false,
+           }
         }
         this.getTournamentInfo();
         this.getRenderFileManager();
@@ -29,7 +34,8 @@ class TournamentInfo extends Component {
                     if (response.data !== undefined && response.data !== ""){
                         
                     
-                        self.props.dispatch(userConnection(response.data))
+                        self.props.dispatch(userConnection(response.data));
+                        self.setState({user:response.data});
                         
                     
                     }else{
@@ -56,7 +62,8 @@ class TournamentInfo extends Component {
                     
                  self.setState({
                     tournamentName:response.data.name,
-                    tournamentDescription:response.data.description
+                    tournamentDescription:response.data.description,
+                    teams:response.data.teams
                  })
                    
                 
@@ -122,24 +129,80 @@ class TournamentInfo extends Component {
         
 
     }
+
     
+    validateTournament(){
+        var self = this;
+        let tournamentId = this.props.match.params.tournamentId;
+        
+        axios.post('http://localhost:8083/tournament/'+tournamentId+'/createBracket',this.state.teams)
+            .catch(function (error) {
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });  
+
+    }
+
+    authValidate(){
+        if(this.state.user.isAdmin){
+            return (<button  onClick={()=>this.validateTournament()}>Validate Tournament</button>)
+        }else{
+            return ""
+        }
+    }
     
 
     render(){
         //const display_list= this.getRenderFileManager();
         return(
             <div>
-            <div className="row">
-                <div className="column">
-                <TournamentInfoText
-                    tournamentName = {this.state.tournamentName}
-                    tournamentDescription = {this.state.tournamentDescription}
-                    />               
-                 </div>
-                <div className="column">
-                    {this.state.renderFile}
+                <div className="row">
+                    <div className="column">
+                    <TournamentInfoText
+                        tournamentName = {this.state.tournamentName}
+                        tournamentDescription = {this.state.tournamentDescription}
+                        />               
+                    </div>
+                    <div className="column">
+                        {this.state.renderFile}
+                    </div>
+                    
                 </div>
-                       
+                <div className="ValidateTournament">
+                    {this.authValidate()}
+                </div>
+                <div id="ListTeam">
+
+                <h3> Teams registered</h3>
+
+                {this.state.teams.map((team,i)=>{
+                return(
+                                    <div>   
+                                        <Accordion className="accordion">
+
+                                            <Accordion.Toggle as={Button} variant="link" eventKey="0" className="tournamentName">
+                                            <div id="tournamentName"> {team.teamName}</div>
+                                            </Accordion.Toggle>
+                                            <Accordion.Collapse eventKey="0">
+                                        <div id="hehe">
+                                        {team.players.map((player,i)=>{
+                                            return(<div>
+                                            <div id="tournamentDes"> {player.playerName} </div>
+                                            </div>
+                                            )
+                                        })}
+                                    
+                                        </div>
+                            </Accordion.Collapse>
+                                    
+                                    </Accordion>
+                                    </div> 
+                )
+                })}
+                </div>
+
             </div>
             <div id="ListTeam">
 
