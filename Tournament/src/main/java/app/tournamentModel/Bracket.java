@@ -30,12 +30,14 @@ public class Bracket extends StructureT  {
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<MatchList> bracket;
 	
-	public Bracket(List<Team> teams) {
-		super(teams);
-		this.bracket = new ArrayList<>();
+	public Bracket(List<MatchList> matchLists) {
+		super();
+		this.bracket = matchLists;
 	}
 	public Bracket() {
 		super();
+		this.bracket = new ArrayList<MatchList>();
+
 	}
 	
 	
@@ -45,11 +47,12 @@ public class Bracket extends StructureT  {
 		int nbEquipesFictives=0;
 		int nbEquipesTour1 = 0;
 		int q = tailleTeams;
-		int step = Resbracket.size()-1;
+		int step = Resbracket.size();
 		System.out.println(teamsQualified);
 
-		if(Resbracket.size() ==1) {
-			/////ELO
+		if(step ==0) {
+			/////Sort with elo the list of teams when it's step 0 
+
            
 
 		}
@@ -90,24 +93,38 @@ public class Bracket extends StructureT  {
 		MatchList bracketInf= new MatchList();
 		
 		
-		System.out.println(tailleBracket);
+		System.out.println(step);
 		for(int i = 0; i<=tailleBracket-1; i++) {
 			if(i<= nbEquipesFictives-1) {
 				Team GhostTeam= new Team();
 				//System.out.println(teamsQualified.size());
 
 				Match match = new Match(teamsQualified.get(i).getTeamId(), 0,0, step);
+				//System.out.println(match);
+
 				bracketInf.getMatchList().add(match);
 				//System.out.println(match);
 			} 
-			if( tailleTeams>i  && i> nbEquipesFictives-1){
+			if( tailleTeams>i  && i> nbEquipesFictives-1 && step > 0){
+				//System.out.println(i);
+
 				Match match = new Match(teamsQualified.get(i).getTeamId(),  teamsQualified.get(i+1).getTeamId(),0, step );
 				i=i+1;
 				bracketInf.getMatchList().add(match);
 			}
+			if( (tailleBracket/2) > i  && i> nbEquipesFictives-1 && step==0 ){
+				//System.out.println(i);
+
+				int a = tailleBracket - i -1;
+
+				Match match = new Match(teamsQualified.get(i).getTeamId(),  teamsQualified.get(a).getTeamId(),0, step );
+				//i=i+1;
+				bracketInf.getMatchList().add(match);
+			}
+			
 		}
 		Resbracket.add(bracketInf);
-		//System.out.println(bracket);
+		System.out.println(bracket);
 
 		return Resbracket;
 	}
@@ -116,7 +133,7 @@ public class Bracket extends StructureT  {
 		return bracket;
 	}
 	
-	public List<MatchList> results(List<MatchList> ResBracket) {
+	public List<MatchList> results(List<MatchList> ResBracket, List<Team> teams) {
 		List<Team> teamsQualified = new ArrayList<>();
 		int step =ResBracket.size()-1;
 		//System.out.println(step);
@@ -130,20 +147,25 @@ public class Bracket extends StructureT  {
 			
 			if(ResBracket.get(step).getMatchList().get(i).getResult() == 1 || ResBracket.get(step).getMatchList().get(i).getTeamId2() == 0 ) {
 				//System.out.println(ResBracket.get(i));
-				Team teamQualified = findTeamById(ResBracket.get(step).getMatchList().get(i).getTeamId1());
+				Team teamQualified = findTeamById(ResBracket.get(step).getMatchList().get(i).getTeamId1(), teams);
+				findTeamById(ResBracket.get(step).getMatchList().get(i).getTeamId1(),teams).setEloVictoires(10);
 				teamsQualified.add(teamQualified);
 
 			}
 			if(ResBracket.get(step).getMatchList().get(i).getResult() == 2 || ResBracket.get(step).getMatchList().get(i).getTeamId1() == 0 ) {
 				//System.out.println(ResBracket.get(i));
-				Team teamQualified = findTeamById(ResBracket.get(step).getMatchList().get(i).getTeamId2());
+				Team teamQualified = findTeamById(ResBracket.get(step).getMatchList().get(i).getTeamId2(), teams);
+				findTeamById(ResBracket.get(step).getMatchList().get(i).getTeamId2(),teams).setEloVictoires(10);
+
 				teamsQualified.add(teamQualified);
 
 			}
 		}
-		//System.out.println(teamsQualified);
+		System.out.println(teamsQualified.size());
 		
 		if(ResBracket.get(ResBracket.size()-1).getMatchList().size() == teamsQualified.size()) {
+			System.out.println(teamsQualified);
+
 		      bracket = createBracket2(ResBracket, teamsQualified);
 		}
 
@@ -152,5 +174,6 @@ public class Bracket extends StructureT  {
 	@Override
 	public String toString() {
 		return "Bracket [bracket=" + bracket + "]";
-	}	
+	}
+	
 }

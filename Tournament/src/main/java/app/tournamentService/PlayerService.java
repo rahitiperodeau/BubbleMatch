@@ -57,11 +57,11 @@ public class PlayerService {
 		player.setEloPlayer(elo);
 		playerRepository.save(player);
 	}
-	
+
+
 	public Integer getTournamentId(Integer playerId) {
 		
 		List<Team> team = teamRepository.findByPlayers_PlayerId(playerId);
-		
 		return team.get(0).getTournamentId();
 	}
 	

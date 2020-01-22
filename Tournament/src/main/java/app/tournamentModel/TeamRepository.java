@@ -13,6 +13,7 @@ import app.tournamentModel.Tournament;
 public interface TeamRepository extends CrudRepository<Team, Integer> {
 	
 	public Team findByTeamId(int team_id);
+	public Team findByTeamName(String teamName);
 	public List<Team> findByPlayers_PlayerId(Integer playerId);
 
 

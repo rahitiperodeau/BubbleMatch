@@ -32,7 +32,7 @@ public class Team {
     @Column(name = "TeamName")
 	private String teamName;
     
-    
+    private int EloVictoires;
 	private int tournamentIdRef;
 	
 	
@@ -72,14 +72,14 @@ public class Team {
 	public int getElo() {
 		return elo;
 		}
-	public void setElo(int elo) {
-//		this.elo = 0;
-//		for(int i = 0; i <= players.size(); i++){
-//			this.elo = elo + players.get(i).getEloPlayer();
-//		    System.out.println(getElo());
-//		}
-//		this.elo = this.elo/(players.size());
-		this.elo = elo;
+	public void setElo() {
+		this.elo = 0;
+		for(int i = 0; i <= players.size(); i++){
+			this.elo = elo + players.get(i).getEloPlayer();
+		    System.out.println(getElo());
+		}
+		this.elo = this.elo/(players.size());
+		this.elo = elo + EloVictoires;
 		}
 
 	public Team(String teamName) {
@@ -126,9 +126,24 @@ public class Team {
 		this.elo = this.elo - player.getEloPlayer();
 		return players;
 	}
-	
-	
 
+
+	public int getEloVictoires() {
+		return EloVictoires;
+	}
+
+
+	public void setEloVictoires(int addElo) {
+		EloVictoires = this.EloVictoires + addElo;
+	}
+	
+	@Override
+	public String toString() {
+		return "Team [teamId=" + teamId + ", players=" + players + ", elo=" + elo + ", teamName=" + teamName
+				+ ", EloVictoires=" + EloVictoires + ", tournamentIdRef=" + tournamentIdRef + "]";
+	}
+	
+	
 	
 	
 }

@@ -68,7 +68,7 @@ class App extends Component {
             <Route path="/signUp" component={SignUp} /> 
             <PrivateRoute path="/signOut" component={SignOut} />  
             <PrivateRoute path="/autresTournois" component={AutresTournois}/>    
-            <PrivateRoute path="/inscriptionTournoi" component={InscriptionTournoi}/>
+            <PrivateRoute path="/inscriptionTournoi/:tournamentId" component={InscriptionTournoi}/>
 	          <PrivateRoute path="/generationTournoi" component={GenerationTournoi} />
             <PrivateRoute path="/upload" component={Upload}/>
             <Route path="/404" component={NotFound} />

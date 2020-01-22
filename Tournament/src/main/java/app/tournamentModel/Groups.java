@@ -107,9 +107,9 @@ public class Groups extends StructureT {
 	
 	
 	public List<GroupMap> findGroup(int i, int winner) {
-		boolean boo = groups.get(i).containsKey(findTeamById(winner));
+		boolean boo = groups.get(i).containsKey(findTeamById(winner,new ArrayList<Team>()));
 		if(boo) {
-			groups.get(i).put(findTeamById(winner),groups.get(i).get(findTeamById(winner))+1);
+			groups.get(i).put(findTeamById(winner,new ArrayList<Team>()),groups.get(i).get(findTeamById(winner,new ArrayList<Team>()))+1);
 		}
 		return(groups);
 	}

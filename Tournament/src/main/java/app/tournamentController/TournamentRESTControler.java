@@ -1,5 +1,6 @@
 package app.tournamentController;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.tournamentModel.Team;
 import app.tournamentModel.Tournament;
 import app.tournamentService.TournamentService;
 
@@ -53,6 +55,12 @@ public class TournamentRESTControler {
 	@RequestMapping(method=RequestMethod.PUT,value="/tournament")
 	private void updateTournament(@RequestBody Tournament tournament ) {
 		tournamentService.updateTournament(tournament);
+
+	}
+	
+	@RequestMapping(method=RequestMethod.PUT,value="/tournament/{id}/addTeam")
+	private void addNewTeamToTournament(@PathVariable int id, @RequestBody Team team ) throws URISyntaxException {
+		tournamentService.addNewTeamToTournament(id, team);
 
 	}
 	

@@ -9,7 +9,6 @@ h1
   display:block;
   margin:16px;
 }
-/* Style the buttons that are used to open and close the accordion panel */
 .accordion {
     background-color: #eee;
     color: #444;
@@ -25,6 +24,7 @@ h1
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
   .active, .accordion:hover {
     background-color: rgb(153, 4, 4);
+    color: white;
   }
   
   /* Style the accordion panel. Note: hidden by default */
@@ -37,4 +37,29 @@ h1
 
 .accordion.Toggle{
   color: white;
+}
+
+#tournamentName{
+  margin:10px;
+  color: black;
+  font-size: large;
+
+}
+
+#tournamentDes{
+  margin-top: 10;
+  margin-left: 10;
+}
+
+#inscription{
+  color: white;
+  background-color: rgb(153, 4, 4);
+}
+
+#hehe{
+  width:80%;
+}
+
+.accordion:{
+  color:white;
 }

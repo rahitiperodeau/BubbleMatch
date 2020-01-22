@@ -71,12 +71,14 @@ export const setTournamentIdAction=(id) =>{
     }
 }
     
-export const filesAvailable=(files_obj) =>{
-    return{
-        type:'UPDATE_FILES_AVAILABLE',
-        obj:files_obj
+    export const filesAvailable=(files_obj) => {
+        return{
+            type:'UPDATE_FILES_AVAILABLE',
+            obj:files_obj
+        }
+        
     }
-}
+
 
 
 export const team1InfosAction=(team_obj)=>{
