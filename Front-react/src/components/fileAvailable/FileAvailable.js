@@ -16,7 +16,7 @@ class FileAvailable extends Component {
           ]
         }
         this.getAllFilesRender = this.getAllFilesRender.bind(this);
-       
+        this.getFilesList();
       }
 
       getFilesList(){
@@ -82,7 +82,7 @@ class FileAvailable extends Component {
         return (
          
             <div>
-            <h1 id='title'>React Dynamic Table</h1>
+            <h1 id='title'>Tournament's files</h1>
             <table id='filesAvailable'>
                <tbody>
                   <tr>{this.renderTableHeader()}</tr>
@@ -91,7 +91,6 @@ class FileAvailable extends Component {
                   }
                </tbody>
             </table>
-            <button onClick={()=>this.getFilesList()}>UpdateFileList</button>
          </div>
         
        )
