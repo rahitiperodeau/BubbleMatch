@@ -2,27 +2,22 @@ import React, { Component } from 'react';
 import PlayerInfo from './components/PlayerInfo';
 import {perfect_player} from '../../../data/perfect_player';
 import {team_blueside} from '../../../data/team_blueside';
-
-
-
+import axios from "axios";
+import {playerDisplay, championDisplay,allTeamDisplay} from '../../../actions'
 import { connect } from 'react-redux';
 
-function PlayerFunction(team){
 
-    console.log(team.param)
- let infos_team = team.param
- console.log(infos_team)
+export const api_key = "RGAPI-b63a1986-694e-4bf6-9476-2ed691136246";
+
+
+
+
+function PlayerFunction(player){
+
+    console.log(player.param)
  return(
     <PlayerInfo
-        id = {infos_team.teamId}
-        // id={infos_team.id}
-        // name={infos_team.name}
-        // profileIconId={infos_team.profileIconId}
-        // rank_tier={infos_team.rank_tier}
-        // champion_mastered_1_src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/" + infos_team.champion_mastered_1_id +".png"}
-        // champion_mastered_1_id={infos_team.champion_mastered_1_id}
-        // champion_mastered_2_id={infos_team.champion_mastered_2_id}
-        // champion_mastered_3_id={infos_team.champion_mastered_3_id}
+        id = {player.id}
     >
 
     </PlayerInfo>
@@ -37,29 +32,78 @@ class Player extends Component {
            
         }
 
+        //this.firstDisplay();
+        for(const playerNb in team_blueside.players){
+            console.log(team_blueside.players[playerNb].playerName)
+            this.getSummoner(team_blueside.players[playerNb].playerName)
+
+            this.getChampions("lJY9dSXgRH23K5MBFMHGOHnsflpDT0ZE_i6mf66JrwdeOIM");
+
+            //if(this.props.playerState!= undefined){
+                
+            //}
+            //this.getChampions(this.props.playerState.id);
+        }
+        //this.getSummoner("Rospote");
+        //this.getChampions();
+    }
+
+
+
+    getSummoner(playerName) {
+
+        var self= this;
+        axios.get(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${playerName}?api_key=${api_key}`) .then(function (response) {
+          if (response.data !== undefined && response.data != ""){
+              
+              self.props.dispatch(playerDisplay(response.data))
+              return response.data; 
+          
+          }else{
+              alert("error no response from server")
+              //res = {};
+              return {}
+          };
+        })
         
+        //const res = await axios.get(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Rospote?api_key=RGAPI-2466e900-3827-4ea3-afc5-3e7cf66ff42b`);
+        //console.log(res.data);
+    
+        
+        //return res;
+    
+    }
+    getChampions(summonerId){
+
+        //var summonerId ="lJY9dSXgRH23K5MBFMHGOHnsflpDT0ZE_i6mf66JrwdeOIM";
+        var self= this;
+
+
+        axios.get(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerId}?api_key=${api_key}`) .then(function (response) {
+              if (response.data !== undefined && response.data != ""){
+                  
+                  console.log("Champion OK");
+                  self.props.dispatch(championDisplay(response.data))
+                  //teamsDisplay
+                  return response.data;
+    
+              }else{
+                  alert("error no response from server")
+                  return {}
+              };
+            })
 
     }
 
     
 
     render(){
-        let team_info =this.props.team
+        //let team_info =this.props.team
         //this.getPlayerId(sessionStorage.getItem("sessionId"));
+        
         return(
             <div className="panel-body">
                 <PlayerFunction param ={this.props}/>
-                {/* <PlayerInfo
-                    
-                    id={this.props.id}
-                    name={this.props.name}
-                    profileIconId={this.props.profileIconId}
-                    rank_tier={this.props.rank_tier}
-                    champion_mastered_1_id={this.props.champion_mastered_1_id}
-                    champion_mastered_2_id={this.props.champion_mastered_2_id}
-                    champion_mastered_3_id={this.props.champion_mastered_3_id}
-			
-                /> */}
             </div>
         )
     }

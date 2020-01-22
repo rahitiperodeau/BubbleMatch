@@ -12,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import Player from '../player/Player'
 import PlayerFunction from '../player/Player'
 
+import { connect } from 'react-redux';
 
 import {player_1} from '../../../data/data_player';
 import {champion_mastery_by_player} from '../../../data/data_champions';
@@ -20,10 +21,11 @@ import {champion_info} from '../../../data/data_champion';
 import {perfect_player} from '../../../data/perfect_player';
 import {team_blueside} from '../../../data/team_blueside';
 import {team_redside} from '../../../data/team_redside';
-
+import {playerDisplay,matchTabAction,championsDisplay} from '../../../actions'
 
 
 import {getSummoner} from '../../../api/index'
+import Axios from 'axios';
 
 
 
@@ -76,86 +78,146 @@ const useStyles = makeStyles(theme => ({
   }
 
 
-function MatchFunction(team1, team2){
-    let team_blueside= team1.param;
-    let team_redside = team2.param
-    const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+// function MatchFunction(team1, team2){
+//     let team_blueside= team1.param;
+//     let team_redside = team2.param
+//     const classes = useStyles();
+//     const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
+//     const handleChange = (event, newValue) => {
+//       setValue(newValue);
+//     };
 
-    const summonerName = "Rospote";
+//     const summonerName = "Rospote";
+    
+// }
 
-    return(
-        <Grid container alignItems="center" className={classes.root}>
-            <AppBar position="static" >
-                <Tabs 
-                    value={value} 
-                    onChange={handleChange} 
-                    aria-label="simple tabs example"
-                    centered
-                >
-                <Tab label="Votre équipe" {...a11yProps(0)} />
-                <Tab label="Equipe adverse" {...a11yProps(1)} /> 
-                </Tabs>
-            </AppBar>
-            <TabPanel value={value} index={0}>
-              {champion_mastery_by_player.map((champion,index)=>{
-                while (index <1){
-                //if (champion.championId == champion_info.id)
-                //call API pour récup champion info
-                //champion_info = résultat du call de l'API avec champion.championId
-                    return(champion.championId == champion_info.id ? 
-                      <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/" + champion.championId +".png"}/>
-                     : 
-                     champion_info.name);
-                    }
-                     // <div>{champion.championId}</div>
-                    //)
-              })}
-                {player_1.name}
-                {rank_info.map((info,index)=>
-                  info.tier)
-                }
-            </TabPanel>
 
-            <TabPanel value={value} index={1}>
-                <Player param={team_redside}>
-                </Player>
 
-            </TabPanel>
-            
-            <Divider orientation="vertical"/>
-            
-        </Grid>
-    );
-}
+// function tryHook(){
+//   const [value, setValue] = React.useState(0);
+//   const handleChange = (event, newValue) => {
+//     setValue(newValue);
+//   };
+//   return ([[value,setValue],handleChange]);
+// }
 
 
 //model d'un match
 class MatchModel extends Component{
     constructor(props){
         super(props);
+        //let summoner = {};
+        //summoner = getSummoner("Rospote");
         this.state={
-            
-
+          tabSelected:1,
+          //summoner : getSummoner("Rospote")
         }
+
+
+        //this.getPlayerInfo=this.getPlayerInfo.bind(this);
+        this.sendPlayerInfo=this.sendPlayerInfo.bind(this);
+        this.selectedTab=this.selectedTab.bind(this);
+        this.renderTab=this.renderTab.bind(this);
+        
+        this.selectedTab(0)
     }
 
-    static get TEAM_ONE(){
-        return "team_one";
+
+
+    getPlayerInfo(summoner){
+    const playerState=this.props.matchState;
+    let rendering = <div/>;
+        
+      if (playerState==true){
+          rendering=<Player /*param={summoner}*//>;
+      }
+
+      return rendering;
+    }
+
+    sendPlayerInfo(summoner){
+      this.props.dispatch(playerDisplay(summoner));
+    }
+
+    getChampionsInfo(summoner){
+      const championState=this.props.matchState;
+      let rendering = <div/>;
+          
+        if (championState==true){
+            rendering=<Player param={summoner}/>;
+        }
+  
+        return rendering;
+      }
+
+    selectedTab(classIndex){
+      //this.state.tabSelected=classIndex;
+      this.props.dispatch(matchTabAction(classIndex));
+    }
+
+    renderTab(classIndex){
+      let rendering =<div/>;
+
+      if (classIndex===0){
+        rendering=<TabPanel value={classIndex} index={classIndex} >
+        {champion_mastery_by_player.map((champion,index)=>{
+          while (index <2){
+          //if (champion.championId == champion_info.id)
+          //call API pour récup champion info
+          //champion_info = résultat du call de l'API avec champion.championId
+              return(champion.championId == champion_info.id ? 
+                <img src = {"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/" + champion.championId +".png"} key="cait-img"/>
+               : 
+               champion_info.name);
+              }
+               // <div>{champion.championId}</div>
+              //)
+        })}
+          {player_1.name}
+          {rank_info.map((info,index)=>
+            info.tier)
+          }
+      </TabPanel>;
+      }
+      else{
+        if (classIndex===1){
+          rendering= <TabPanel value={classIndex} index={classIndex}>
+                
+          <Player>
+          </Player>
+
+      </TabPanel>
+        }
+      }
+
+      return(rendering);
+
     }
     
-    static get TEAM_TWO(){
-        return "team_two";
-    }
 
     render(){
         return(
             <div>
-                <MatchFunction param={team_blueside,team_redside}/>
+
+                <Grid container alignItems="center" >
+            <AppBar position="static" >
+                <Tabs 
+                     value={0} 
+                    // onChange={} 
+                    aria-label="simple tabs example"
+                    centered
+                >
+                <Tab className="team_blue" label="Votre équipe" onClick={()=>{this.selectedTab(0)}} />
+                <Tab className="team_red" label="Equipe adverse" onClick={()=>{this.selectedTab(1)}}  /> 
+                </Tabs>
+            </AppBar>
+            
+            {this.renderTab(this.props.matchTabState)}
+            
+            {/* <Divider orientation="vertical"/> */}
+            
+        </Grid>
             </div>
         )
     }
@@ -163,4 +225,12 @@ class MatchModel extends Component{
 
 }
 
-export default MatchModel;
+const mapStateToProps =(state,ownProps)=>{
+  return{
+      playerState: state.playerReducer,
+      matchTabState: state.matchTabReducer,
+      championState: state.championsReducer
+      }
+}
+
+export default connect(mapStateToProps)(MatchModel);
