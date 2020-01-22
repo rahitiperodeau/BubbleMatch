@@ -109,7 +109,8 @@ class Tournoi extends Component{
         }
         else{
             console.log("check allteams in the render")
-            console.log(this.props.allTeams)
+            console.log(self.props.allTeams)
+            console.log(self.props.bracketR)
             return(
                 
                     

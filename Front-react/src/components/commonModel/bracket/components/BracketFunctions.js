@@ -218,7 +218,7 @@ const recursiveNodes = (bracket,parentNode,pNode,depth)=>{
     let tmp_map=tree.copy().descendants();
     let tmp_mapBis=[]
     tmp_map.forEach((c_node)=>{
-      if(c_node.data.step<bracketTmp.length){
+      if(c_node.height<bracketTmp.length){
         let matchTmp = bracketTmp[c_node.height].matchList[i];
         c_node.matchId=matchTmp.matchId;
         c_node.result=matchTmp.result;
@@ -226,7 +226,7 @@ const recursiveNodes = (bracket,parentNode,pNode,depth)=>{
         c_node.teamId2=matchTmp.teamId2;
         
         i++;
-        if(i==bracketTmp[c_node.data.step].matchList.length){
+        if(i==bracketTmp[c_node.height].matchList.length){
           i=0
         }
         

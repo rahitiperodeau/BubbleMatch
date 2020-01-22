@@ -64,7 +64,7 @@ class Node extends Component{
 
   getTeamName(p_team_id){
     let self=this;
-
+    console.log(p_team_id)
     let allTeamsFiltered=self.props.allTeams.filter((el)=>el.teamId==p_team_id);
     console.log(allTeamsFiltered[0].teamName);
     return allTeamsFiltered[0].teamName;
@@ -76,8 +76,26 @@ class Node extends Component{
   render(){
     let self=this;
     if(this.props.allTeams===undefined || this.props.allTeams==={} ||
-      (Object.keys(this.props.allTeams).length===0 && this.props.allTeams===Object)){
-      return(<div></div>)
+      (Object.keys(this.props.allTeams).length===0 && this.props.allTeams===Object)|| this.props.node.teamId1===undefined 
+      || this.props.node.teamId2===undefined){
+      return(
+        <Group top={self.props.node.x} left={self.props.node.y}>
+              <rect
+              height={height}
+              width={width}
+              y={centerY}
+              x={centerX}
+              fill={bg}
+              stroke={peach}
+              strokeWidth={1}
+              
+              rx={10}
+
+              />
+              
+          </Group>
+
+      )
     }
     else{
       return(
@@ -106,7 +124,7 @@ class Node extends Component{
               fill={green}
               style={{ pointerEvents: 'none' }}
               >
-              {this.getTeamName(self.props.node.teamId1)} VS {this.getTeamName(self.props.node.teamId2)}
+              {this.getTeamName(this.props.node.teamId1)} VS {this.getTeamName(this.props.node.teamId2)}
                   
               </text>
           </Group>
