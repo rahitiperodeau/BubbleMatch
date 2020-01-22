@@ -91,7 +91,7 @@ class Upload extends Component {
         return (
           <div>
           <form onSubmit={this.onFormSubmit}>
-            <h1>File Upload</h1>
+            <h2>Add a tournament file</h2>
             <input type="file" onChange={this.onChange} />
             <button type="submit">Upload</button>
           </form>
