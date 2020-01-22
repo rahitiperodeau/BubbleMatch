@@ -3,7 +3,7 @@ import ItemChatBot from './itemChatbot/ItemChatBot';
 import ItemMatch from './itemMatch/ItemMatch';
 import ItemTournoi from './itemTournoi/ItemTournoi';
 import {Row,Col} from 'react-bootstrap';
-import ChatBot from '../../chatBot/ChatBot';
+import ChatBot from '../../chatBot/Chatbot';
 import Tournoi from '../../tournoi/Tournoi';
 import Match from '../../match/Match';
 import { connect } from 'react-redux';

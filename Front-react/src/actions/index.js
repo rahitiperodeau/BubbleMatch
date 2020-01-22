@@ -78,7 +78,7 @@ export const setTournamentIdAction=(id) =>{
         }
         
     }
-}
+
 
 
 export const team1InfosAction=(team_obj)=>{

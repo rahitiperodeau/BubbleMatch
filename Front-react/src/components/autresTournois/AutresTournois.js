@@ -66,7 +66,7 @@ class AutresTournois extends Component{
                         <div id="hehe">
                         <div id="tournamentDes"> {tournament.description} </div>
                         <Button  href='/inscriptionTournoi' id="inscription">S'inscrire</Button>
-                        <Button  href={"/tournamentInfo/"+tournament.id} >+ Info</Button>
+                        <Button  href={"/tournamentInfo/"+tournament.id} id="inscription">+ Info</Button>
 
                         </div>
                         </Accordion.Collapse>

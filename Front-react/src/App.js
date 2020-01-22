@@ -5,7 +5,7 @@ import SignOut from './components/auth/signOut/SignOut';
 import Login from './components/auth/login/Login';
 import SignUp from './components/auth/signUp/SignUp';
 import Home from './components/home/Home';
-import Chatbot from './components/chatBot/ChatBot';
+import Chatbot from './components/chatBot/Chatbot';
 import Tournoi from './components/tournoi/Tournoi';
 import TournamentInfo from './components/tournoi/TournamentInfo';
 

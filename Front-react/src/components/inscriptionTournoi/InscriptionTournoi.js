@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Form, Button} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import './css/Inscription.css';
+var axios=require('axios') ;
 
 
 
@@ -19,17 +20,21 @@ class InscriptionTournoi extends Component{
     sendSubscribeTeam() {
         let self = this;
         let team = {};
-        let playerName1 = document.getElementById("playerName1").value;
-        let playerName2 = document.getElementById("playerName2").value;
-        let playerName3 = document.getElementById("playerName3").value;
-        let playerName4 = document.getElementById("playerName4").value;
-        let playerName5 = document.getElementById("playerName5").value;
-        let player1= {playerName1};
-        let player2= {playerName2};
-        let player3= {playerName3};
-        let player4= {playerName4};
-        let player5= {playerName5};
+        
+        let playerName = document.getElementById("playerName1").value;
+        let player1= {playerName};
 
+        playerName = document.getElementById("playerName2").value;
+        let player2= {playerName};
+
+        playerName = document.getElementById("playerName3").value;
+        let player3= {playerName};
+
+        playerName = document.getElementById("playerName4").value;
+        let player4= {playerName};
+
+        playerName = document.getElementById("playerName5").value;
+        let player5= {playerName};
        
         team.teamName= document.getElementById("teamName").value;
 
@@ -78,7 +83,7 @@ class InscriptionTournoi extends Component{
                     <Form.Label className="labels"> Pseudo 5 </Form.Label>
                     <Form.Control type="text" id="playerName5" />
                 </Form.Group>
-                <Button variant="primary" onClick={()=>{this.sendSubscribeTeam()}} type="submit">
+                <Button variant="primary" onClick={()=>{this.sendSubscribeTeam()}} >
                     Envoyer
                 </Button>
                 </Form>
