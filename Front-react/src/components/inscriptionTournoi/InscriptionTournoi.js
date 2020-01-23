@@ -45,10 +45,11 @@ class InscriptionTournoi extends Component{
         console.log(this.props.match.params.tournamentId);
         axios.put("http://localhost:8083/tournament/" + self.props.match.params.tournamentId +"/addTeam", team)
                         .then(function (response) {
-                                
+                               window.location="/tournamentInfo/" + self.props.match.params.tournamentId
                             })
                             .catch(function(error){
                                 console.log(error);
+                                window.location="/tournamentInfo/" + self.props.match.params.tournamentId
                             })
                         }
     

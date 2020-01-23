@@ -34,10 +34,11 @@ class GenTournoiModel extends Component{
             })
             .then(function(response){
                 console.log(response);
+                window.location = "/autresTournois"
             }).catch(function(err){
-                console.log(err);
+                window.location = "/autresTournois"
             }).finally(function(a){
-                console.log(a);
+                window.location = "/autresTournois"
             })
 
             // let info =
@@ -57,16 +58,16 @@ class GenTournoiModel extends Component{
         return(
         <div>
             <div>
-                <h1>Créer un nouveau tournoi</h1>
+                <h1>Create a new tournament</h1>
                 <form className="form" noValidate>
                     <div>
-                        <div>Nom tournoi</div>
+                        <div>Tournament Name</div>
                         <TextField id="nom-tournoi" label="Nom Tournoi" variant="filled" />
                     </div>
                     
                     <div>
                         <Form.Group>
-                            <Form.Label>Description du tournoi</Form.Label>
+                            <Form.Label>Tournament Description</Form.Label>
                             <Form.Control id="desc-tournoi" as="textarea" rows="3" />
                         </Form.Group>
 
@@ -87,7 +88,7 @@ class GenTournoiModel extends Component{
                                 document.getElementById("desc-tournoi").value
                                 )}}
                         >
-                            Créer tournoi
+                            Create a tournament
                         </Button>
                     </div>
                 </form>
