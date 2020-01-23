@@ -8,6 +8,9 @@ import Tournoi from '../../tournoi/Tournoi';
 import Match from '../../match/Match';
 import { connect } from 'react-redux';
 import './MiddleSide.css'
+import {userConnection} from '../../../actions'
+
+var axios=require('axios') ;
 
 class MiddleSide extends Component{
     constructor(props){
@@ -19,9 +22,39 @@ class MiddleSide extends Component{
 
     }
 
+    getUserInfo(){
 
-    updateComponent(cmp){
+        //this.getUserId(sessionStorage.getItem("sessionId"));
         
+        var self = this;
+
+        //console.log()
+       
+        axios.get('http://localhost:8082/user/' + sessionStorage.getItem("userId"))
+            .then(function (response) {
+                if (response.data !== undefined && response.data !== ""){
+                    
+                 
+                    self.props.dispatch(userConnection(response.data))
+                    
+                
+                }else{
+                    alert("error no response from server")
+                }
+                
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });  
+
+        
+
+    }
+    updateComponent(cmp){
+        this.getUserInfo();
         this.setState({mainComponent : cmp})
     }
 

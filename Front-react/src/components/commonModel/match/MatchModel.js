@@ -8,6 +8,16 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
+import Player from '../player/Player'
+
+import { connect } from 'react-redux';
+
+import {team_blueside} from '../../../data/team_blueside';
+import {team_redside} from '../../../data/team_redside';
+import {playerDisplay,matchTabAction,championsDisplay, setTeamToDisplay} from '../../../actions'
+
+
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -57,63 +67,125 @@ const useStyles = makeStyles(theme => ({
     };
   }
 
-
-function MatchFunction(){
-    const classes = useStyles();
-    const [value, setValue] = React.useState(0);
-
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
-
-    return(
-        <Grid container alignItems="center" className={classes.root}>
-            <AppBar position="static" >
-                <Tabs 
-                    value={value} 
-                    onChange={handleChange} 
-                    aria-label="simple tabs example"
-                    centered
-                >
-                <Tab label="Votre équipe" {...a11yProps(0)} />
-                <Tab label="Equipe adverse" {...a11yProps(1)} /> 
-                </Tabs>
-            </AppBar>
-            <TabPanel value={value} index={0}>
-                votre équipe
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                équipe adverse
-            </TabPanel>
-            <Divider orientation="vertical"/>
-            
-        </Grid>
-    );
-}
-
-
 //model d'un match
 class MatchModel extends Component{
     constructor(props){
         super(props);
         this.state={
-            
-
+          tabSelected:1,
         }
+
+
+        //this.getPlayerInfo=this.getPlayerInfo.bind(this);
+        this.sendPlayerInfo=this.sendPlayerInfo.bind(this);
+        this.selectedTab=this.selectedTab.bind(this);
+        this.renderTab=this.renderTab.bind(this);
+        this.sendTeamInfo=this.sendTeamInfo.bind(this);
+
+        
+        this.selectedTab(0)
     }
 
-    static get TEAM_ONE(){
-        return "team_one";
+
+
+    getPlayerInfo(summoner){
+    const playerState=this.props.matchState;
+    let rendering = <div/>;
+        
+      if (playerState==true){
+          rendering=<Player /*param={summoner}*//>;
+      }
+
+      return rendering;
+    }
+
+    sendPlayerInfo(summoner){
+      this.props.dispatch(playerDisplay(summoner));
+    }
+
+    sendTeamInfo(list_team){
+      this.props.dispatch(setTeamToDisplay(list_team));
+    }
+
+    getChampionsInfo(summoner){
+      const championState=this.props.matchState;
+      let rendering = <div/>;
+          
+        if (championState==true){
+            rendering=<Player param={summoner}/>;
+        }
+  
+        return rendering;
+      }
+
+    selectedTab(classIndex){
+      //this.state.tabSelected=classIndex;
+      this.props.dispatch(matchTabAction(classIndex));
+    }
+
+    renderTab(classIndex){
+      let rendering =<div/>;
+
+      if (classIndex===0){
+        rendering=<TabPanel value={classIndex} index={classIndex} >
+          <div>
+            <Player
+            team={this.getUserState()}
+            />
+          </div>
+          {/* <div>En cours de Dev</div> */}
+      </TabPanel>;
+      }
+      else{
+        if (classIndex===1){
+          rendering= <TabPanel value={classIndex} index={classIndex}>
+                
+          <Player
+           team={team_redside.players[0].playerName}
+          />
+
+      </TabPanel>
+        }
+      }
+
+      return(rendering);
+
+    }
+
+    getUserState(){
+
+      if(this.props.userState.user.pseudo != undefined){
+        return this.props.userState.user.pseudo
+      }
+      else{
+        return "Rospote";
+      }
+      
     }
     
-    static get TEAM_TWO(){
-        return "team_two";
-    }
 
     render(){
         return(
             <div>
-                <MatchFunction/>
+
+                <Grid container alignItems="center" >
+            <AppBar position="static" >
+                <Tabs 
+                     value={0} 
+                    // onChange={} 
+                    aria-label="simple tabs example"
+                    centered
+                >
+                <Tab className="team_blue" label="Votre équipe" onClick={()=>{this.selectedTab(0)}} />
+                <Tab className="team_red" label="Equipe adverse" onClick={()=>{this.selectedTab(1)}}  /> 
+                </Tabs>
+            </AppBar>
+            
+            {this.renderTab(this.props.matchTabState)}
+            
+            <Divider orientation="vertical"/>
+            
+        </Grid>
             </div>
         )
     }
@@ -121,4 +193,15 @@ class MatchModel extends Component{
 
 }
 
-export default MatchModel;
+const mapStateToProps =(state,ownProps)=>{
+  return{
+      playerState: state.playerReducer,
+      matchTabState: state.matchTabReducer,
+      championState: state.championsReducer,
+      listPlayersReducer: state.listChampionsReducer,
+      userState: state.userReducer
+
+      }
+}
+
+export default connect(mapStateToProps)(MatchModel);

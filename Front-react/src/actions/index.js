@@ -124,3 +124,52 @@ export const tournamentListAction=(tournaments_list)=>{
 }
 
 
+
+
+export const playerDisplay=(player_obj)=>{
+    return {
+        type: 'SET_PLAYER_STATE',
+        obj:player_obj
+        
+    };
+}
+
+export const championDisplay=(player_obj)=>{
+    return {
+        type: 'ADD_CHAMPION_INFO',
+        obj:player_obj
+        
+    };
+}
+
+export const teamsDisplay=(player_obj)=>{
+    return {
+        type: 'ADD_PLAYER_INFO',
+        obj:player_obj
+        
+    };
+}
+
+export const matchTabAction=(class_index)=>{
+    return{
+        type:'SET_MATCH_TAB',
+        obj:class_index
+    }
+}
+
+export const championsDisplay=(champions_obj)=>{
+    return {
+        type: 'SET_CHAMPIONS_STATE',
+        obj:champions_obj
+        
+    };
+}
+
+
+export const setTeamToDisplay=(listPlayers_obj)=>{
+    return {
+        type: 'TEAM_SELECTED',
+        obj:listPlayers_obj
+        
+    };
+}
